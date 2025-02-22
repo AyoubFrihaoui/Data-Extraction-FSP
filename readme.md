@@ -44,8 +44,8 @@ Initially, I will test the scraper without implementing any rate-limiting measur
     ```python
     from main import fetch_profiles
     try:
-    result = fetch_profiles()
-    print(json.dumps(result, indent=2))
+       result = fetch_profiles()
+       print(json.dumps(result, indent=2))
     except Exception as e:
-    print(f"Error: {e}")
+       print(f"Error: {e}")
     ```
