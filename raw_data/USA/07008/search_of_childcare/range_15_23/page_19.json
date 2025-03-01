@@ -1,0 +1,111 @@
+{
+  "data": {
+    "searchProvidersChildCare": {
+      "sourceType": "PN",
+      "searchProvidersConnection": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null,
+          "__typename": "PageInfo"
+        },
+        "totalHits": 181,
+        "edges": [
+          {
+            "node": {
+              "member": {
+                "id": "",
+                "legacyId": "",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/27/46214727_pchiclm91FKi7UmFFOOSRd6Zp7VBaJ00",
+                "displayName": "Jeffrey H.",
+                "firstName": "Jeffrey",
+                "lastName": "H",
+                "address": {
+                  "city": "Staten Island",
+                  "state": "NY",
+                  "zip": "10312",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK",
+                "PREMIUM",
+                "VACCINATED"
+              ],
+              "yearsOfExperience": 1,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 0,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "34842037",
+                  "bio": {
+                    "experienceSummary": "As a nurturing and passionate childcare provider with a year of experience, I'm dedicated to fostering children's growth and development in a safe and nurturing environment. With my calm and imaginative nature, I create a fun and engaging atmosphere for children to learn, play, and thrive.\n\nI prioritize open communication with parents and believe in providing regular updates about their child's day. I adapt to the preferred communication method of each family, whether it's verbal updates at pickup, text messages, or phone calls.\n\nEnforcing household rules is essential for a harmonious environment, and I'm very comfortable doing so in a gentle yet firm manner. From outdoor sports to board games and technology-based apps, I enjoy a variety of games that cater to different interests and age groups.\n\nI'm seeking a position where I can positively impact the life of one child and support their family.",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "16",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "19",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 2,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "16",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "16",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          }
+        ],
+        "__typename": "SearchProvidersConnection"
+      },
+      "__typename": "SearchProvidersSuccess"
+    }
+  }
+}
