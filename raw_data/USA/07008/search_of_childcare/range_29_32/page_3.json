@@ -1,0 +1,117 @@
+{
+  "data": {
+    "searchProvidersChildCare": {
+      "sourceType": "PN",
+      "searchProvidersConnection": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null,
+          "__typename": "PageInfo"
+        },
+        "totalHits": 21,
+        "edges": [
+          {
+            "node": {
+              "member": {
+                "id": "",
+                "legacyId": "",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/38/46848438_nsaiEUTAutTOi34TYhWp6NgD5alA2400",
+                "displayName": "Anna C.",
+                "firstName": "Anna",
+                "lastName": "C",
+                "address": {
+                  "city": "Staten Island",
+                  "state": "NY",
+                  "zip": "10312",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK"
+              ],
+              "yearsOfExperience": 8,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 1,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "24881355",
+                  "bio": {
+                    "experienceSummary": "Hi! I'm Anna. I am a law student in my final year. I attend classes on Wednesdays and Thursdays and graduate in May! I have 8 years of child care experience caring for children ranging 3 months to 10 years old. I also am a partial owner of a children's party entertainment business so I am well versed in keeping the little ones engaged and entertained! I was a lifeguard in 2016 and 2017 so I was previously CPR certified and would be willing to update my certification at request. I have my own car with a safety first toddler car seat but can also install any others if needed. I would love to assist with the caretaking of your family and would love to schedule a day to meet!",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "30",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "35",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 2,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "40",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 3,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "20",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "35",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          }
+        ],
+        "__typename": "SearchProvidersConnection"
+      },
+      "__typename": "SearchProvidersSuccess"
+    }
+  }
+}
