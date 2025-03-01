@@ -259,7 +259,7 @@ query SearchProvidersChildCare($input: SearchProvidersChildCareInput!) {
             "filters": {
                 "postalCode": "07008",
                 "searchPageSize": 10,
-                "searchAfter": "U2VlZD0wLEluZGV4PTEwLFBhZ2VTY3JvbGxJZD0yNWZjNDJkNjgxMzA0NDRhOWVkZTY4OTcwNmM3YmY0NA=="
+                "searchAfter": ""
             },
             "agesServedInMonths": [0, 11, 12, 47, 48, 71, 72, 143, 144, 216],
             "attributes": [
@@ -274,6 +274,7 @@ query SearchProvidersChildCare($input: SearchProvidersChildCareInput!) {
     }
 }
 
+searchAfter = "U2VlZD0wLEluZGV4PTEwLFBhZ2VTY3JvbGxJZD0yNWZjNDJkNjgxMzA0NDRhOWVkZTY4OTcwNmM3YmY0NA=="
 def fetch_profiles():
     """
     Sends a POST request to the GraphQL endpoint with the defined payload and headers.
