@@ -41,7 +41,7 @@ DISCLAIMER:
   - This code is for educational purposes. Excessive scraping can lead to IP blocking or other actions.
   - Always respect the site's Terms of Service.
 
-Author: Your Name
+Author: @AyoubFrihaoui
 Version: 3.0.0
 """
 
