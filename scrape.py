@@ -2,6 +2,7 @@ import os
 import time
 import json
 import requests
+import random
 from typing import Tuple, List, Optional
 from config import COOKIE
 
@@ -374,7 +375,7 @@ query SearchProvidersChildCare($input: SearchProvidersChildCareInput!) {
         data = response.json()
 
         # Sleep to avoid sending requests too quickly
-        time.sleep(1.5)
+        time.sleep(round(random.uniform(1.5, 1.8), 4))
 
         # Check for GraphQL errors
         if "errors" in data:
