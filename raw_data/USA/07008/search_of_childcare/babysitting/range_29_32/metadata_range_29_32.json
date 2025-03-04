@@ -1,0 +1,75 @@
+{
+  "deception": "This metadata file is used by future LLMs or data engineers to understand the structure and purpose of the data in this directory.",
+  "directory_name": "range_29_32",
+  "creation_time": "2025-03-04T16:29:25.461489Z",
+  "scrape_status": "success",
+  "run_id": "2b1dadf6-8726-461f-aae2-efaf09d5bbe3",
+  "description": "Range directory for 29-32 USD",
+  "start_time_iso": "2025-03-04T16:29:25.461490Z",
+  "end_time_iso": "2025-03-04T16:29:32.454388Z",
+  "duration_seconds": 6.99,
+  "total_pages": 3,
+  "total_caregivers": 21,
+  "api_request": {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-US,en;q=0.9",
+      "apollographql-client-name": "search-mfe",
+      "apollographql-client-version": "1.230.0",
+      "baggage": "sentry-environment=prod,sentry-release=search-mfe@1.230.0,sentry-public_key=74fca7c56b254f19bda68008acb52ac3,sentry-trace_id=e1b40cdf6bd5404899e8aa22938c69c8,sentry-sample_rate=0.4,sentry-transaction=/,sentry-sampled=false",
+      "content-type": "application/json",
+      "origin": "https://www.care.com",
+      "priority": "u=1, i",
+      "referer": "https://www.care.com/app/search?zipcode=07008&radius=10&vertical=CHILD_CARE&subvertical=SITTER&ageRanges=48+-+71%2C0+-+11%2C12+-+47%2C144+-+216%2C72+-+143&numberOfChildren=1&attributes=CPR_TRAINED%2CCOMFORTABLE_WITH_PETS%2CCOLLEGE_EDUCATED%2COWN_TRANSPORTATION%2CNON_SMOKER",
+      "sec-ch-ua": "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "sentry-trace": "e1b40cdf6bd5404899e8aa22938c69c8-8741747362ac06bd-0",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+    },
+    "payload": {
+      "query": "\nfragment CaregiverFragment on SearchProvidersSuccess {\n  sourceType\n  searchProvidersConnection {\n    pageInfo {\n      hasNextPage\n      endCursor\n      __typename\n    }\n    totalHits\n    edges {\n      node {\n        ... on Caregiver {\n          member {\n            id\n            legacyId\n            imageURL\n            displayName\n            firstName\n            lastName\n            address {\n              city\n              state\n              zip\n              __typename\n            }\n            primaryService\n            __typename\n          }\n          hasCareCheck\n          badges\n          yearsOfExperience\n          profileDataSource\n          hiredByCounts {\n            locality {\n              hiredCount\n              __typename\n            }\n            __typename\n          }\n          hiredTimes\n          revieweeMetrics {\n            ... on ReviewFailureResponse {\n              message\n              __typename\n            }\n            ... on RevieweeMetricsPayload {\n              metrics {\n                totalReviews\n                averageRatings {\n                  type\n                  value\n                  __typename\n                }\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          profiles {\n            commonCaregiverProfile {\n              id\n              bio {\n                experienceSummary\n                __typename\n              }\n              __typename\n            }\n            childCareCaregiverProfile {\n              rates {\n                hourlyRate {\n                  amount\n                  __typename\n                }\n                numberOfChildren\n                __typename\n              }\n              recurringRate {\n                hourlyRateFrom {\n                  amount\n                  __typename\n                }\n                hourlyRateTo {\n                  amount\n                  __typename\n                }\n                __typename\n              }\n              __typename\n            }\n            petCareCaregiverProfile {\n              serviceRates {\n                duration\n                rate {\n                  amount\n                  __typename\n                }\n                subtype\n                __typename\n              }\n              recurringRate {\n                hourlyRateFrom {\n                  amount\n                  __typename\n                }\n                hourlyRateTo {\n                  amount\n                  __typename\n                }\n                __typename\n              }\n              __typename\n            }\n            houseKeepingCaregiverProfile {\n              recurringRate {\n                hourlyRateFrom {\n                  amount\n                  __typename\n                }\n                hourlyRateTo {\n                  amount\n                  __typename\n                }\n                __typename\n              }\n              __typename\n            }\n            tutoringCaregiverProfile {\n              recurringRate {\n                hourlyRateFrom {\n                  amount\n                  __typename\n                }\n                hourlyRateTo {\n                  amount\n                  __typename\n                }\n                __typename\n              }\n              __typename\n            }\n            seniorCareCaregiverProfile {\n              recurringRate {\n                hourlyRateFrom {\n                  amount\n                  __typename\n                }\n                hourlyRateTo {\n                  amount\n                  __typename\n                }\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          featuredReview {\n            description {\n              displayText\n              originalText\n              __typename\n            }\n            reviewer {\n              publicMemberInfo {\n                firstName\n                lastInitial\n                imageURL\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          isFavorite\n          __typename\n        }\n        ... on SearchProvidersNodeError {\n          providerId\n          message\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nquery SearchProvidersChildCare($input: SearchProvidersChildCareInput!) {\n  searchProvidersChildCare(input: $input) {\n    ... on SearchProvidersSuccess {\n      ...CaregiverFragment\n      __typename\n    }\n    ... on SearchProvidersError {\n      message\n      __typename\n    }\n    __typename\n  }\n}\n",
+      "variables": {
+        "input": {
+          "careType": "SITTER",
+          "filters": {
+            "payRange": {
+              "min": {
+                "amount": 29,
+                "currencyCode": "USD"
+              },
+              "max": {
+                "amount": 32,
+                "currencyCode": "USD"
+              }
+            },
+            "postalCode": "07008",
+            "searchPageSize": 10,
+            "searchAfter": ""
+          },
+          "agesServedInMonths": [
+            0,
+            11,
+            12,
+            47,
+            48,
+            71,
+            72,
+            143,
+            144,
+            216
+          ],
+          "numberOfChildren": 1
+        }
+      }
+    }
+  },
+  "scraper_info": {
+    "python_version": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "some_future_data": "Any additional data we might store for data lineage"
+  }
+}
