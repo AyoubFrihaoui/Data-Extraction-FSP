@@ -1,0 +1,110 @@
+{
+  "data": {
+    "searchProvidersChildCare": {
+      "sourceType": "PN",
+      "searchProvidersConnection": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null,
+          "__typename": "PageInfo"
+        },
+        "totalHits": 1,
+        "edges": [
+          {
+            "node": {
+              "member": {
+                "id": "535a8ec5-c378-4298-801a-329ff4c4a600",
+                "legacyId": "53515331",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/90/41864590_DJzKrKHddpl8pNvx0uP2zHVtWhhGa300",
+                "displayName": "Aretha O.",
+                "firstName": "Aretha",
+                "lastName": "O",
+                "address": {
+                  "city": "Irvington",
+                  "state": "NJ",
+                  "zip": "07111",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK",
+                "VACCINATED"
+              ],
+              "yearsOfExperience": 10,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 0,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "29997890",
+                  "bio": {
+                    "experienceSummary": "I am a trustworthy individual who can be left in charge to provide outstanding care.\nAnd when another pair of hands is needed around the home, let me know how I can be of assistance.",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "40",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "40",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 2,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "20",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "50",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          }
+        ],
+        "__typename": "SearchProvidersConnection"
+      },
+      "__typename": "SearchProvidersSuccess"
+    }
+  }
+}
