@@ -1,0 +1,92 @@
+{
+  "data": {
+    "searchProvidersSeniorCare": {
+      "sourceType": "PN",
+      "searchProvidersConnection": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null,
+          "__typename": "PageInfo"
+        },
+        "totalHits": 1,
+        "edges": [
+          {
+            "node": {
+              "member": {
+                "id": "0bf3af29-1e2d-445c-bd54-b9f64b47f1bb",
+                "legacyId": "50262684",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/88/40639788_3pd7c8Oni5FZF5JxQ49yRrOSetHl00",
+                "displayName": "Germaine M.",
+                "firstName": "Germaine",
+                "lastName": "M",
+                "address": {
+                  "city": "Irvington",
+                  "state": "NJ",
+                  "zip": "07111",
+                  "__typename": "Address"
+                },
+                "primaryService": "HOUSEKEEPING",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK",
+                "VACCINATED"
+              ],
+              "yearsOfExperience": 10,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 0,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "28722928",
+                  "bio": {
+                    "experienceSummary": "My exceptional level of service is exactly what you need. \nI've been a healthcare worker for 10 years. I've worked in nursing homes, hospitals, and private home care. I am great at cleaning/maintaining and personal organization services also. \nI was born in the Caribbean and raised here in US. I love the career path that I have chosen where I can make a difference in someone else's life.\nI am a fit, uplifting worker bee who really loves helping to make life a bit easier for any client or patient, one task at a time.",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": null,
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": {
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "51",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "51",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "SeniorCareCaregiverProfile"
+                },
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          }
+        ],
+        "__typename": "SearchProvidersConnection"
+      },
+      "__typename": "SearchProvidersSuccess"
+    }
+  }
+}
