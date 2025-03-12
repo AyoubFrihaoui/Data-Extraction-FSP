@@ -1,0 +1,650 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-04-26T13:00:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "HIGH_SCHOOL_DEGREE",
+          "schoolName": "",
+          "educationDetailsText": [
+            "High school degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": false,
+      "member": {
+        "id": "7f87aa22-12fd-4bf7-9d38-2f9ddf163c04",
+        "lastName": "W",
+        "firstName": "Ashana",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/69/44539569_do1NOWrlTEMR9pIaRwe9dURnQZ4bN00",
+        "displayName": "Ashana W.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/69/44539569_do1NOWrlTEMR9pIaRwe9dURnQZ4bN00",
+        "address": {
+          "city": "Linden",
+          "state": "NJ",
+          "zip": "07036",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "59329110",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "HOUSEKEEPING",
+          "PET_CARE",
+          "SENIOR_CARE"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hello I am a very outgoing person and patient as well as kind calm and mature. I will be committed to ensuring child's walfare and wellness through fun education activities to boost mental and physical growth in a pleasant atmosphere. An adaptable babysitter/teacher with knowledge of nutrition, hygiene, behavior and physical health for stable development.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "32512837",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 3,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "15",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "34",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": false,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": false,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "15",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "15",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "30",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "33",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 3,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": false,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": false,
+            "mealPreparation": false,
+            "swimmingSupervision": false,
+            "travel": false,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 3,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "32512837",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": true,
+            "dateNight": false,
+            "lightCleaning": true,
+            "mealPrepLaundry": true,
+            "mover": false,
+            "personalAssistant": true,
+            "petHelp": false,
+            "shopping": true,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "rates": [
+            {
+              "activity": "Sitting",
+              "activityRate": {
+                "amount": "65",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Boarding",
+              "activityRate": {
+                "amount": "59",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Doggy day care",
+              "activityRate": {
+                "amount": "59",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "day",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "30-minute dog walk",
+              "activityRate": {
+                "amount": "26",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "60-minute dog walk",
+              "activityRate": {
+                "amount": "41",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            }
+          ],
+          "bio": {
+            "experienceSummary": "I have history of delivering exceptional care to animals in various environments. With a lot of experience with handling and caring for a variety of animals. As well as doing the daily care and well being including feeding walking grooming and providing companionship",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "34387977",
+          "numberOfPetsComfortableWith": 0,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "18",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "34",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "petSpecies": {
+            "caresForAmphibians": false,
+            "caresForBirds": false,
+            "caresForCats": true,
+            "caresForDogs": true,
+            "caresForExoticPets": false,
+            "caresForFarmAnimals": false,
+            "caresForFish": true,
+            "caresForHorses": false,
+            "caresForMammals": true,
+            "caresForOtherPets": false,
+            "__typename": "PetCareSpeciesCaredFor"
+          },
+          "qualities": {
+            "isBondedAndInsured": false,
+            "isNappsCertified": false,
+            "isPSAMemberAndIsInsured": false,
+            "isRedCrossPetFirstAidCertified": false,
+            "doesNotSmoke": true,
+            "ownsTransportation": false,
+            "isCertifiedAndInsured": false,
+            "isExperiencedWithChallengingPets": false,
+            "isExperiencedWithSeniorPets": false,
+            "isExperiencedWithSpecialNeedsPets": false,
+            "isExperiencedWithYoungPets": false,
+            "__typename": "PetCareQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "18",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "34",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "serviceRates": [
+            {
+              "rate": {
+                "amount": "65",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "SITTING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "59",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "BOARDING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "59",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_DAY",
+              "subtype": "DAYCARE",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "26",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_30_MIN",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "41",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_HOUR",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            }
+          ],
+          "supportedServices": {
+            "administersMedicine": false,
+            "boardsOvernight": false,
+            "doesDailyFeeding": false,
+            "doesHouseSitting": false,
+            "doesPetDaycare": false,
+            "doesPetSitting": true,
+            "doesPetWalking": true,
+            "groomsAnimals": true,
+            "retrievesMail": false,
+            "trainsDogs": false,
+            "transportsPets": false,
+            "watersPlants": false,
+            "__typename": "PetCareServices"
+          },
+          "yearsOfExperience": 0,
+          "__typename": "PetCareCaregiverProfile"
+        },
+        "seniorCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "I provide personalized care and support to elderly clients, promoting physical and emotional well being. Assisting with daily activities including bathing , dressing, medication and mean preparation",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "34387727",
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "33",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "alzheimersOrDementiaExperience": false,
+            "certifiedNursingAssistant": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "doesNotSmoke": true,
+            "firstAidTraining": false,
+            "homeHealthAideExperience": false,
+            "hospiceExperience": false,
+            "licensedNurse": false,
+            "medicalEquipmentExperience": true,
+            "ownTransportation": false,
+            "registeredNurse": false,
+            "woundCare": true,
+            "__typename": "SeniorCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "20",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "33",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "supportedServices": {
+            "visitingPhysician": false,
+            "visitingNurse": false,
+            "transportation": false,
+            "specializedCare": false,
+            "specialNeeds": false,
+            "respiteCare": false,
+            "personalCare": false,
+            "mobilityAssistance": false,
+            "medicalTransportation": false,
+            "medicalManagement": true,
+            "mealPreparation": true,
+            "lightHousekeeping": true,
+            "liveInHomeCare": false,
+            "hospiceServices": false,
+            "homeModification": false,
+            "homeHealth": false,
+            "helpStayingPhysicallyActive": false,
+            "heavyLifting": false,
+            "feeding": false,
+            "errands": true,
+            "dementia": false,
+            "companionship": false,
+            "bathing": false,
+            "__typename": "SeniorCareCaregiverServices"
+          },
+          "yearsOfExperience": 0,
+          "__typename": "SeniorCareCaregiverProfile"
+        },
+        "tutoringCaregiverProfile": null,
+        "houseKeepingCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "I am a preschool teacher and apart of my job is to keep everything nice and clean and by night I am a toddler mom so that's an extra clean house for me :)",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "distanceWillingToTravel": null,
+          "id": "34387736",
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "18",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "33",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "comfortableWithPets": true,
+            "doesNotSmoke": true,
+            "ownTransportation": false,
+            "providesEquipment": false,
+            "providesSupplies": false,
+            "__typename": "HousekeeperQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "18",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "33",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "schedule": [],
+          "supportedServices": {
+            "atticCleaning": false,
+            "basementCleaning": false,
+            "bathroomCleaning": true,
+            "cabinetCleaning": false,
+            "carpetCleaning": false,
+            "changingBedLinens": false,
+            "deepCleaning": false,
+            "dishes": false,
+            "dusting": false,
+            "furnitureTreatment": false,
+            "generalRoomCleaning": true,
+            "houseSitting": false,
+            "kitchenCleaning": true,
+            "laundry": false,
+            "moveOutCleaning": false,
+            "organization": true,
+            "ovenCleaning": false,
+            "packingUnpacking": false,
+            "petWasteCleanup": false,
+            "plantCare": false,
+            "refrigeratorCleaning": false,
+            "standardCleaning": false,
+            "surfacePolishing": false,
+            "vacuumingOrMopping": false,
+            "wallWashing": false,
+            "windowWashing": false,
+            "__typename": "HousekeeperServices"
+          },
+          "yearsOfExperience": 0,
+          "__typename": "HouseKeepingCaregiverProfile"
+        },
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2023-06-06T06:37:00.000Z",
+      "yearsOfExperience": 3,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/59/45960859_do1NOWrlTEMR9pIaRwe9dURnQZ4bN00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/62/45960862_do1NOWrlTEMR9pIaRwe9dURnQZ4bN00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

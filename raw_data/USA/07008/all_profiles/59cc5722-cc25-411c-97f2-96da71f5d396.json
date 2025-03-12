@@ -1,0 +1,351 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-09-29T15:41:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": true,
+          "degreeYear": null,
+          "educationLevel": "COLLEGE_DEGREE",
+          "schoolName": "CAHE",
+          "educationDetailsText": [
+            "Cahe",
+            "Currently attending",
+            "College degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "59cc5722-cc25-411c-97f2-96da71f5d396",
+        "lastName": "B",
+        "firstName": "Jessica",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/35/46528635_wPfipMnxkoOrhRUD1AIKQVWTE9g8m00",
+        "displayName": "Jessica B.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/35/46528635_wPfipMnxkoOrhRUD1AIKQVWTE9g8m00",
+        "address": {
+          "city": "Staten Island",
+          "state": "NY",
+          "zip": "10314",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "55428076",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hello! I love working with children and have two years of daycare experience and one year of nannying. I graduated highschool early, spent a year studying at San Diego State, and now I am currently completing a primarily online program to be a diagnostic medical sonographer. I consider myself to be fun, loving, patient, and responsible. I also took two semesters of ASL in college.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "30858154",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 2,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "22",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": true,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "22",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "26",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "29",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": false,
+            "mealPreparation": true,
+            "swimmingSupervision": false,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 3,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "30858154",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": true,
+            "lightCleaning": false,
+            "mealPrepLaundry": false,
+            "mover": false,
+            "personalAssistant": false,
+            "petHelp": true,
+            "shopping": true,
+            "transportation": true,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "I have 3 years of experience in childcare, and 1 year of experience in tutoring. I love working with children, I consider myself to be patient, kind, and a problem solver. I studied psychology at San Diego State University and now I am a medical student in diagnostic sonography at CAHE.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "35811065",
+          "otherGeneralSubjects": [
+            "Computers",
+            "English",
+            "Science",
+            "Test Prep"
+          ],
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": true,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": false,
+              "certifiedTeacher": false,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": true,
+            "tutorsInStudentsHome": true,
+            "tutorsInTeachersHome": false,
+            "tutorsOnline": true,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [],
+          "otherSpecificSubject": "",
+          "yearsOfExperience": 1,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "13:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2022-08-10T07:08:00.000Z",
+      "yearsOfExperience": 3,
+      "nonPrimaryImages": [],
+      "__typename": "Caregiver"
+    }
+  }
+}

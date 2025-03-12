@@ -1,0 +1,367 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-04-10T17:55:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "SOME_COLLEGE",
+          "schoolName": "",
+          "educationDetailsText": [
+            "Some college"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": false,
+      "member": {
+        "id": "b03c1f06-63bb-4495-a950-71c52fca6d21",
+        "lastName": "D",
+        "firstName": "Lorraine",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/31/44977331_v1SuoZ1wzyDq6YYk3GQgDF7yy9nDc00",
+        "displayName": "Lorraine D.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "HOUSEKEEPING",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/31/44977331_v1SuoZ1wzyDq6YYk3GQgDF7yy9nDc00",
+        "address": {
+          "city": "Westfield",
+          "state": "NJ",
+          "zip": "07090",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "58014664",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "HOUSEKEEPING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "One of my most fulfilling accomplishments in life was to raise two boys who have become polite, well adjusted young men. There is nothing more important to me than that. I understand that your children are precious to you and would be my honor to help you watch over them. I have many years of experience with newborns, toddlers as well as older children with excellent references.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "31939592",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 3,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": false,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": true,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": false,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "30",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "30",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "33",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 3,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": true,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": false,
+            "travel": false,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 10,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "31939592",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": false,
+            "lightCleaning": true,
+            "mealPrepLaundry": false,
+            "mover": true,
+            "personalAssistant": true,
+            "petHelp": false,
+            "shopping": true,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": null,
+        "houseKeepingCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Reliable, positive and experienced mother of two grown boys who knows what it takes to run a smooth household. Light housekeeping, laundry, changing bed linens, running errands, organizing and the occasional pick up or drop off for the kids are all a part of that. Let me help so you can enjoy your free time with loved ones and be worry free when it comes to getting those daunting everyday chores accomplished. I also have years of experience with children of all ages and have excellent references.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "distanceWillingToTravel": null,
+          "id": "31939410",
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "comfortableWithPets": false,
+            "doesNotSmoke": true,
+            "ownTransportation": false,
+            "providesEquipment": false,
+            "providesSupplies": false,
+            "__typename": "HousekeeperQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "schedule": [],
+          "supportedServices": {
+            "atticCleaning": false,
+            "basementCleaning": false,
+            "bathroomCleaning": false,
+            "cabinetCleaning": false,
+            "carpetCleaning": false,
+            "changingBedLinens": true,
+            "deepCleaning": false,
+            "dishes": false,
+            "dusting": false,
+            "furnitureTreatment": false,
+            "generalRoomCleaning": false,
+            "houseSitting": false,
+            "kitchenCleaning": false,
+            "laundry": true,
+            "moveOutCleaning": false,
+            "organization": true,
+            "ovenCleaning": false,
+            "packingUnpacking": false,
+            "petWasteCleanup": false,
+            "plantCare": false,
+            "refrigeratorCleaning": false,
+            "standardCleaning": false,
+            "surfacePolishing": false,
+            "vacuumingOrMopping": false,
+            "wallWashing": false,
+            "windowWashing": false,
+            "__typename": "HousekeeperServices"
+          },
+          "yearsOfExperience": 10,
+          "__typename": "HouseKeepingCaregiverProfile"
+        },
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "16:00:00",
+                "start": "10:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "16:00:00",
+                "start": "10:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "16:00:00",
+                "start": "10:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "16:00:00",
+                "start": "10:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "16:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2023-03-02T13:49:00.000Z",
+      "yearsOfExperience": 10,
+      "nonPrimaryImages": [],
+      "__typename": "Caregiver"
+    }
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2025-03-02T17:13:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "GRADUATE_DEGREE",
+          "schoolName": "Pace University",
+          "educationDetailsText": [
+            "Pace University",
+            "Bachelor degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "f7558a17-4851-40f6-8830-b6cfca9fccc7",
+        "lastName": "F",
+        "firstName": "Kate",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/5/38879305_mf1tyr8Gucdw8kAmdribuu0cOtQLhs00",
+        "displayName": "Kate F.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "TUTORING",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/5/38879305_mf1tyr8Gucdw8kAmdribuu0cOtQLhs00",
+        "address": {
+          "city": "Staten Island",
+          "state": "NY",
+          "zip": "10301",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "46205046",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hi! My name is Kate and I am a New York City, Board of Ed Certified Substitute Teacher. I have a Bachelors of Science in Music and I have a very unique experience teaching that can be a great asset for your family this year. Not only have I been teaching private music lessons for about 20 years (both in person and remotely) but I have also been teaching children from ages 3-18 in some capacity or another for nearly 20 years. Other than a regular classroom setting where children are grouped by grade and age, I also have experience working with multiple children of varying ages and levels at the same time. Due to the Pandemic, I worked at a REC center this past Spring where each teacher had a classroom full of children of all different ages (K-5th grade). The combination of distance learning and the physical classroom gave me many unique tools to use so I can teach and enrich children's lives while keeping them safe and healthy.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "27136679",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 1,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": true,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": false,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": false,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": true,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "28",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": true,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": false,
+            "mealPreparation": true,
+            "swimmingSupervision": false,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 10,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "27136679",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": true,
+            "dateNight": false,
+            "lightCleaning": false,
+            "mealPrepLaundry": true,
+            "mover": false,
+            "personalAssistant": true,
+            "petHelp": true,
+            "shopping": true,
+            "transportation": true,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hi! My name is Kate and I am a NYS Certified teacher of both Music K-12 and SWDs. I have a Bachelors of Science in Music and I have a Masters of Science in Educational Studies from PACE University. I have 5 years as an NYC public school teacher and 20 years of experience teaching music privately.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "26982863",
+          "otherGeneralSubjects": [
+            "English",
+            "Math",
+            "Science",
+            "Special Education",
+            "Test Prep",
+            "Art",
+            "Musical Instruments",
+            "Music And Drama"
+          ],
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "50",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": false,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": false,
+              "certifiedTeacher": true,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": true,
+            "tutorsInStudentsHome": true,
+            "tutorsInTeachersHome": true,
+            "tutorsOnline": true,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [
+            "MATH_SUBJECT_MIDDLE_SCHOOL_MATH",
+            "ENGLISH_SUBJECT_GRAMMAR",
+            "ENGLISH_SUBJECT_LANGUAGE_ARTS_K6",
+            "ENGLISH_SUBJECT_LITERATURE",
+            "ENGLISH_SUBJECT_READING",
+            "ENGLISH_SUBJECT_WRITING",
+            "SCIENCE_SUBJECT_ELEMENTARY_SCIENCE",
+            "SCIENCE_SUBJECT_MIDDLE_SCHOOL",
+            "SCIENCE_SUBJECT_PSYCHOLOGY",
+            "ART_SUBJECT_ART_HISTORY",
+            "MUSIC_DRAMA_SUBJECT_DRAMA_THEATER",
+            "MUSIC_DRAMA_SUBJECT_GENERAL_MUSIC",
+            "MUSIC_DRAMA_SUBJECT_SINGING",
+            "MUSICAL_INSTRUMENTS_SUBJECT_KEYBOARD",
+            "MUSICAL_INSTRUMENTS_SUBJECT_PIANO",
+            "MUSICAL_INSTRUMENTS_SUBJECT_VIOLIN",
+            "TEST_PREP_SUBJECT_ELEMENTARY_STANDARD_TESTING"
+          ],
+          "otherSpecificSubject": "History",
+          "yearsOfExperience": 10,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "17:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "17:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "17:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "17:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "18:00:00",
+                "start": "11:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [
+              {
+                "end": "17:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2020-07-31T16:10:00.000Z",
+      "yearsOfExperience": 10,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/63/46975363_mf1tyr8Gucdw8kAmdribuu0cOtQLhs00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/72/46975372_mf1tyr8Gucdw8kAmdribuu0cOtQLhs00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

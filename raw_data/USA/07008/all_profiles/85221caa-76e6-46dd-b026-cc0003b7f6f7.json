@@ -1,0 +1,480 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-02-19T08:53:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": true,
+          "degreeYear": null,
+          "educationLevel": "SOME_GRADUATE_SCHOOL",
+          "schoolName": "",
+          "educationDetailsText": [
+            "Currently attending",
+            "Some graduate school"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "85221caa-76e6-46dd-b026-cc0003b7f6f7",
+        "lastName": "C",
+        "firstName": "Micaela",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/38/43771338_Z3Wgirx79ZcqqmY3RyRZAIhWtuxb00",
+        "displayName": "Micaela C.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/38/43771338_Z3Wgirx79ZcqqmY3RyRZAIhWtuxb00",
+        "address": {
+          "city": "Staten Island",
+          "state": "NY",
+          "zip": "10308",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "57498032",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "PET_CARE"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "Hi! My names Micaela I'm currently a student at Rutgers pursuing a doctorate of physical therapy. One thing I'm interested in is potentially working pediatrics and hoping that I can solidly that desire while babysitting your little ones! I have 3 nieces of my own , twin 1-year-olds and a 4-year-old, all who I love dearly and have given me ample experience multitasking ! My school work does not allow me to have a 9-5 job which is why babysitting is alluring to me because I get to build relationships with families and their kids that benefit my career down the line and the hours allow me to actually work through my semesters! I hope I can be a good fit for you and your family !",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "31715061",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 2,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "22",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "22",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "22",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "22",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "26",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "29",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": false,
+            "mealPreparation": true,
+            "swimmingSupervision": false,
+            "travel": false,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 1,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "31715061",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": false,
+            "lightCleaning": false,
+            "mealPrepLaundry": false,
+            "mover": false,
+            "personalAssistant": false,
+            "petHelp": false,
+            "shopping": false,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "rates": [
+            {
+              "activity": "Sitting",
+              "activityRate": {
+                "amount": "46",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Boarding",
+              "activityRate": {
+                "amount": "42",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Doggy day care",
+              "activityRate": {
+                "amount": "42",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "day",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "30-minute dog walk",
+              "activityRate": {
+                "amount": "19",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "60-minute dog walk",
+              "activityRate": {
+                "amount": "29",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            }
+          ],
+          "bio": {
+            "experienceSummary": "I have had an animal my entire life until recently and unfortunately my school schedule is not ideal to bring a fur baby home right now. I have dog sat for my neighbors as well as lived in friends homes for a week to be with their dog for their wedding, I care for every animal as if it was my own, and often miss the brightness pets bring into your life. I'm hoping I can help you and have the opportunity to shower your pets with the care, attention and affection they deserve",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "31739506",
+          "numberOfPetsComfortableWith": 0,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "17",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "petSpecies": {
+            "caresForAmphibians": false,
+            "caresForBirds": true,
+            "caresForCats": true,
+            "caresForDogs": true,
+            "caresForExoticPets": false,
+            "caresForFarmAnimals": false,
+            "caresForFish": true,
+            "caresForHorses": false,
+            "caresForMammals": false,
+            "caresForOtherPets": false,
+            "__typename": "PetCareSpeciesCaredFor"
+          },
+          "qualities": {
+            "isBondedAndInsured": false,
+            "isNappsCertified": false,
+            "isPSAMemberAndIsInsured": false,
+            "isRedCrossPetFirstAidCertified": false,
+            "doesNotSmoke": true,
+            "ownsTransportation": false,
+            "isCertifiedAndInsured": false,
+            "isExperiencedWithChallengingPets": false,
+            "isExperiencedWithSeniorPets": false,
+            "isExperiencedWithSpecialNeedsPets": false,
+            "isExperiencedWithYoungPets": false,
+            "__typename": "PetCareQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "17",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "20",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "serviceRates": [
+            {
+              "rate": {
+                "amount": "46",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "SITTING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "42",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "BOARDING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "42",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_DAY",
+              "subtype": "DAYCARE",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "19",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_30_MIN",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "29",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_HOUR",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            }
+          ],
+          "supportedServices": {
+            "administersMedicine": false,
+            "boardsOvernight": false,
+            "doesDailyFeeding": false,
+            "doesHouseSitting": false,
+            "doesPetDaycare": false,
+            "doesPetSitting": true,
+            "doesPetWalking": true,
+            "groomsAnimals": false,
+            "retrievesMail": false,
+            "trainsDogs": false,
+            "transportsPets": false,
+            "watersPlants": false,
+            "__typename": "PetCareServices"
+          },
+          "yearsOfExperience": 1,
+          "__typename": "PetCareCaregiverProfile"
+        },
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": null,
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "23:30:00",
+                "start": "17:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "22:00:00",
+                "start": "17:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "17:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [
+              {
+                "end": "17:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2023-01-24T08:32:00.000Z",
+      "yearsOfExperience": 1,
+      "nonPrimaryImages": [],
+      "__typename": "Caregiver"
+    }
+  }
+}

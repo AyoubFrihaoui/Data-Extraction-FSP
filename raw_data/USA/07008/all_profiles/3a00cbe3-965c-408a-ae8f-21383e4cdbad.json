@@ -1,0 +1,249 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-10-01T17:25:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "PREMIUM",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "GRADUATE_DEGREE",
+          "schoolName": "The College of New Jersey",
+          "educationDetailsText": [
+            "The College of New Jersey",
+            "Graduate degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "3a00cbe3-965c-408a-ae8f-21383e4cdbad",
+        "lastName": "F",
+        "firstName": "Gabrielle",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/2/45382602_afRqFKD9SGNhSHyjOzDLXIPyDaQxh00",
+        "displayName": "Gabrielle F.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/2/45382602_afRqFKD9SGNhSHyjOzDLXIPyDaQxh00",
+        "address": {
+          "city": "Bayonne",
+          "state": "NJ",
+          "zip": "07002",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "16629264",
+        "isPremium": true,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hi! My name is Gabrielle, and I am a School Counselor in an elementary school in Hudson County. Some things one should know about me... I'm very capable of \"running the show\" (both figuratively and literally). I've spent many years being a stage manager for various theatrical and dance performances through which I have worked with children of varied ages. Prior to my professional experiences as a School Counselor, I spent many years baby-sitting and working as a camp counselor in Bayonne and as both a Teacher's Assistant and Administrative Assistant for a summer enrichment program for gifted students at The Hudson School in Hoboken. Also, I have a very large extended family, so I am comfortable working with many people at one time. I'm very talkative, sociable, and organized.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "10836700",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 1,
+          "offerings": null,
+          "otherQualities": [
+            "State of New Jersey School Counselor certification; National Certified Counselor."
+          ],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": false,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": false,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "28",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": true,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 10,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "10836700",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": true,
+            "lightCleaning": false,
+            "mealPrepLaundry": false,
+            "mover": true,
+            "personalAssistant": false,
+            "petHelp": false,
+            "shopping": true,
+            "transportation": true,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": null,
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2014-09-16T14:33:00.000Z",
+      "yearsOfExperience": 10,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/35/45236535_afRqFKD9SGNhSHyjOzDLXIPyDaQxh00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/81/45236581_afRqFKD9SGNhSHyjOzDLXIPyDaQxh00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

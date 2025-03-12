@@ -1,0 +1,518 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2025-02-06T18:06:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": 1982,
+          "educationLevel": "HIGH_SCHOOL_DEGREE",
+          "schoolName": "National High School",
+          "educationDetailsText": [
+            "National High School - 1982",
+            "High school degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "9c8a71d7-0c6f-428d-94f4-21d1d1927c4c",
+        "lastName": "K",
+        "firstName": "Kuldeep",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/79/46974279_FdOqzTlsQnjtK4kAqmdOvvbEtbdo300",
+        "displayName": "Kuldeep K.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "PET_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/79/46974279_FdOqzTlsQnjtK4kAqmdOvvbEtbdo300",
+        "address": {
+          "city": "Carteret",
+          "state": "NJ",
+          "zip": "07008",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH",
+          "HINDI",
+          "PUNJABI"
+        ],
+        "legacyId": "21551400",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "PET_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Highly educated care taker who can assist kids on homework, certified CPR/AED/First aid. Will help in cooking especially vegetarian food. I will commute your kids.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "36063138",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 1,
+          "offerings": null,
+          "otherQualities": [
+            "Teaching degree in India"
+          ],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": false,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": false,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": false,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 2,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "36063138",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": false,
+            "lightCleaning": true,
+            "mealPrepLaundry": true,
+            "mover": false,
+            "personalAssistant": true,
+            "petHelp": false,
+            "shopping": false,
+            "transportation": true,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": {
+          "approvalStatus": "INACTIVE",
+          "rates": [
+            {
+              "activity": "Sitting",
+              "activityRate": {
+                "amount": "55",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Boarding",
+              "activityRate": {
+                "amount": "50",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Doggy day care",
+              "activityRate": {
+                "amount": "50",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "day",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "30-minute dog walk",
+              "activityRate": {
+                "amount": "22",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "60-minute dog walk",
+              "activityRate": {
+                "amount": "34",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            }
+          ],
+          "bio": {
+            "experienceSummary": "Kind and nurturing babysitter available to take care of infants, toddlers and teens. Non-smoker, Certified in CPR/AED/First Aid, Comfortable with pets, valid driver's license, experience in providing basic help with home work. Fluent in English, Punjabi and Hindi language. Organized, friendly, has safety awareness and knowledge of child development.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "13658284",
+          "numberOfPetsComfortableWith": 0,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "22",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "22",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "petSpecies": {
+            "caresForAmphibians": false,
+            "caresForBirds": false,
+            "caresForCats": false,
+            "caresForDogs": false,
+            "caresForExoticPets": false,
+            "caresForFarmAnimals": false,
+            "caresForFish": false,
+            "caresForHorses": false,
+            "caresForMammals": false,
+            "caresForOtherPets": false,
+            "__typename": "PetCareSpeciesCaredFor"
+          },
+          "qualities": {
+            "isBondedAndInsured": false,
+            "isNappsCertified": false,
+            "isPSAMemberAndIsInsured": false,
+            "isRedCrossPetFirstAidCertified": false,
+            "doesNotSmoke": true,
+            "ownsTransportation": false,
+            "isCertifiedAndInsured": false,
+            "isExperiencedWithChallengingPets": false,
+            "isExperiencedWithSeniorPets": false,
+            "isExperiencedWithSpecialNeedsPets": false,
+            "isExperiencedWithYoungPets": false,
+            "__typename": "PetCareQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "22",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "22",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "serviceRates": [
+            {
+              "rate": {
+                "amount": "55",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "SITTING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "50",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "BOARDING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "50",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_DAY",
+              "subtype": "DAYCARE",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "22",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_30_MIN",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "34",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_HOUR",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            }
+          ],
+          "supportedServices": {
+            "administersMedicine": false,
+            "boardsOvernight": false,
+            "doesDailyFeeding": false,
+            "doesHouseSitting": false,
+            "doesPetDaycare": false,
+            "doesPetSitting": false,
+            "doesPetWalking": false,
+            "groomsAnimals": false,
+            "retrievesMail": false,
+            "trainsDogs": false,
+            "transportsPets": false,
+            "watersPlants": false,
+            "__typename": "PetCareServices"
+          },
+          "yearsOfExperience": 5,
+          "__typename": "PetCareCaregiverProfile"
+        },
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "I was certified teacher in India. Teaching Punjabi language online and in Sikh Temple about 20 kids every week, would love helping elementary kids on all subjects. Very good in Microsoft Office to teach basic skills to students.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "36070126",
+          "otherGeneralSubjects": [
+            "Computers",
+            "English",
+            "Foreign Language",
+            "Math",
+            "Science"
+          ],
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "27",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "32",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": false,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": false,
+              "certifiedTeacher": false,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": true,
+            "tutorsInStudentsHome": true,
+            "tutorsInTeachersHome": true,
+            "tutorsOnline": true,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [],
+          "otherSpecificSubject": "",
+          "yearsOfExperience": 0,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "16:30:00",
+                "start": "08:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "18:00:00",
+                "start": "08:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "16:30:00",
+                "start": "08:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "18:00:00",
+                "start": "08:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "18:00:00",
+                "start": "08:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 88,
+      "responseTime": 1,
+      "signUpDate": "2015-09-03T15:22:00.000Z",
+      "yearsOfExperience": 2,
+      "nonPrimaryImages": [],
+      "__typename": "Caregiver"
+    }
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-09-15T15:38:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "COLLEGE_DEGREE",
+          "schoolName": "Central University College, Ghana",
+          "educationDetailsText": [
+            "Central University College, Ghana",
+            "College degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "1684a275-5f52-4a7e-815d-ab718ea5650b",
+        "lastName": "A",
+        "firstName": "Philipah",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/93/46484993_kcbAOGHqX4CyMVZktZRkVOErbYcy700",
+        "displayName": "Philipah A.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "SENIOR_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/93/46484993_kcbAOGHqX4CyMVZktZRkVOErbYcy700",
+        "address": {
+          "city": "Irvington",
+          "state": "NJ",
+          "zip": "07111",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH",
+          "FRENCH"
+        ],
+        "legacyId": "37324001",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "SENIOR_CARE"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "I am a mother of 3 girls including a set of twins and I take care of them asides everything I do which makes multi tasking very easy for me . I have volunteered with Jewish community center in west orange and privately worked with a family for 6years.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "25579025",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 3,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "15",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": true,
+            "specialNeedsCare": true,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "15",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "30",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "33",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 3,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": false,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": false,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 7,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "25579025",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": false,
+            "lightCleaning": false,
+            "mealPrepLaundry": false,
+            "mover": true,
+            "personalAssistant": false,
+            "petHelp": true,
+            "shopping": false,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "I have an 10 plus years experience with senior care and child care. I am available for meal prep, grocery shopping, light housekeeping and other errands including driving. I assisted people with dementia, Parkinson's, Alzheimer, MS. etc. I am Adult and pediatric CPR/AED trained as well as a certified HHA.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "22562678",
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "30",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "alzheimersOrDementiaExperience": true,
+            "certifiedNursingAssistant": false,
+            "comfortableWithPets": true,
+            "cprTrained": false,
+            "doesNotSmoke": true,
+            "firstAidTraining": false,
+            "homeHealthAideExperience": true,
+            "hospiceExperience": true,
+            "licensedNurse": false,
+            "medicalEquipmentExperience": false,
+            "ownTransportation": true,
+            "registeredNurse": false,
+            "woundCare": false,
+            "__typename": "SeniorCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "20",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "30",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "supportedServices": {
+            "visitingPhysician": false,
+            "visitingNurse": false,
+            "transportation": true,
+            "specializedCare": false,
+            "specialNeeds": true,
+            "respiteCare": false,
+            "personalCare": true,
+            "mobilityAssistance": false,
+            "medicalTransportation": false,
+            "medicalManagement": false,
+            "mealPreparation": false,
+            "lightHousekeeping": false,
+            "liveInHomeCare": true,
+            "hospiceServices": true,
+            "homeModification": false,
+            "homeHealth": true,
+            "helpStayingPhysicallyActive": false,
+            "heavyLifting": false,
+            "feeding": false,
+            "errands": false,
+            "dementia": true,
+            "companionship": false,
+            "bathing": true,
+            "__typename": "SeniorCareCaregiverServices"
+          },
+          "yearsOfExperience": 10,
+          "__typename": "SeniorCareCaregiverProfile"
+        },
+        "tutoringCaregiverProfile": null,
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [
+              {
+                "end": "07:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "00:00:00",
+                "start": "19:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2018-09-19T10:48:00.000Z",
+      "yearsOfExperience": 7,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/66/37785266_kcbAOGHqX4CyMVZktZRkVOErbYcy700"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

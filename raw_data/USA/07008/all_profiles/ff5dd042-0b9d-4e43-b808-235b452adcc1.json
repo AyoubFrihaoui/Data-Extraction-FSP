@@ -1,0 +1,419 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-02-08T11:20:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": true,
+          "degreeYear": null,
+          "educationLevel": "SOME_COLLEGE",
+          "schoolName": "New Jersey City University",
+          "educationDetailsText": [
+            "New Jersey City University",
+            "Currently attending",
+            "Some college"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 1,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": false,
+      "member": {
+        "id": "ff5dd042-0b9d-4e43-b808-235b452adcc1",
+        "lastName": "M",
+        "firstName": "Jenna",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/15/45693415_ycD74CTyxxOSLCImsmF1HKNyJcsg00",
+        "displayName": "Jenna M.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/15/45693415_ycD74CTyxxOSLCImsmF1HKNyJcsg00",
+        "address": {
+          "city": "Roselle Park",
+          "state": "NJ",
+          "zip": "07204",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "62766977",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "SENIOR_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hello!\n\nI am employed as a paraprofessional within the Plainfield school district, where I primarily support children with autism, ADHD, and ODD. \n\nWith a background in psychology , specializing in early developmental psychology and counseling, I am well-equipped to provide support in many areas including homework assistance, tutoring, and specialized help for children and adults with learning disabilities and/or special needs. I am also happy to provide light housekeeping & meal preparation.\n\nIn addition to formal education, I have practical experience with local babysitting & volunteer positions in church daycare programs.\n\nOutside of professional work, most of my time is spent in the gym, hiking, in museums, or in new restaurants. I also spent a year studying media arts with a focus on photography & cinema, so I am more than happy to provide enrichment time. I enjoy painting, pencil sketching, all types of crafting, sewing, and baking.\n\nHope to find a long-term family to work for :)",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "33973379",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 2,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": false,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": true,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": false,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "25",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": false,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "30",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": false,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": false,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": true,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 3,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "33973379",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": false,
+            "lightCleaning": false,
+            "mealPrepLaundry": false,
+            "mover": false,
+            "personalAssistant": false,
+            "petHelp": false,
+            "shopping": false,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hello,\n\nI am an quiet but energetic paraprofessional for the Plainfield NJ School District. I am currently in college and looking for a full or part time caregiver role in Union NJ, Manhattan NY, or the surrounding areas.\n\nMost of my experience is with special needs children ages 4-11, specifically children with autism, ADHD, and down's syndrome. \n\nAlthough I do not have as much experience with seniors, I have personal experience with senior medication management, transportation to doctors appointment, providing assistance with everyday tasks, and light cooking and cleaning. I can provide more information upon request.\n\nOutside of professional work, most of my time is spent in the gym, hiking, in museums, or in new restaurants. I also spent a year studying media arts with a focus on photography & cinema, so I am more than happy to provide enrichment time. I enjoy painting, pencil sketching, all types of crafting, sewing, and baking.\n\nHope to find a long-term family to work for",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "35092041",
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "alzheimersOrDementiaExperience": false,
+            "certifiedNursingAssistant": false,
+            "comfortableWithPets": true,
+            "cprTrained": false,
+            "doesNotSmoke": true,
+            "firstAidTraining": false,
+            "homeHealthAideExperience": false,
+            "hospiceExperience": false,
+            "licensedNurse": false,
+            "medicalEquipmentExperience": false,
+            "ownTransportation": false,
+            "registeredNurse": false,
+            "woundCare": false,
+            "__typename": "SeniorCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "35",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "supportedServices": {
+            "visitingPhysician": false,
+            "visitingNurse": false,
+            "transportation": true,
+            "specializedCare": false,
+            "specialNeeds": false,
+            "respiteCare": false,
+            "personalCare": false,
+            "mobilityAssistance": false,
+            "medicalTransportation": false,
+            "medicalManagement": true,
+            "mealPreparation": true,
+            "lightHousekeeping": true,
+            "liveInHomeCare": true,
+            "hospiceServices": false,
+            "homeModification": false,
+            "homeHealth": false,
+            "helpStayingPhysicallyActive": false,
+            "heavyLifting": false,
+            "feeding": false,
+            "errands": true,
+            "dementia": false,
+            "companionship": false,
+            "bathing": true,
+            "__typename": "SeniorCareCaregiverServices"
+          },
+          "yearsOfExperience": 0,
+          "__typename": "SeniorCareCaregiverProfile"
+        },
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hello,\n\nI am employed as a teacher's aide to support children with special needs and learning disabilities such as autism and ADHD. Most of my experience is with elementary school aged children (4-11), but I possess some experience with middle school aged children as well (12-15). I can assist in mostly Math, English, and Science. \n\nOutside of professional experience, I am currently attending school as a Cyber Forensics major and spend most of my free time in the gym, baking, or visiting family in PA.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "35121126",
+          "otherGeneralSubjects": [
+            "Computers",
+            "English",
+            "Math",
+            "Art"
+          ],
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "26",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "31",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": false,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": true,
+              "certifiedTeacher": false,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": false,
+            "tutorsInStudentsHome": true,
+            "tutorsInTeachersHome": false,
+            "tutorsOnline": true,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [],
+          "otherSpecificSubject": "",
+          "yearsOfExperience": 2,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "20:00:00",
+                "start": "08:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 100,
+      "responseTime": 0,
+      "signUpDate": "2024-02-08T10:29:00.000Z",
+      "yearsOfExperience": 3,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/29/46373929_ycD74CTyxxOSLCImsmF1HKNyJcsg00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

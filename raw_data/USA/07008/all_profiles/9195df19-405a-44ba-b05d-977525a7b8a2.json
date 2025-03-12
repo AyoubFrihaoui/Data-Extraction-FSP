@@ -1,0 +1,351 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-03-20T03:47:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "GRADUATE_DEGREE",
+          "schoolName": "Rutgers University - Newark",
+          "educationDetailsText": [
+            "Rutgers University - Newark",
+            "Bachelor degree"
+          ],
+          "__typename": "EducationDegree"
+        },
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "GRADUATE_DEGREE",
+          "schoolName": "Rutgers University - Newark",
+          "educationDetailsText": [
+            "Rutgers University - Newark",
+            "Graduate degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 6,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "9195df19-405a-44ba-b05d-977525a7b8a2",
+        "lastName": "H",
+        "firstName": "Tatyana",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/11/40879911_7VOTyj3lQACo4YtJCw122ZiAdkrcom00",
+        "displayName": "Tatyana H.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "TUTORING",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/11/40879911_7VOTyj3lQACo4YtJCw122ZiAdkrcom00",
+        "address": {
+          "city": "Irvington",
+          "state": "NJ",
+          "zip": "07111",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "28331616",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hi, my name is Tatyana! I am 25 years old and I have 5+ years of experience with babysitting/nannying, which also involved tutoring sometimes as well. I have my Bachelors of Science in Criminal Justice and Masters of Public Administration, both from Rutgers University with Summa Cum Laude honors distinction. I am from Newark, NJ and I now reside in the Middlesex County area. On my free time, I mentor and tutor 7th and 8th grade girls from my old elementary school. My favorite subjects are Math and English, and I am a writer myself. I also love to play games such as Fortnite and Roblox, and have played and supervised gameplay with the children I've nannied.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "17640460",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 1,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "40",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": true,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "40",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": true,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": true,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 5,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "17640460",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": true,
+            "lightCleaning": true,
+            "mealPrepLaundry": true,
+            "mover": false,
+            "personalAssistant": true,
+            "petHelp": true,
+            "shopping": true,
+            "transportation": true,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "Hi, my name is Tatyana! I am 25 years old and I have 5+ years of experience with babysitting/nannying, which also involved tutoring sometimes as well. I have my Bachelors of Science in Criminal Justice and Masters of Public Administration, both from Rutgers University with Summa Cum Laude honors distinction. I am from Newark, NJ and I now reside in the Middlesex County area. On my free time, I mentor and tutor 7th and 8th grade girls from my old elementary school. My favorite subjects are Math and English, and I am a writer myself. I also love to play games such as Fortnite and Roblox, and have played and supervised gameplay with the children I've nannied.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "17640385",
+          "otherGeneralSubjects": [
+            "English",
+            "Math"
+          ],
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": false,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": false,
+              "certifiedTeacher": false,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": true,
+            "tutorsInStudentsHome": true,
+            "tutorsInTeachersHome": true,
+            "tutorsOnline": true,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [
+            "MATH_SUBJECT_ALGEBRA",
+            "MATH_SUBJECT_ELEMENTARY_SCHOOL_MATH",
+            "MATH_SUBJECT_GEOMETRY",
+            "MATH_SUBJECT_MIDDLE_SCHOOL_MATH",
+            "ENGLISH_SUBJECT_GRAMMAR",
+            "ENGLISH_SUBJECT_LITERATURE",
+            "ENGLISH_SUBJECT_READING",
+            "ENGLISH_SUBJECT_WRITING"
+          ],
+          "otherSpecificSubject": "",
+          "yearsOfExperience": 5,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "14:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "14:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "11:30:00",
+                "start": "05:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "16:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "23:00:00",
+                "start": "16:30:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2017-01-08T09:06:00.000Z",
+      "yearsOfExperience": 5,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/450X450/24/31299324_7VOTyj3lQACo4YtJCw122ZiAdkrcom086",
+        "https://www.care.com/s/d/aws/photo/1080X1080/8/37445108_7VOTyj3lQACo4YtJCw122ZiAdkrcom00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/82/39385582_7VOTyj3lQACo4YtJCw122ZiAdkrcom00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/98/46494298_7VOTyj3lQACo4YtJCw122ZiAdkrcom00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}
