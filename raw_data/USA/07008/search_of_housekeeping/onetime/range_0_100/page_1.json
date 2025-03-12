@@ -5,10 +5,10 @@
       "searchProvidersConnection": {
         "pageInfo": {
           "hasNextPage": true,
-          "endCursor": "U2VlZD0wLEluZGV4PTEwLFBhZ2VTY3JvbGxJZD00MjM4OGY5NzZkMzk0YzUyYWY0ZGYzMWZkZDM5ZmZlNw==",
+          "endCursor": "U2VlZD0wLEluZGV4PTEwLFBhZ2VTY3JvbGxJZD01NTZlZjMwNDYwNWQ0YmEwYWIxNDlkZWIxYTM5OTQ5OA==",
           "__typename": "PageInfo"
         },
-        "totalHits": 454,
+        "totalHits": 455,
         "edges": [
           {
             "node": {
@@ -62,6 +62,79 @@
                   "recurringRate": {
                     "hourlyRateFrom": {
                       "amount": "30",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "50",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "HouseKeepingCaregiverProfile"
+                },
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          },
+          {
+            "node": {
+              "member": {
+                "id": "2a0a04c3-059e-4b62-a156-6aa09e9d4112",
+                "legacyId": "28844871",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/20/42710620_v224XfJ0XwejaB1PCmTWQvM7dKxCf00",
+                "displayName": "Tanisha P.",
+                "firstName": "Tanisha",
+                "lastName": "P",
+                "address": {
+                  "city": "Carteret",
+                  "state": "NJ",
+                  "zip": "07008",
+                  "__typename": "Address"
+                },
+                "primaryService": "TUTORING",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK",
+                "VACCINATED"
+              ],
+              "yearsOfExperience": 0,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 0,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "29000324",
+                  "bio": {
+                    "experienceSummary": "I am good at cleaning the house. I am an organized person. My cleaning skills are excellent. I am able to do a lot of things.",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": null,
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": {
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "50",
                       "__typename": "Money"
                     },
                     "hourlyRateTo": {
@@ -158,27 +231,28 @@
           {
             "node": {
               "member": {
-                "id": "2a0a04c3-059e-4b62-a156-6aa09e9d4112",
-                "legacyId": "28844871",
-                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/20/42710620_v224XfJ0XwejaB1PCmTWQvM7dKxCf00",
-                "displayName": "Tanisha P.",
-                "firstName": "Tanisha",
-                "lastName": "P",
+                "id": "e07ee0c9-26c7-44ac-910e-a0561f46089e",
+                "legacyId": "20624982",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/22/46865222_xBIWuaHSN21Zh3y7f11msjV0uyU00",
+                "displayName": "Maria Vibeth O.",
+                "firstName": "Maria Vibeth",
+                "lastName": "O",
                 "address": {
                   "city": "Carteret",
                   "state": "NJ",
                   "zip": "07008",
                   "__typename": "Address"
                 },
-                "primaryService": "TUTORING",
+                "primaryService": "CHILD_CARE",
                 "__typename": "Member"
               },
               "hasCareCheck": true,
               "badges": [
                 "BACKGROUND_CHECK",
+                "PREMIUM",
                 "VACCINATED"
               ],
-              "yearsOfExperience": 0,
+              "yearsOfExperience": 10,
               "profileDataSource": "bravo",
               "hiredByCounts": {
                 "locality": null,
@@ -195,9 +269,9 @@
               },
               "profiles": {
                 "commonCaregiverProfile": {
-                  "id": "29000324",
+                  "id": "35154340",
                   "bio": {
-                    "experienceSummary": "I am good at cleaning the house. I am an organized person. My cleaning skills are excellent. I am able to do a lot of things.",
+                    "experienceSummary": "I have experience for 20 years. I am honest nationality Filipina. I like to clean 4 to 5 hours a day Monday thru Wednesday or I can do 4 sometime",
                     "__typename": "Bio"
                   },
                   "__typename": "CommonCaregiverProfile"
@@ -207,11 +281,11 @@
                 "houseKeepingCaregiverProfile": {
                   "recurringRate": {
                     "hourlyRateFrom": {
-                      "amount": "50",
+                      "amount": "30",
                       "__typename": "Money"
                     },
                     "hourlyRateTo": {
-                      "amount": "50",
+                      "amount": "30",
                       "__typename": "Money"
                     },
                     "__typename": "PayRange"
@@ -285,80 +359,6 @@
                     },
                     "hourlyRateTo": {
                       "amount": "50",
-                      "__typename": "Money"
-                    },
-                    "__typename": "PayRange"
-                  },
-                  "__typename": "HouseKeepingCaregiverProfile"
-                },
-                "tutoringCaregiverProfile": null,
-                "seniorCareCaregiverProfile": null,
-                "__typename": "CaregiverProfiles"
-              },
-              "featuredReview": null,
-              "isFavorite": false,
-              "__typename": "Caregiver"
-            },
-            "__typename": "SearchProvidersEdge"
-          },
-          {
-            "node": {
-              "member": {
-                "id": "e07ee0c9-26c7-44ac-910e-a0561f46089e",
-                "legacyId": "20624982",
-                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/22/46865222_xBIWuaHSN21Zh3y7f11msjV0uyU00",
-                "displayName": "Maria Vibeth O.",
-                "firstName": "Maria Vibeth",
-                "lastName": "O",
-                "address": {
-                  "city": "Carteret",
-                  "state": "NJ",
-                  "zip": "07008",
-                  "__typename": "Address"
-                },
-                "primaryService": "CHILD_CARE",
-                "__typename": "Member"
-              },
-              "hasCareCheck": true,
-              "badges": [
-                "BACKGROUND_CHECK",
-                "PREMIUM",
-                "VACCINATED"
-              ],
-              "yearsOfExperience": 10,
-              "profileDataSource": "bravo",
-              "hiredByCounts": {
-                "locality": null,
-                "__typename": "CaregiverHiredByCounts"
-              },
-              "hiredTimes": 0,
-              "revieweeMetrics": {
-                "metrics": {
-                  "totalReviews": 0,
-                  "averageRatings": [],
-                  "__typename": "RevieweeMetrics"
-                },
-                "__typename": "RevieweeMetricsPayload"
-              },
-              "profiles": {
-                "commonCaregiverProfile": {
-                  "id": "35154340",
-                  "bio": {
-                    "experienceSummary": "I have experience for 20 years. I am honest nationality Filipina. I like to clean 4 to 5 hours a day Monday thru Wednesday or I can do 4 sometime",
-                    "__typename": "Bio"
-                  },
-                  "__typename": "CommonCaregiverProfile"
-                },
-                "childCareCaregiverProfile": null,
-                "petCareCaregiverProfile": null,
-                "houseKeepingCaregiverProfile": {
-                  "recurringRate": {
-                    "hourlyRateFrom": {
-                      "amount": "30",
-                      "__typename": "Money"
-                    },
-                    "hourlyRateTo": {
-                      "amount": "30",
                       "__typename": "Money"
                     },
                     "__typename": "PayRange"
@@ -689,19 +689,19 @@
           {
             "node": {
               "member": {
-                "id": "2deaf883-897d-4dd4-996b-b8976b6b14bc",
-                "legacyId": "49532876",
-                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/29/42458729_R7YjzJ74NbkGwxrKmVPrm0lnXJPNa00",
-                "displayName": "Stacey P.",
-                "firstName": "Stacey",
-                "lastName": "P",
+                "id": "8342e676-bf23-4561-a7cb-442d9bc34b3f",
+                "legacyId": "46384050",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/27/46228727_k4Xv0JSvMj7vcl9Qlp9QtfAtZ010",
+                "displayName": "Neisha R.",
+                "firstName": "Neisha",
+                "lastName": "R",
                 "address": {
-                  "city": "Avenel",
-                  "state": "NJ",
-                  "zip": "07001",
+                  "city": "Staten Island",
+                  "state": "NY",
+                  "zip": "10303",
                   "__typename": "Address"
                 },
-                "primaryService": "SENIOR_CARE",
+                "primaryService": "HOUSEKEEPING",
                 "__typename": "Member"
               },
               "hasCareCheck": true,
@@ -709,29 +709,42 @@
                 "BACKGROUND_CHECK",
                 "VACCINATED"
               ],
-              "yearsOfExperience": 4,
+              "yearsOfExperience": 10,
               "profileDataSource": "bravo",
               "hiredByCounts": {
-                "locality": {
-                  "hiredCount": 1,
-                  "__typename": "CaregiverLocalityHiredByCount"
-                },
+                "locality": null,
                 "__typename": "CaregiverHiredByCounts"
               },
-              "hiredTimes": 0,
+              "hiredTimes": 6,
               "revieweeMetrics": {
                 "metrics": {
-                  "totalReviews": 0,
-                  "averageRatings": [],
+                  "totalReviews": 2,
+                  "averageRatings": [
+                    {
+                      "type": "OVERALL",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    },
+                    {
+                      "type": "DEPENDABILITY",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    },
+                    {
+                      "type": "PUNCTUALITY",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    }
+                  ],
                   "__typename": "RevieweeMetrics"
                 },
                 "__typename": "RevieweeMetricsPayload"
               },
               "profiles": {
                 "commonCaregiverProfile": {
-                  "id": "29111904",
+                  "id": "27053963",
                   "bio": {
-                    "experienceSummary": "Hello, my name is Stacey and I can help you with your housekeeping needs. \nI am a trustworthy person, dependable and a great housekeeper & organizer.\nYou can be confident in hiring the right person when hiring me. \nIf interested in speaking with me, you can send me a message here. \n\nThank you, \nStacey",
+                    "experienceSummary": "Hello, \n\nMy name is Neisha R and I am a reliable, energetic Professional Housekeeper/House manager with 16 + years' experience in the following skills: \n\nIn-depth knowledge of cleaning methods, and operation of housekeeping equipment. Effective communication skills with strong command of the English language. Personal reputation as an individual of high ethical standards. In addition, I possess great organization skills, laundry skills, attentive to details, reliable, efficient, flexible, have a CAN DO attitude, CONSISTENT, can clean an entire house thoroughly, etc. If, you're in search of an HONEST individual who knows how to make a house SPARKLE, and takes pride in their work. Please reach out to me ASAP. I will gladly provide references/ Clean background C. to verify this information. Thank you for your time. \n\nSincerely, \nNeisha",
                     "__typename": "Bio"
                   },
                   "__typename": "CommonCaregiverProfile"
@@ -741,11 +754,11 @@
                 "houseKeepingCaregiverProfile": {
                   "recurringRate": {
                     "hourlyRateFrom": {
-                      "amount": "30",
+                      "amount": "18",
                       "__typename": "Money"
                     },
                     "hourlyRateTo": {
-                      "amount": "30",
+                      "amount": "18",
                       "__typename": "Money"
                     },
                     "__typename": "PayRange"
@@ -756,7 +769,23 @@
                 "seniorCareCaregiverProfile": null,
                 "__typename": "CaregiverProfiles"
               },
-              "featuredReview": null,
+              "featuredReview": {
+                "description": {
+                  "displayText": "Neisha has a strong sense of detail in deep cleaning. She is extremely professional and respectful. I would definitely recommend her to clean your home!",
+                  "originalText": "Neisha has a strong sense of detail in deep cleaning. She is extremely professional and respectful. I would definitely recommend her to clean your home!",
+                  "__typename": "ReviewInfoText"
+                },
+                "reviewer": {
+                  "publicMemberInfo": {
+                    "firstName": "Sabrina",
+                    "lastInitial": "T",
+                    "imageURL": "https://www.care.com/s/d/aws/photo/135X135/32/39438832_CRBPyNLnv9IWy9Minc25YYSPClNp00",
+                    "__typename": "PublicMemberInfo"
+                  },
+                  "__typename": "ReviewInfoReviewer"
+                },
+                "__typename": "ReviewInfo"
+              },
               "isFavorite": false,
               "__typename": "Caregiver"
             },

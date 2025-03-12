@@ -5,10 +5,10 @@
       "searchProvidersConnection": {
         "pageInfo": {
           "hasNextPage": true,
-          "endCursor": "U2VlZD0wLEluZGV4PTEwLFBhZ2VTY3JvbGxJZD02YjQzYmIzNjdhMWU0N2YzOGM4YWNjMzMzOTRmNzU5ZA==",
+          "endCursor": "U2VlZD0wLEluZGV4PTEwLFBhZ2VTY3JvbGxJZD0yNjVmNTM2MmJiNjQ0OWY4YTZmNDhmZTYxOTAwYTQxOA==",
           "__typename": "PageInfo"
         },
-        "totalHits": 307,
+        "totalHits": 303,
         "edges": [
           {
             "node": {
@@ -121,6 +121,112 @@
                 },
                 "__typename": "ReviewInfo"
               },
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          },
+          {
+            "node": {
+              "member": {
+                "id": "38085c0b-589c-433c-a379-f04700f0deaa",
+                "legacyId": "8121367",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/30/4423730_Ic4PLeqYXW1a3S9gQ06AsX2RWL3MN9010",
+                "displayName": "Kayla G.",
+                "firstName": "Kayla",
+                "lastName": "G",
+                "address": {
+                  "city": "Carteret",
+                  "state": "NJ",
+                  "zip": "07008",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK"
+              ],
+              "yearsOfExperience": 4,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 0,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "5417812",
+                  "bio": {
+                    "experienceSummary": "I am currently a toddler teacher. I have 14 children in my class between the ages of 2 and 3.\nOver the summer I was an infant caregiver. I had 2-month-old babies up to 18 months.\nI am CPR and first aid certified.\nI have a clean background history.\nI have been babysitting for family friends for certain occasions for 2 years.\nI was also a lead assistant at a Montessori for 2 1/2 years, dealing with children ages 18 months - 6 years.",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "25",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "28",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 2,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "31",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 3,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "34",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 4,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "15",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "20",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
               "isFavorite": false,
               "__typename": "Caregiver"
             },
@@ -242,112 +348,6 @@
                 },
                 "__typename": "ReviewInfo"
               },
-              "isFavorite": false,
-              "__typename": "Caregiver"
-            },
-            "__typename": "SearchProvidersEdge"
-          },
-          {
-            "node": {
-              "member": {
-                "id": "38085c0b-589c-433c-a379-f04700f0deaa",
-                "legacyId": "8121367",
-                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/30/4423730_Ic4PLeqYXW1a3S9gQ06AsX2RWL3MN9010",
-                "displayName": "Kayla G.",
-                "firstName": "Kayla",
-                "lastName": "G",
-                "address": {
-                  "city": "Carteret",
-                  "state": "NJ",
-                  "zip": "07008",
-                  "__typename": "Address"
-                },
-                "primaryService": "CHILD_CARE",
-                "__typename": "Member"
-              },
-              "hasCareCheck": true,
-              "badges": [
-                "BACKGROUND_CHECK"
-              ],
-              "yearsOfExperience": 4,
-              "profileDataSource": "bravo",
-              "hiredByCounts": {
-                "locality": null,
-                "__typename": "CaregiverHiredByCounts"
-              },
-              "hiredTimes": 0,
-              "revieweeMetrics": {
-                "metrics": {
-                  "totalReviews": 0,
-                  "averageRatings": [],
-                  "__typename": "RevieweeMetrics"
-                },
-                "__typename": "RevieweeMetricsPayload"
-              },
-              "profiles": {
-                "commonCaregiverProfile": {
-                  "id": "5417812",
-                  "bio": {
-                    "experienceSummary": "I am currently a toddler teacher. I have 14 children in my class between the ages of 2 and 3.\nOver the summer I was an infant caregiver. I had 2-month-old babies up to 18 months.\nI am CPR and first aid certified.\nI have a clean background history.\nI have been babysitting for family friends for certain occasions for 2 years.\nI was also a lead assistant at a Montessori for 2 1/2 years, dealing with children ages 18 months - 6 years.",
-                    "__typename": "Bio"
-                  },
-                  "__typename": "CommonCaregiverProfile"
-                },
-                "childCareCaregiverProfile": {
-                  "rates": [
-                    {
-                      "hourlyRate": {
-                        "amount": "25",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 1,
-                      "__typename": "OneTimeChildCareRates"
-                    },
-                    {
-                      "hourlyRate": {
-                        "amount": "28",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 2,
-                      "__typename": "OneTimeChildCareRates"
-                    },
-                    {
-                      "hourlyRate": {
-                        "amount": "31",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 3,
-                      "__typename": "OneTimeChildCareRates"
-                    },
-                    {
-                      "hourlyRate": {
-                        "amount": "34",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 4,
-                      "__typename": "OneTimeChildCareRates"
-                    }
-                  ],
-                  "recurringRate": {
-                    "hourlyRateFrom": {
-                      "amount": "15",
-                      "__typename": "Money"
-                    },
-                    "hourlyRateTo": {
-                      "amount": "20",
-                      "__typename": "Money"
-                    },
-                    "__typename": "PayRange"
-                  },
-                  "__typename": "ChildCareCaregiverProfile"
-                },
-                "petCareCaregiverProfile": null,
-                "houseKeepingCaregiverProfile": null,
-                "tutoringCaregiverProfile": null,
-                "seniorCareCaregiverProfile": null,
-                "__typename": "CaregiverProfiles"
-              },
-              "featuredReview": null,
               "isFavorite": false,
               "__typename": "Caregiver"
             },
@@ -665,6 +665,137 @@
           {
             "node": {
               "member": {
+                "id": "f87c7116-5c38-483a-a20e-cd05f3fe312a",
+                "legacyId": "3041822",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/90/16248390_EJdwslX1uobJc2SoGvcBckBAbEHB8010",
+                "displayName": "Oce T.",
+                "firstName": "Oce",
+                "lastName": "T",
+                "address": {
+                  "city": "Edison",
+                  "state": "NJ",
+                  "zip": "08817",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK",
+                "PREMIUM"
+              ],
+              "yearsOfExperience": 10,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 1,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 3,
+                  "averageRatings": [
+                    {
+                      "type": "OVERALL",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    },
+                    {
+                      "type": "DEPENDABILITY",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    },
+                    {
+                      "type": "PUNCTUALITY",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    }
+                  ],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "2269828",
+                  "bio": {
+                    "experienceSummary": "I'm single with no children, but I love children. It's so fun to be with them. Children is a precious gift from the Lord. Babysitting for kids is where my heart is. I am trustworthy, honest, responsible, dependable, helpful, energetic and fun-loving nanny. I have 15 years of experience as a full time nanny assisting kids for all ages.",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "25",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "28",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 2,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "31",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 3,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "24",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "35",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": {
+                "description": {
+                  "displayText": "",
+                  "originalText": "Oce cared for our 1.5 year old daughter full time for a month. She was full of energy for our active little girl! We really appreciated Oce’s flexibility - she was always on time and willing to come early/stay late when my work schedule changed. Very glad we found Oce!",
+                  "__typename": "ReviewInfoText"
+                },
+                "reviewer": {
+                  "publicMemberInfo": {
+                    "firstName": "Donna",
+                    "lastInitial": "S",
+                    "imageURL": "https://www.care.com/s/d/aws/photo/135X135/67/42299367_Uihun1qHtQJJcTUJ5uu1pMkRnWUBLe00",
+                    "__typename": "PublicMemberInfo"
+                  },
+                  "__typename": "ReviewInfoReviewer"
+                },
+                "__typename": "ReviewInfo"
+              },
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          },
+          {
+            "node": {
+              "member": {
                 "id": "55c812ed-f373-48bc-8011-bd8bb60b1204",
                 "legacyId": "57458768",
                 "imageURL": "https://www.care.com/s/d/aws/photo/135X135/43/44814643_YSclwLCb3Oz047I9W3aCYuEP0NoyM100",
@@ -765,138 +896,6 @@
                 "__typename": "CaregiverProfiles"
               },
               "featuredReview": null,
-              "isFavorite": false,
-              "__typename": "Caregiver"
-            },
-            "__typename": "SearchProvidersEdge"
-          },
-          {
-            "node": {
-              "member": {
-                "id": "186df4f4-200e-426f-8ebf-793bc9dfc332",
-                "legacyId": "42604495",
-                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/3/36414803_dqedMM8vMbMIpHfe2r0VKC1Vd3va800",
-                "displayName": "Alona M.",
-                "firstName": "Alona",
-                "lastName": "M",
-                "address": {
-                  "city": "Union",
-                  "state": "NJ",
-                  "zip": "07083",
-                  "__typename": "Address"
-                },
-                "primaryService": "CHILD_CARE",
-                "__typename": "Member"
-              },
-              "hasCareCheck": true,
-              "badges": [
-                "BACKGROUND_CHECK",
-                "PREMIUM",
-                "VACCINATED"
-              ],
-              "yearsOfExperience": 10,
-              "profileDataSource": "bravo",
-              "hiredByCounts": {
-                "locality": null,
-                "__typename": "CaregiverHiredByCounts"
-              },
-              "hiredTimes": 10,
-              "revieweeMetrics": {
-                "metrics": {
-                  "totalReviews": 10,
-                  "averageRatings": [
-                    {
-                      "type": "DEPENDABILITY",
-                      "value": 5,
-                      "__typename": "ReviewInfoRating"
-                    },
-                    {
-                      "type": "PUNCTUALITY",
-                      "value": 5,
-                      "__typename": "ReviewInfoRating"
-                    },
-                    {
-                      "type": "OVERALL",
-                      "value": 5,
-                      "__typename": "ReviewInfoRating"
-                    }
-                  ],
-                  "__typename": "RevieweeMetrics"
-                },
-                "__typename": "RevieweeMetricsPayload"
-              },
-              "profiles": {
-                "commonCaregiverProfile": {
-                  "id": "25245366",
-                  "bio": {
-                    "experienceSummary": "Alona M, from Union New Jersey\nI am a reliable, responsible, respectful, trustworthy and well experienced nanny. \nI am very passionate, I love the company of young kids in a way that I treat them as my own children. I am very patient in handling their moods and behaviors without losing my temper. I am safety conscious and prepared to handle an emergency. I can work in a less supervised setting. \nI have a strong morals. Committed to make positive difference in the lives of the children. I truly care for the kids as I do care for my job.",
-                    "__typename": "Bio"
-                  },
-                  "__typename": "CommonCaregiverProfile"
-                },
-                "childCareCaregiverProfile": {
-                  "rates": [
-                    {
-                      "hourlyRate": {
-                        "amount": "25",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 1,
-                      "__typename": "OneTimeChildCareRates"
-                    },
-                    {
-                      "hourlyRate": {
-                        "amount": "30",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 2,
-                      "__typename": "OneTimeChildCareRates"
-                    },
-                    {
-                      "hourlyRate": {
-                        "amount": "35",
-                        "__typename": "Money"
-                      },
-                      "numberOfChildren": 3,
-                      "__typename": "OneTimeChildCareRates"
-                    }
-                  ],
-                  "recurringRate": {
-                    "hourlyRateFrom": {
-                      "amount": "25",
-                      "__typename": "Money"
-                    },
-                    "hourlyRateTo": {
-                      "amount": "25",
-                      "__typename": "Money"
-                    },
-                    "__typename": "PayRange"
-                  },
-                  "__typename": "ChildCareCaregiverProfile"
-                },
-                "petCareCaregiverProfile": null,
-                "houseKeepingCaregiverProfile": null,
-                "tutoringCaregiverProfile": null,
-                "seniorCareCaregiverProfile": null,
-                "__typename": "CaregiverProfiles"
-              },
-              "featuredReview": {
-                "description": {
-                  "displayText": "",
-                  "originalText": "Alona was great. My 5mo loved playing with her and she was kind enough to tidy up the house which was much appreciated.",
-                  "__typename": "ReviewInfoText"
-                },
-                "reviewer": {
-                  "publicMemberInfo": {
-                    "firstName": "Benjamin",
-                    "lastInitial": "J",
-                    "imageURL": null,
-                    "__typename": "PublicMemberInfo"
-                  },
-                  "__typename": "ReviewInfoReviewer"
-                },
-                "__typename": "ReviewInfo"
-              },
               "isFavorite": false,
               "__typename": "Caregiver"
             },
@@ -1044,16 +1043,16 @@
           {
             "node": {
               "member": {
-                "id": "f87c7116-5c38-483a-a20e-cd05f3fe312a",
-                "legacyId": "3041822",
-                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/90/16248390_EJdwslX1uobJc2SoGvcBckBAbEHB8010",
-                "displayName": "Oce T.",
-                "firstName": "Oce",
-                "lastName": "T",
+                "id": "f4132bd7-24ca-4e3b-bc32-8102b815b09f",
+                "legacyId": "63564334",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/38/45910638_wP1m5ViFnMG41dSFOuPZsn5Dtw00",
+                "displayName": "Ligia P.",
+                "firstName": "Ligia",
+                "lastName": "P",
                 "address": {
-                  "city": "Edison",
+                  "city": "Elizabeth",
                   "state": "NJ",
-                  "zip": "08817",
+                  "zip": "07202",
                   "__typename": "Address"
                 },
                 "primaryService": "CHILD_CARE",
@@ -1062,31 +1061,21 @@
               "hasCareCheck": true,
               "badges": [
                 "BACKGROUND_CHECK",
-                "PREMIUM"
+                "VACCINATED"
               ],
-              "yearsOfExperience": 10,
+              "yearsOfExperience": 5,
               "profileDataSource": "bravo",
               "hiredByCounts": {
                 "locality": null,
                 "__typename": "CaregiverHiredByCounts"
               },
-              "hiredTimes": 1,
+              "hiredTimes": 0,
               "revieweeMetrics": {
                 "metrics": {
                   "totalReviews": 3,
                   "averageRatings": [
                     {
                       "type": "OVERALL",
-                      "value": 5,
-                      "__typename": "ReviewInfoRating"
-                    },
-                    {
-                      "type": "DEPENDABILITY",
-                      "value": 5,
-                      "__typename": "ReviewInfoRating"
-                    },
-                    {
-                      "type": "PUNCTUALITY",
                       "value": 5,
                       "__typename": "ReviewInfoRating"
                     }
@@ -1097,9 +1086,9 @@
               },
               "profiles": {
                 "commonCaregiverProfile": {
-                  "id": "2269828",
+                  "id": "34307837",
                   "bio": {
-                    "experienceSummary": "I'm single with no children, but I love children. It's so fun to be with them. Children is a precious gift from the Lord. Babysitting for kids is where my heart is. I am trustworthy, honest, responsible, dependable, helpful, energetic and fun-loving nanny. I have 15 years of experience as a full time nanny assisting kids for all ages.",
+                    "experienceSummary": "Hello!  \n\n\nI am from the Dominican Republic \nI am 27 years old. \n3 years of experience as nanny in Dominican Republic + 2 years as Au pair in USA \nCommunicative, flexible, patient, honest, dedicated, empathetic, social, respectful, and independent person, I am very easy to get along with and responsible. \nStrong driver - NJ and MD driver license. \nNon-smoker.\ngood helper with the child development \nComfortable with pets.\nExperience with kids from 6 months to 12 years. \nSpeaks Spanish and English.\nGood cook.",
                     "__typename": "Bio"
                   },
                   "__typename": "CommonCaregiverProfile"
@@ -1108,7 +1097,7 @@
                   "rates": [
                     {
                       "hourlyRate": {
-                        "amount": "25",
+                        "amount": "20",
                         "__typename": "Money"
                       },
                       "numberOfChildren": 1,
@@ -1116,7 +1105,7 @@
                     },
                     {
                       "hourlyRate": {
-                        "amount": "28",
+                        "amount": "25",
                         "__typename": "Money"
                       },
                       "numberOfChildren": 2,
@@ -1124,7 +1113,7 @@
                     },
                     {
                       "hourlyRate": {
-                        "amount": "31",
+                        "amount": "30",
                         "__typename": "Money"
                       },
                       "numberOfChildren": 3,
@@ -1133,11 +1122,11 @@
                   ],
                   "recurringRate": {
                     "hourlyRateFrom": {
-                      "amount": "24",
+                      "amount": "19",
                       "__typename": "Money"
                     },
                     "hourlyRateTo": {
-                      "amount": "35",
+                      "amount": "20",
                       "__typename": "Money"
                     },
                     "__typename": "PayRange"
@@ -1153,14 +1142,14 @@
               "featuredReview": {
                 "description": {
                   "displayText": "",
-                  "originalText": "Oce cared for our 1.5 year old daughter full time for a month. She was full of energy for our active little girl! We really appreciated Oce’s flexibility - she was always on time and willing to come early/stay late when my work schedule changed. Very glad we found Oce!",
+                  "originalText": "My son loves Ligia she's very funny and keep the kids occupied ",
                   "__typename": "ReviewInfoText"
                 },
                 "reviewer": {
                   "publicMemberInfo": {
-                    "firstName": "Donna",
-                    "lastInitial": "S",
-                    "imageURL": "https://www.care.com/s/d/aws/photo/135X135/67/42299367_Uihun1qHtQJJcTUJ5uu1pMkRnWUBLe00",
+                    "firstName": "Chery",
+                    "lastInitial": "R",
+                    "imageURL": "https://www.care.com/s/d/aws/photo/135X135/29/45667629_6weGAWFAyqpyCkPutAYXTWGRqxSIb010",
                     "__typename": "PublicMemberInfo"
                   },
                   "__typename": "ReviewInfoReviewer"
