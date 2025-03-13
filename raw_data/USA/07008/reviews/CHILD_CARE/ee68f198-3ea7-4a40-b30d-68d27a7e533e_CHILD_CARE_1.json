@@ -1,0 +1,65 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": false,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-05-22T03:19:20.922Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Rania pleasantly followed up about our booking but then cancelled 2 hours later on the night before we were starting care around midnight which left us with no other plans.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "4b39f260-e464-57ba-b60c-b8d0a4d2d760",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 1,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "ee68f198-3ea7-4a40-b30d-68d27a7e533e",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/36/45845736_8eqTwv06ac9XKVuBx4pawCl2Kwf00",
+            "publicMemberInfo": {
+              "firstName": "John",
+              "lastInitial": "M",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-05-22T03:19:21.940Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}
