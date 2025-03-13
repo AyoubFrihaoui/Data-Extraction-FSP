@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "SENIOR_CARE",
+          "createTime": "2024-12-24T07:06:13.981Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Caring, compassionate really down to earth individual!! I couldn’t ask for a more soothing hand.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "54af5959-1288-5b24-b4ed-cb53ded84ef6",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "9d3a1638-eb30-4f3f-9fab-a34c56d57911",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Rebecca",
+              "lastInitial": "Y",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-12-24T07:06:17.155Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

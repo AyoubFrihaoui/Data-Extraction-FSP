@@ -1,0 +1,65 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "SENIOR_CARE",
+          "createTime": "2024-07-07T01:54:02.765Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Margaret is very caring, highly responsible, and easy to work with. It's great to have her!",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "df82769d-2fb2-534a-b02b-fb53c8a19cfb",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "005acbb8-7948-47bf-a1b6-0028dea69e62",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Chris",
+              "lastInitial": "Y",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-10-01T00:40:08.961Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

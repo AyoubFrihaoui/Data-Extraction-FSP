@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-09-13T11:27:02.863Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Breana did a great job with our two kids. We will definitely use her in the future.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "b6a7045a-e570-53d3-85ae-5a48420569d9",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "07636941-7529-4f49-9810-e60d8f2c9836",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Andrew",
+              "lastInitial": "W",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-09-13T11:27:07.482Z",
+          "verifiedByCare": true,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

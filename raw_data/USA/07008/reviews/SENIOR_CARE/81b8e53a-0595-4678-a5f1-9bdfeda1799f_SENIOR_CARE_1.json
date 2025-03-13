@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "SENIOR_CARE",
+          "createTime": "2023-11-13T13:18:41.472Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "She was very kind to my mom and clearly did everything in her power to help her and make her happy",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "bb92772a-0815-4794-ab63-cb24bed27d81",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "81b8e53a-0595-4678-a5f1-9bdfeda1799f",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Gabor",
+              "lastInitial": "K",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-10-03T04:15:03.131Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

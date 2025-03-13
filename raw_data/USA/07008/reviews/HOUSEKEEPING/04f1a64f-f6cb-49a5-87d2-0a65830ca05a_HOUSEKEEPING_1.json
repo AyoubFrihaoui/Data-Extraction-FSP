@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "HOUSEKEEPING",
+          "createTime": "2025-01-29T19:40:28.816Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "“Ana is an excellent cleaning professional—thorough, efficient, and incredibly fast. She pays attention to every detail, ensuring the space is spotless and well-maintained. Beyond her skills, she is trustworthy and reliable, making her a true asset. I highly recommend her to anyone in need of top-quality cleaning services!”",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "d168e2d0-9a4e-5b32-86cd-c51fff11f6e4",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "04f1a64f-f6cb-49a5-87d2-0a65830ca05a",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Leo",
+              "lastInitial": "H",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2025-01-29T19:40:29.643Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

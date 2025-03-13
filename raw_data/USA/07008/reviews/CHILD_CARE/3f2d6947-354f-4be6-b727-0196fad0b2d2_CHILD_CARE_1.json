@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-08-05T15:32:03.236Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Iris has been exceptional with my two young kids. They usually are not very easy to mingle with new people but they were comfortable with Iris right away. She is very experienced and takes very good care of my kids so much so that they always ask for her to come back. ",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "ad30ee01-4e71-5cd0-999b-17f94b3ad368",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "3f2d6947-354f-4be6-b727-0196fad0b2d2",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Sonam",
+              "lastInitial": "M",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-08-05T15:32:04.046Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

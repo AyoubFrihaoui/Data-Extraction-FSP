@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2023-10-05T11:55:46.898Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Coley was great! She came on time and I could tell my daughter really liked her. As a new time mom, I truly felt comfortable leaving my 3 month old with her. Definitely will book her again in the future.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "c4bbe3bd-e074-4a3a-8f55-ed8e0e676916",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "0bdc7617-3294-4f9b-84bf-bea0cea810f9",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/41/45564341_IyXdsoWnWPzPcIq7A9ZzckV0jZm0Lg00",
+            "publicMemberInfo": {
+              "firstName": "Courtney",
+              "lastInitial": "L",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2023-10-05T11:55:47.833Z",
+          "verifiedByCare": true,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

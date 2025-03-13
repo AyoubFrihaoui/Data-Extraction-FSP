@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "SENIOR_CARE",
+          "createTime": "2025-01-26T03:20:29.546Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Amazing. The best person i have ever met.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "5cbec1f2-5984-51df-8dba-4141c53ba533",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "dcbabffe-13d8-46d9-a3de-686524578abe",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Tom",
+              "lastInitial": "W",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2025-01-26T16:15:46.565Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

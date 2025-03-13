@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "HOUSEKEEPING",
+          "createTime": "2024-12-15T21:37:52.479Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Lisset was amazing! I thoroughly enjoyed her being in my home. Her services were exceptional and she finished in a timely manner. I would recommend her to anyone and I'll definitely be hiring her again.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "a7396753-2400-58e5-94e3-d5fa5a94dcd7",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "22571dde-4d82-4745-9caf-e2021a0dcf32",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/32/41412732_Bn2YUCjRQulf9AjWvgKnncmNJoczqO00",
+            "publicMemberInfo": {
+              "firstName": "Britanya",
+              "lastInitial": "C",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-12-16T01:03:29.363Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

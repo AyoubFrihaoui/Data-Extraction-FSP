@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2025-01-13T04:40:28.116Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Kystinea is always on time. My kids love her. ",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "b726a080-2c69-5799-b163-1695b3d92447",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "c0ae0568-e68b-4437-a148-9b68a8afeba9",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/83/46690483_0utIAslS2MfyII1XttxB3Q9mq9Bit00",
+            "publicMemberInfo": {
+              "firstName": "Brittany",
+              "lastInitial": "F",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2025-01-13T04:40:29.184Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}
