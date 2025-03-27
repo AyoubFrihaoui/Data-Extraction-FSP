@@ -78,12 +78,14 @@ from sqlalchemy.orm import (
     declarative_base, relationship, sessionmaker, Session
 )
 from sqlalchemy.exc import IntegrityError
+sys.path.insert(1, 'D:\Data Extraction FSP\Care-fr')
+from config import CARE_FR_PASSWORD
 
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-DATABASE_URI = "postgresql://user:password@localhost:5432/care_db"  # Example for PostgreSQL
-CSV_FILE_PATH = "data/processed/aggregated_profiles.csv"
+DATABASE_URI = f"postgresql://postgres:{CARE_FR_PASSWORD}@localhost:5432/care-fr_db"  # Example for PostgreSQL
+CSV_FILE_PATH = "../data/processed/aggregated_profiles.csv"
 LOG_LEVEL = logging.INFO
 
 logging.basicConfig(
@@ -113,7 +115,7 @@ class Caregiver(Base):
     days_since_last_login = Column(Integer, nullable=True)
     premium_status = Column(String, nullable=True)
     location = Column(String, nullable=True)
-    member_since = Column(String, nullable=True)  # or DateTime if you parse it
+    member_since = Column(String, nullable=True)
     age = Column(Integer, nullable=True)
     bookmarked = Column(Boolean, nullable=True)
     reviewed = Column(Boolean, nullable=True)
@@ -138,7 +140,6 @@ class Caregiver(Base):
 
 class CaregiverSourceFolder(Base):
     __tablename__ = "caregiver_source_folders"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     source_folder = Column(String, nullable=False)
@@ -147,16 +148,15 @@ class CaregiverSourceFolder(Base):
 
 class CaregiverLanguage(Base):
     __tablename__ = "caregiver_languages"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
-    language = Column(String, nullable=False)
+    language_name = Column(String, nullable=False)
+    proficiency_level = Column(String, nullable=True)
 
     caregiver = relationship("Caregiver", back_populates="languages")
 
 class CaregiverQualification(Base):
     __tablename__ = "caregiver_qualifications"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     qualification = Column(String, nullable=False)
@@ -165,7 +165,6 @@ class CaregiverQualification(Base):
 
 class CaregiverDocument(Base):
     __tablename__ = "caregiver_documents"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     document = Column(String, nullable=False)
@@ -174,7 +173,6 @@ class CaregiverDocument(Base):
 
 class CaregiverAboutDetail(Base):
     __tablename__ = "caregiver_about_details"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     about_detail = Column(String, nullable=False)
@@ -183,7 +181,6 @@ class CaregiverAboutDetail(Base):
 
 class CaregiverHighlight(Base):
     __tablename__ = "caregiver_highlights"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     highlight = Column(String, nullable=False)
@@ -192,25 +189,24 @@ class CaregiverHighlight(Base):
 
 class CaregiverService(Base):
     __tablename__ = "caregiver_services"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
-    service_type = Column(String, nullable=False)
+    service_type = Column(String, nullable=True)
+    service_value = Column(String, nullable=False)
 
     caregiver = relationship("Caregiver", back_populates="services")
 
 class CaregiverExperience(Base):
     __tablename__ = "caregiver_experiences"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
-    experience_type = Column(String, nullable=False)
+    experience_type = Column(String, nullable=True)
+    experience_value = Column(String, nullable=False)
 
     caregiver = relationship("Caregiver", back_populates="experiences")
 
 class CaregiverVerification(Base):
     __tablename__ = "caregiver_verifications"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     verified_item = Column(String, nullable=False)
@@ -220,7 +216,6 @@ class CaregiverVerification(Base):
 
 class CaregiverLink(Base):
     __tablename__ = "caregiver_links"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     href = Column(String, nullable=True)
@@ -231,7 +226,6 @@ class CaregiverLink(Base):
 
 class CaregiverReview(Base):
     __tablename__ = "caregiver_reviews"
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     caregiver_id = Column(Integer, ForeignKey("caregivers.caregiver_id"), nullable=False)
     rating = Column(Float, nullable=True)
@@ -280,17 +274,20 @@ def main():
 def insert_caregivers(df: pd.DataFrame, session: Session):
     """
     Iterates over each row in the aggregated DataFrame and inserts caregiver + related data
-    into the database respecting the 3NF schema.
+    into the database respecting the 3NF schema. Experiences and services are split so that 
+    each item in the list is stored as its own row (experience_value or service_value).
     """
     for idx, row in df.iterrows():
         caregiver_id = row.get("id")
         if pd.isnull(caregiver_id):
             continue
         caregiver_id = int(caregiver_id)
+
         caregiver_obj = session.query(Caregiver).filter_by(caregiver_id=caregiver_id).one_or_none()
         if not caregiver_obj:
             caregiver_obj = Caregiver(caregiver_id=caregiver_id)
 
+        # Basic columns
         caregiver_obj.vertical_id = str(row.get("verticalId", "")) or ""
         caregiver_obj.display_name = str(row.get("displayName", "")) or None
         caregiver_obj.first_name = str(row.get("firstName", "")) or None
@@ -315,55 +312,112 @@ def insert_caregivers(df: pd.DataFrame, session: Session):
         session.add(caregiver_obj)
         session.flush()
 
-        # Insert related tables. Remove old entries to avoid duplicates if re-run.
+        # Remove old entries for each sub-table
         session.query(CaregiverSourceFolder).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "source_folder" in row and not pd.isnull(row["source_folder"]):
             folder_values = parse_list_field(row["source_folder"])
             for folder in folder_values:
                 caregiver_obj.source_folders.append(CaregiverSourceFolder(source_folder=str(folder)))
 
+        # LANGUAGES
         session.query(CaregiverLanguage).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "languages" in row and not pd.isnull(row["languages"]):
             languages = parse_list_field(row["languages"])
-            for lang in languages:
-                caregiver_obj.languages.append(CaregiverLanguage(language=str(lang)))
+            for lang_obj in languages:
+                language_name = lang_obj.get("language", "")
+                proficiency = lang_obj.get("proficiencyLevel", "")
+                caregiver_obj.languages.append(CaregiverLanguage(
+                    language_name=language_name,
+                    proficiency_level=proficiency
+                ))
 
+        # QUALIFICATIONS
         session.query(CaregiverQualification).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "qualifications" in row and not pd.isnull(row["qualifications"]):
             qualifications = parse_list_field(row["qualifications"])
             for qual in qualifications:
                 caregiver_obj.qualifications.append(CaregiverQualification(qualification=str(qual)))
 
+        # DOCUMENTS
         session.query(CaregiverDocument).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "documents" in row and not pd.isnull(row["documents"]):
             documents = parse_list_field(row["documents"])
             for doc in documents:
                 caregiver_obj.documents.append(CaregiverDocument(document=str(doc)))
 
+        # ABOUT_DETAILS
         session.query(CaregiverAboutDetail).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "aboutDetails" in row and not pd.isnull(row["aboutDetails"]):
             abouts = parse_list_field(row["aboutDetails"])
             for ad in abouts:
                 caregiver_obj.about_details.append(CaregiverAboutDetail(about_detail=str(ad)))
 
+        # HIGHLIGHTS
         session.query(CaregiverHighlight).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "highlights" in row and not pd.isnull(row["highlights"]):
             highlights = parse_list_field(row["highlights"])
             for hi in highlights:
                 caregiver_obj.highlights.append(CaregiverHighlight(highlight=str(hi)))
 
+        # SERVICES: 
+        # If the CSV has a dict like {"childCareServices":["cookingMealPrep","bathing"]} 
+        # we create multiple rows, one for each item
         session.query(CaregiverService).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "services" in row and not pd.isnull(row["services"]):
-            services = parse_list_field(row["services"])
-            for srv in services:
-                caregiver_obj.services.append(CaregiverService(service_type=str(srv)))
+            services_list = parse_list_field(row["services"])
+            # Often 'services_list' might be [ { "childCareServices": [ "cookingMealPrep", ... ] } ]
+            # We'll parse each dict
+            for service_dict in services_list:
+                if isinstance(service_dict, dict):
+                    for service_key, service_values in service_dict.items():
+                        # service_key = "childCareServices", service_values = ["cookingMealPrep","bathing"]
+                        if isinstance(service_values, list):
+                            for sv in service_values:
+                                caregiver_obj.services.append(CaregiverService(
+                                    service_type=service_key,
+                                    service_value=str(sv)
+                                ))
+                        else:
+                            # If it's a single string
+                            caregiver_obj.services.append(CaregiverService(
+                                service_type=service_key,
+                                service_value=str(service_values)
+                            ))
+                else:
+                    # fallback if it's a single string or something
+                    caregiver_obj.services.append(CaregiverService(
+                        service_type="unknownServiceType",
+                        service_value=str(service_dict)
+                    ))
 
+        # EXPERIENCES:
         session.query(CaregiverExperience).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "experience" in row and not pd.isnull(row["experience"]):
-            experiences = parse_list_field(row["experience"])
-            for exp in experiences:
-                caregiver_obj.experiences.append(CaregiverExperience(experience_type=str(exp)))
+            experience_list = parse_list_field(row["experience"])
+            # Might be [ { "childCareExperience": [ "toddler", "preteenOrTeen", ... ] } ]
+            for exp_dict in experience_list:
+                if isinstance(exp_dict, dict):
+                    for exp_key, exp_values in exp_dict.items():
+                        # e.g. exp_key="childCareExperience", exp_values=["toddler","preteenOrTeen"]
+                        if isinstance(exp_values, list):
+                            for ev in exp_values:
+                                caregiver_obj.experiences.append(CaregiverExperience(
+                                    experience_type=exp_key,
+                                    experience_value=str(ev)
+                                ))
+                        else:
+                            caregiver_obj.experiences.append(CaregiverExperience(
+                                experience_type=exp_key,
+                                experience_value=str(exp_values)
+                            ))
+                else:
+                    # fallback single string
+                    caregiver_obj.experiences.append(CaregiverExperience(
+                        experience_type="unknownExperienceType",
+                        experience_value=str(exp_dict)
+                    ))
 
+        # VERIFICATIONS
         session.query(CaregiverVerification).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "verifications" in row and not pd.isnull(row["verifications"]):
             verif_list = parse_list_field(row["verifications"])
@@ -375,6 +429,7 @@ def insert_caregivers(df: pd.DataFrame, session: Session):
                     verified=bool(verified_val) if verified_val is not None else None
                 ))
 
+        # LINKS
         session.query(CaregiverLink).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "links" in row and not pd.isnull(row["links"]):
             link_list = parse_list_field(row["links"])
@@ -388,6 +443,7 @@ def insert_caregivers(df: pd.DataFrame, session: Session):
                     link_type=str(link_type)
                 ))
 
+        # REVIEWS
         session.query(CaregiverReview).filter_by(caregiver_id=caregiver_obj.caregiver_id).delete()
         if "reviews" in row and not pd.isnull(row["reviews"]):
             review_list = parse_list_field(row["reviews"])
@@ -420,7 +476,10 @@ def parse_list_field(value):
         try:
             parsed = ast.literal_eval(val_str)
             if isinstance(parsed, (list, dict)):
-                return parsed if isinstance(parsed, list) else [parsed]
+                # return a list of dict(s) or a list of items
+                if isinstance(parsed, dict):
+                    return [parsed]
+                return parsed
             else:
                 # fallback if it's a single string
                 return [val_str]
@@ -430,5 +489,30 @@ def parse_list_field(value):
     # fallback
     return []
 
+
+def run_etl():
+    engine = create_engine(DATABASE_URI, echo=False)
+    SessionLocal = sessionmaker(bind=engine)
+    session = SessionLocal()
+    Base.metadata.create_all(engine)
+    if not os.path.exists(CSV_FILE_PATH):
+        logger.error(f"CSV file not found at {CSV_FILE_PATH}. Exiting.")
+        return
+    df = pd.read_csv(CSV_FILE_PATH, encoding="utf-8")
+    logger.info(f"Loaded {len(df)} rows from CSV.")
+    try:
+        insert_caregivers(df, session)
+        session.commit()
+        logger.info("Data inserted successfully!")
+    except IntegrityError as e:
+        logger.error(f"Integrity error: {e}")
+        session.rollback()
+    except Exception as e:
+        logger.error(f"Error inserting data: {e}")
+        session.rollback()
+    finally:
+        session.close()
+
+
 if __name__ == "__main__":
-    main()
+    run_etl()
