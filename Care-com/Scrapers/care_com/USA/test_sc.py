@@ -700,25 +700,25 @@ query SearchProvidersSeniorCare($input: SearchProvidersSeniorCareInput!) {
                     if pay_min == pay_max:
                         # Instead of skipping, call the new approach
                         tasks_list = [
-                            "COMPANIONSHIP",
+                            #"COMPANIONSHIP",
                             "MOBILITY_ASSISTANCE",
                             # "SPECIALIZED_CARE",
                             # "HOUSEHOLD_TASKS",
                             # "PERSONAL_CARE",
-                            #"TRANSPORTATION",
-                            # "HOSPICE_SUPPORT"
+                            "TRANSPORTATION",
+                            "HOSPICE_SUPPORT",
                         ]
                         details_list = [
                             "COMFORTABLE_WITH_PETS",
                             "OWN_TRANSPORTATION",
-                            "NON_SMOKER"
+                            # "NON_SMOKER"
                         ]
                         skills_list = [
-                            # "ALZHEIMERS_DEMENTIA_EXPERIENCE",
+                             "ALZHEIMERS_DEMENTIA_EXPERIENCE",
                             # "HOME_HEALTH_AIDE",
-                            # "REGISTERED_NURSE",
-                            "CPR_TRAINED",
-                            "CERTIFIED_NURSING_ASSISTANT"
+                             "REGISTERED_NURSE",
+                            # "CPR_TRAINED",
+                             "CERTIFIED_NURSING_ASSISTANT",
                         ]
                         
                         wraper_provider_key = list(["searchProvidersSeniorCare"]) # eg: "searchProvidersChildCare"
