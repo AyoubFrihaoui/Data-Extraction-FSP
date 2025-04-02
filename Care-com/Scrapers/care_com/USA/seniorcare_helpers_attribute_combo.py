@@ -215,42 +215,42 @@ def run_threaded_combinations(
             base_url=base_url
         )
         if len(combo_ids) > 498:
-            logger.info(f"Doing reverse sorting (SORT_ORDER_REVIEW_RATING_DESCENDING) on Combo: {t_combo} {d_combo} {s_combo}...")
-            combo_ids2 =  scrape_ids_for_range_with_attributes(
-            session=session,
-            logger=logger,
-            wraper_provider_key=wraper_provider_key,
-            care_type=care_type,
-            thread_lock=thread_lock,
-            pay_min=pay_min,
-            pay_max=pay_max,
-            tasks_subset=t_combo,
-            details_subset=d_combo,
-            skills_subset=s_combo,
-            postal_code=postal_code,
-            base_query=base_query,
-            base_headers=base_headers,
-            base_url=base_url,
-            sort_order="SORT_ORDER_REVIEW_RATING_DESCENDING"
-            )
-            logger.info(f"doing SORT_ORDER_RECOMMENDED_DESCENDING on Combo: {t_combo} {d_combo} {s_combo}...")
-            combo_ids3 =  scrape_ids_for_range_with_attributes(
-            session=session,
-            logger=logger,
-            wraper_provider_key=wraper_provider_key,
-            care_type=care_type,
-            thread_lock=thread_lock,
-            pay_min=pay_min,
-            pay_max=pay_max,
-            tasks_subset=t_combo,
-            details_subset=d_combo,
-            skills_subset=s_combo,
-            postal_code=postal_code,
-            base_query=base_query,
-            base_headers=base_headers,
-            base_url=base_url,
-            sort_order="SORT_ORDER_RECOMMENDED_DESCENDING"
-            )
+            # logger.info(f"Doing reverse sorting (SORT_ORDER_REVIEW_RATING_DESCENDING) on Combo: {t_combo} {d_combo} {s_combo}...")
+            # combo_ids2 =  scrape_ids_for_range_with_attributes(
+            # session=session,
+            # logger=logger,
+            # wraper_provider_key=wraper_provider_key,
+            # care_type=care_type,
+            # thread_lock=thread_lock,
+            # pay_min=pay_min,
+            # pay_max=pay_max,
+            # tasks_subset=t_combo,
+            # details_subset=d_combo,
+            # skills_subset=s_combo,
+            # postal_code=postal_code,
+            # base_query=base_query,
+            # base_headers=base_headers,
+            # base_url=base_url,
+            # sort_order="SORT_ORDER_REVIEW_RATING_DESCENDING"
+            # )
+            # logger.info(f"doing SORT_ORDER_RECOMMENDED_DESCENDING on Combo: {t_combo} {d_combo} {s_combo}...")
+            # combo_ids3 =  scrape_ids_for_range_with_attributes(
+            # session=session,
+            # logger=logger,
+            # wraper_provider_key=wraper_provider_key,
+            # care_type=care_type,
+            # thread_lock=thread_lock,
+            # pay_min=pay_min,
+            # pay_max=pay_max,
+            # tasks_subset=t_combo,
+            # details_subset=d_combo,
+            # skills_subset=s_combo,
+            # postal_code=postal_code,
+            # base_query=base_query,
+            # base_headers=base_headers,
+            # base_url=base_url,
+            # sort_order="SORT_ORDER_RECOMMENDED_DESCENDING"
+            # )
             logger.info(f"doing SORT_ORDER_DISTANCE_ASCENDING on Combo: {t_combo} {d_combo} {s_combo}...")
             combo_ids4 =  scrape_ids_for_range_with_attributes(
             session=session,
@@ -273,8 +273,8 @@ def run_threaded_combinations(
             # Merge in a thread-safe manner
             with thread_lock:
                 aggregated_ids.update(combo_ids)
-                if combo_ids2: aggregated_ids.update(combo_ids2)
-                if combo_ids3: aggregated_ids.update(combo_ids3)
+                # if combo_ids2: aggregated_ids.update(combo_ids2)
+                # if combo_ids3: aggregated_ids.update(combo_ids3)
                 if combo_ids4: aggregated_ids.update(combo_ids4)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:

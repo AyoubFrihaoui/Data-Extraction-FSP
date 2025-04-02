@@ -807,7 +807,7 @@ class CaregiverProfileScraper:
             data = response.json()
 
             # Sleep randomly to avoid detection or rate-limiting
-            time.sleep(round(random.uniform(0.8, 1.2), 4))
+            time.sleep(round(random.uniform(0.3, 0.7), 4))
             # Check for GraphQL-level errors
             if "errors" in data:
                 print(f"[ERROR] GraphQL returned errors for {caregiver_id}: {data['errors']}")
@@ -837,12 +837,12 @@ class CaregiverProfileScraper:
             caregiver_ids = extract_caregiver_ids(file_data)
             all_caregiver_ids_list.extend(caregiver_ids)
 
-        print(f"[INFO] Extracted {len(all_caregiver_ids_list)} caregiver IDs before deduplication.")
+        print(f"[INFO] Extracted {len(all_caregiver_ids_list)} caregiver IDs before removing deduplication.")
 
         # Convert to set to remove duplicates
         all_caregiver_ids = set(all_caregiver_ids_list)
 
-        print(f"[INFO] Extracted {len(all_caregiver_ids)} unique caregiver IDs after deduplication.")
+        print(f"[INFO] Extracted {len(all_caregiver_ids)} unique caregiver IDs after removing deduplication.")
 
 
         # Step 3: For each caretaker ID, fetch full profile

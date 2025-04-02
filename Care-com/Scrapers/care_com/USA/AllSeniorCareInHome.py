@@ -42,7 +42,7 @@ DISCLAIMER:
   - Always respect the site's Terms of Service.
 
 Author: @AyoubFrihaoui
-Version: 3.0.0
+Version: 4.0.0
 """
 
 import os
@@ -57,6 +57,13 @@ import requests
 from datetime import datetime
 from typing import Tuple, List, Optional
 from config import COOKIE
+# Append parent directory to sys.path so that modules in utils can be imported
+sys.path.append('..')
+from Scrapers.care_com.USA.seniorcare_helpers_attribute_combo import (
+    run_threaded_combinations,
+    create_aggregated_search_file
+)
+
 
 # If you store the cookie in config.py, import it:
 # from config import COOKIE
@@ -329,7 +336,9 @@ query SearchProvidersSeniorCare($input: SearchProvidersSeniorCareInput!) {
         self.search_page_size = search_page_size
         self.min_pay_range = min_pay_range
         self.max_pay_range = max_pay_range
-
+        
+        self.session = requests.Session()
+        self.session.headers.update(self.HEADERS)
         # Unique run ID for the entire scrape
         self.run_id = str(uuid.uuid4())
 
@@ -517,7 +526,7 @@ query SearchProvidersSeniorCare($input: SearchProvidersSeniorCareInput!) {
             response.raise_for_status()
             data = response.json()
 
-            time.sleep(round(random.uniform(1.5, 1.8), 4))
+            time.sleep(round(random.uniform(0.4, 0.7), 4))
 
             if "errors" in data:
                 self.logger.error(f"GraphQL errors in _get_total_hits_for_range: {data['errors']}")
@@ -574,7 +583,7 @@ query SearchProvidersSeniorCare($input: SearchProvidersSeniorCareInput!) {
                 data = response.json()
 
                 # Random sleep to avoid detection
-                time.sleep(round(random.uniform(1.5, 1.8), 4))
+                time.sleep(round(random.uniform(0.35, .7), 4))
 
                 if "errors" in data:
                     scrape_status = "error"
@@ -689,25 +698,70 @@ query SearchProvidersSeniorCare($input: SearchProvidersSeniorCareInput!) {
 
                 if total_hits > 500:
                     if pay_min == pay_max:
-                        self.logger.warning(
-                            f"Single-value range [{pay_min}] but hits > 500. Skipping."
+                        # Instead of skipping, call the new approach
+                        tasks_list = [
+                            #"COMPANIONSHIP",
+                            "MOBILITY_ASSISTANCE",
+                            # "SPECIALIZED_CARE",
+                            # "HOUSEHOLD_TASKS",
+                            # "PERSONAL_CARE",
+                            "TRANSPORTATION",
+                            "HOSPICE_SUPPORT",
+                        ]
+                        details_list = [
+                            "COMFORTABLE_WITH_PETS",
+                            "OWN_TRANSPORTATION",
+                            # "NON_SMOKER"
+                        ]
+                        skills_list = [
+                             "ALZHEIMERS_DEMENTIA_EXPERIENCE",
+                            # "HOME_HEALTH_AIDE",
+                             "REGISTERED_NURSE",
+                            # "CPR_TRAINED",
+                             "CERTIFIED_NURSING_ASSISTANT",
+                        ]
+                        
+                        wraper_provider_key = list(["searchProvidersSeniorCare"]) # eg: "searchProvidersChildCare"
+                        # 1) Run attribute combos in threads
+                        aggregated_ids = run_threaded_combinations(
+                            session=self.session,
+                            logger=self.logger,
+                            wraper_provider_key= wraper_provider_key,
+                            care_type="COMPANION",
+                            pay_min=pay_min,
+                            pay_max=pay_max,
+                            total_hits=total_hits,
+                            tasks_list=tasks_list,
+                            details_list=details_list,
+                            skills_list=skills_list,
+                            postal_code=self.postal_code,
+                            base_query=self.QUERY,
+                            base_headers=self.HEADERS,
+                            base_url=self.GRAPHQL_URL
                         )
-                        continue
-
-                    mid = (pay_min + pay_max) // 2
-                    left_range = (pay_min, mid)
-                    right_range = (mid + 1, pay_max)
-
-                    self.logger.info(
-                        f"  => Splitting into [{left_range[0]}, {left_range[1]}] "
-                        f"and [{right_range[0]}, {right_range[1]}]."
-                    )
-                    ranges_to_check.append(left_range)
-                    ranges_to_check.append(right_range)
-                elif total_hits == 0:
-                    self.logger.info(
-                        f"No results found for pay range [{pay_min}, {pay_max}]."
-                    )
+                        # 2) Create final aggregated file
+                        unique_count = len(aggregated_ids)
+                        create_aggregated_search_file(
+                            logger=self.logger,
+                            base_dir=self.base_dir,
+                            wraper_provider_key= wraper_provider_key,
+                            range_total_hits=total_hits,
+                            pay_min=pay_min,
+                            pay_max=pay_max,
+                            caregiver_ids=aggregated_ids,
+                            unique_count=unique_count,
+                        )
+                    else:
+                        # Normal splitting logic
+                        mid = (pay_min + pay_max) // 2
+                        left_range = (pay_min, mid)
+                        right_range = (mid + 1, pay_max)
+                        self.logger.info(
+                            f"  => Splitting into [{left_range[0]}, {left_range[1]}] "
+                            f"and [{right_range[0]}, {right_range[1]}]."
+                        )
+                        ranges_to_check.append(left_range)
+                        ranges_to_check.append(right_range)
                 else:
                     # totalHits <= 500, scrape this segment
                     self._fetch_profiles_for_range(pay_min, pay_max)

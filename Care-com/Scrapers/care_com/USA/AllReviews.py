@@ -294,7 +294,7 @@ class ReviewScraper:
             data = resp.json()
 
             # Sleep randomly to avoid detection or rate-limiting
-            time.sleep(round(random.uniform(1.5, 2.0), 4))
+            time.sleep(round(random.uniform(0.3, 0.65), 4))
 
             if "errors" in data:
                 return None

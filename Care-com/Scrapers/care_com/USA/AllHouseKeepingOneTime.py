@@ -517,7 +517,7 @@ query SearchProvidersHousekeeping($input: SearchProvidersHousekeepingInput!) {
             response.raise_for_status()
             data = response.json()
 
-            time.sleep(round(random.uniform(1.5, 1.8), 4))
+            time.sleep(round(random.uniform(0.6, 0.9), 4))
 
             if "errors" in data:
                 self.logger.error(f"GraphQL errors in _get_total_hits_for_range: {data['errors']}")
@@ -574,7 +574,7 @@ query SearchProvidersHousekeeping($input: SearchProvidersHousekeepingInput!) {
                 data = response.json()
 
                 # Random sleep to avoid detection
-                time.sleep(round(random.uniform(1.5, 1.8), 4))
+                time.sleep(round(random.uniform(0.6, 0.9), 4))
 
                 if "errors" in data:
                     scrape_status = "error"
@@ -690,9 +690,9 @@ query SearchProvidersHousekeeping($input: SearchProvidersHousekeepingInput!) {
                 if total_hits > 500:
                     if pay_min == pay_max:
                         self.logger.warning(
-                            f"Single-value range [{pay_min}] but hits > 500. Skipping."
+                            f"Single-value range [{pay_min}] but hits > 500. so scrapping the possible"  
                         )
-                        continue
+                        self._fetch_profiles_for_range(pay_min, pay_max)
 
                     mid = (pay_min + pay_max) // 2
                     left_range = (pay_min, mid)
