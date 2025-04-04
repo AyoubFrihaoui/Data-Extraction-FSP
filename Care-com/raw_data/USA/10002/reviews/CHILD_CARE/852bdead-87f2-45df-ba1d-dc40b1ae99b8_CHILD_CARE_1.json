@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2019-05-03T13:49:13.000Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "He's excellent!",
+            "originalText": "He's excellent!",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "1d9b708b-8664-4364-a0db-522c523e0f2a",
+          "languageCode": "en-us",
+          "originalSource": "CZEN",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "DEPENDABILITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "PUNCTUALITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "852bdead-87f2-45df-ba1d-dc40b1ae99b8",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Jay",
+              "lastInitial": "C",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "UNKNOWN",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": "CZEN",
+          "updateTime": "2019-05-06T18:18:27.000Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

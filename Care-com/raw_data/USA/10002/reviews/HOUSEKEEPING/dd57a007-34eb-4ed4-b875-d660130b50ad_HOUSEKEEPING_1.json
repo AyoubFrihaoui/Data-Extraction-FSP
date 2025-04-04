@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "HOUSEKEEPING",
+          "createTime": "2023-11-19T17:01:25.782Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "We hired Jezebel for weekly cleaning. The first time she was late 15 mins but good (although slow, probably took double the time others did to clean our apt). The next time, she canceled 30 mins before arrival because she got another job. So she is very unreliable and would not recommend her overall unless you want someone canceling on you last minute. ",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "1b422a01-94b7-4a8e-8783-aaf4740193d4",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 3,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "dd57a007-34eb-4ed4-b875-d660130b50ad",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/59/46773259_BxGd0glZ8R8ib7sFP2RkdApz6alg00",
+            "publicMemberInfo": {
+              "firstName": "Radhika",
+              "lastInitial": "R",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2023-11-19T17:01:29.504Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

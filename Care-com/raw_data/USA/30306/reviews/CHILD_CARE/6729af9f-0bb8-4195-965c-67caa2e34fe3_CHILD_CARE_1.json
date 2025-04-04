@@ -1,0 +1,130 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-03-11T01:17:17.555Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "The kids absolutely love her. She was so reliable and a huge help!",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "5b81e17c-cd33-4f38-b11f-509835e2c5bd",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "6729af9f-0bb8-4195-965c-67caa2e34fe3",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Anthony",
+              "lastInitial": "B",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-03-14T13:19:04.197Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        },
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-03-10T23:30:19.000Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "She is extremely helpful; the kids absolutely love spending time with her! She is kind and will be their when you need her.",
+            "originalText": "She is extremely helpful; the kids absolutely love spending time with her! She is kind and will be their when you need her.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "263cb177-be36-440c-a1ff-541ab8b63aed",
+          "languageCode": "en-us",
+          "originalSource": "CZEN",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "DEPENDABILITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "PUNCTUALITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "6729af9f-0bb8-4195-965c-67caa2e34fe3",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Anthony",
+              "lastInitial": "B",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "UNKNOWN",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": "CZEN",
+          "updateTime": "2024-03-11T10:28:05.000Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

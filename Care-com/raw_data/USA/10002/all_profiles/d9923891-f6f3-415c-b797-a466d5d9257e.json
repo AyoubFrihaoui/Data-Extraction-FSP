@@ -1,0 +1,325 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2025-02-20T01:05:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK",
+        "VACCINATED"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": 2019,
+          "educationLevel": "GRADUATE_DEGREE",
+          "schoolName": "University of Minnesota - Duluth",
+          "educationDetailsText": [
+            "University of Minnesota - Duluth - 2019",
+            "Bachelor degree - Business Management & Psychology"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 1,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": true,
+      "member": {
+        "id": "d9923891-f6f3-415c-b797-a466d5d9257e",
+        "lastName": "M",
+        "firstName": "Megan",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/95/45198095_boXIyXANIymH65sKWt5h4iAolE5UxN140",
+        "displayName": "Megan M.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/95/45198095_boXIyXANIymH65sKWt5h4iAolE5UxN140",
+        "address": {
+          "city": "Brooklyn",
+          "state": "NY",
+          "zip": "11212",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "24473244",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "I am a 25-year-old, household manager and family assistant located in NYC. I have been working for a large, high-net-worth family in the Upper West side for a little under a year. My duties involve managing the staff and family's schedules, household organization projects, cooking, running errands, managing household inventory, and assisting the nanny, chef, and housekeeper when needed. \n\nI have a bachelor's degree in Business Management & Psychology, as well as two years of experience in managing a business/household. \n\nI can provide two stellar recommendations from employers and proof of vaccination! I am flexible with traveling during the summers but would like to remain in NYC for the majority of the time.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "15348680",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 3,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "30",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "30",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "30",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": false,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "33",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "36",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 3,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": true,
+            "swimmingSupervision": true,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 2,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "15348680",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": true,
+            "lightCleaning": true,
+            "mealPrepLaundry": true,
+            "mover": true,
+            "personalAssistant": true,
+            "petHelp": true,
+            "shopping": true,
+            "transportation": true,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "Though, I do not have direct experience with tutoring children, I can say that during my 4. 5 years of college, I have learned and acquired necessary skills for online learning. During college I would often use my own time to tutor and edit papers for friends in subjects such as writing, english, and history.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "27295347",
+          "otherGeneralSubjects": [
+            "Business",
+            "Computers",
+            "English",
+            "Science",
+            "Test Prep",
+            "Art",
+            "Dance",
+            "Musical Instruments"
+          ],
+          "otherQualities": [
+            "-Graduate Degree with honors\n-Violin Player since 4th grade\n-Certified Nursing Assistant\n-I love too cook/bake\n-Great with pets\n-Very proficient writer (former journalism/communications major)"
+          ],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "17",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "17",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": false,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": false,
+              "certifiedTeacher": false,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": false,
+            "tutorsInStudentsHome": false,
+            "tutorsInTeachersHome": false,
+            "tutorsOnline": false,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [
+            "ENGLISH_SUBJECT_GRAMMAR",
+            "ENGLISH_SUBJECT_LITERATURE",
+            "ENGLISH_SUBJECT_READING",
+            "ENGLISH_SUBJECT_WRITING",
+            "SCIENCE_SUBJECT_BIOLOGY",
+            "SCIENCE_SUBJECT_EARTH_SCIENCE",
+            "SCIENCE_SUBJECT_ELEMENTARY_SCIENCE",
+            "SCIENCE_SUBJECT_MIDDLE_SCHOOL",
+            "SCIENCE_SUBJECT_PSYCHOLOGY",
+            "COMPUTERS_SUBJECT_COMPUTER_BASICS",
+            "COMPUTERS_SUBJECT_MICROSOFT_ACCESS",
+            "COMPUTERS_SUBJECT_MICROSOFT_EXCEL",
+            "COMPUTERS_SUBJECT_HTML",
+            "COMPUTERS_SUBJECT_JAVA",
+            "COMPUTERS_SUBJECT_MACINTOSH",
+            "COMPUTERS_SUBJECT_MICROSOFT_WORD",
+            "COMPUTERS_SUBJECT_MICROSOFT_OFFICE",
+            "COMPUTERS_SUBJECT_OUTLOOK",
+            "COMPUTERS_SUBJECT_MICROSOFT_POWERPOINT",
+            "COMPUTERS_SUBJECT_WINDOWS",
+            "COMPUTERS_SUBJECT_JAVASCRIPT",
+            "ART_SUBJECT_PAINTING",
+            "ART_SUBJECT_PHOTOGRAPHY",
+            "MUSICAL_INSTRUMENTS_SUBJECT_VIOLIN",
+            "BUSINESS_SUBJECT_ORGANIZATIONAL_BEHAVIOR",
+            "BUSINESS_SUBJECT_ACCOUNTING",
+            "BUSINESS_SUBJECT_ECONOMICS",
+            "BUSINESS_SUBJECT_MARKETING",
+            "TEST_PREP_SUBJECT_ACT",
+            "TEST_PREP_SUBJECT_ELEMENTARY_STANDARD_TESTING"
+          ],
+          "otherSpecificSubject": "",
+          "yearsOfExperience": 0,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": null,
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2016-04-11T23:30:00.000Z",
+      "yearsOfExperience": 2,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/15/39272615_boXIyXANIymH65sKWt5h4iAolE5UxN1650",
+        "https://www.care.com/s/d/aws/photo/1080X1080/16/43834816_boXIyXANIymH65sKWt5h4iAolE5UxN0114"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

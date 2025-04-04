@@ -1,0 +1,133 @@
+{
+  "data": {
+    "searchProvidersChildCare": {
+      "sourceType": "PN",
+      "searchProvidersConnection": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null,
+          "__typename": "PageInfo"
+        },
+        "totalHits": 1,
+        "edges": [
+          {
+            "node": {
+              "member": {
+                "id": "85552bec-62f4-4e4d-928e-fec2e33b006d",
+                "legacyId": "48090950",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/53/39786153_nwZEc6GWtAOLJz1nW5H295W0oGZQyu00",
+                "displayName": "Danielle H.",
+                "firstName": "Danielle",
+                "lastName": "H",
+                "address": {
+                  "city": "Decatur",
+                  "state": "GA",
+                  "zip": "30030",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK"
+              ],
+              "yearsOfExperience": 10,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 3,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 4,
+                  "averageRatings": [
+                    {
+                      "type": "OVERALL",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    },
+                    {
+                      "type": "DEPENDABILITY",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    },
+                    {
+                      "type": "PUNCTUALITY",
+                      "value": 5,
+                      "__typename": "ReviewInfoRating"
+                    }
+                  ],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "27846017",
+                  "bio": {
+                    "experienceSummary": "Hello everyone my name is Danielle!\r\nI have over 10 years of experience working with children from ages infant to teenagers. I am CPR certified and also have experience in healthcare. On my free time I enjoy music, art and doing outside activities in the sun! If you need a date night, nanny, mommy-helper or help with virtual school I'm your girl ! Look forward to hearing from you",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "75",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "25",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "27",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": {
+                "description": {
+                  "displayText": "",
+                  "originalText": "Danielle is such an empathetic and kind soul. She has a calm aura about her which helps with our boys during their meltdowns. I would absolutely recommend Danielle to anyone looking for a great and reliable nanny! ",
+                  "__typename": "ReviewInfoText"
+                },
+                "reviewer": {
+                  "publicMemberInfo": {
+                    "firstName": "Nina",
+                    "lastInitial": "D",
+                    "imageURL": null,
+                    "__typename": "PublicMemberInfo"
+                  },
+                  "__typename": "ReviewInfoReviewer"
+                },
+                "__typename": "ReviewInfo"
+              },
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          }
+        ],
+        "__typename": "SearchProvidersConnection"
+      },
+      "__typename": "SearchProvidersSuccess"
+    }
+  }
+}

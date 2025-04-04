@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-12-04T03:32:25.819Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Sadie L is amazing! She is punctual, friendly with kids, and helpful with household work. She is also calm and a great listener!",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "f02fdcb8-f6a4-53f3-bd21-7638ce0de173",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "7fcd40db-1850-490d-8e86-06ef8df3cbfc",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/78/46611578_tz8fjmTxJXTup8ui09QPnUww41DJr010",
+            "publicMemberInfo": {
+              "firstName": "Naveen Kumar",
+              "lastInitial": "K",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-12-04T03:32:26.586Z",
+          "verifiedByCare": true,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2017-07-03T20:49:04.000Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "733b4c66-828d-4e7f-919c-e11ffbe3608b",
+          "languageCode": "en-us",
+          "originalSource": "CZEN",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "DEPENDABILITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "PUNCTUALITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "9cdbad4a-df6a-44eb-905e-ab332d9cf49d",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Anna",
+              "lastInitial": "P",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": "CZEN",
+          "updateTime": "2017-07-13T17:42:31.000Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "SENIOR_CARE",
+          "createTime": "2023-07-01T13:27:16.096Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Leslie took care of my grandmother when she was living with us after coming here from Haiti. She bathed her nicely and scratched her scalp as requested. Leslie never gave her a hard time for needing any help. ",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "b1abd9e6-f5f4-4556-9e9b-26b2cb022670",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "QUALITY_OF_CARE",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "PUNCTUALITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "COMMUNICATION",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "SKILL_SET",
+              "value": 4,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "194b75f0-a1f8-4a89-8fda-84cdc18a5afc",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Natshlie",
+              "lastInitial": "I",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2023-07-01T13:27:17.011Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

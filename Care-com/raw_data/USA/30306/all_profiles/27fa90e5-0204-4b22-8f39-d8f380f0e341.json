@@ -1,0 +1,476 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2024-09-16T12:30:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "HIGH_SCHOOL_DEGREE",
+          "schoolName": "",
+          "educationDetailsText": [
+            "High school degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 0,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": false,
+      "member": {
+        "id": "27fa90e5-0204-4b22-8f39-d8f380f0e341",
+        "lastName": "I",
+        "firstName": "Etinosa",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/66/46601766_ASrjW50dqlIjsTB4f8fEzCpaOaWRoW00",
+        "displayName": "Etinosa I.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/66/46601766_ASrjW50dqlIjsTB4f8fEzCpaOaWRoW00",
+        "address": {
+          "city": "Atlanta",
+          "state": "GA",
+          "zip": "30346",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "65460304",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "SENIOR_CARE"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [],
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "As a nurturing caregiver with a passion for fostering children's growth, I'm dedicated to creating a safe and stimulating environment for young minds to flourish. With two years of experience and a graduate degree in my background, I bring a wealth of knowledge and expertise to my role.\n\nMy patient and friendly nature allows me to connect easily with children, while my responsible and reliable approach ensures their well-being is always my top priority. I believe in open communication with parents and regularly provide updates on their child's day, using their preferred method of contact.\n\nWhen it comes to enforcing household rules, I follow the parents' lead to ensure consistency and respect their parenting style. Playing educational games that promote learning is one of my favorite ways to engage children, sparking their curiosity and nurturing their development.",
+            "title": null,
+            "aiAssistedBio": true,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "35229433",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 2,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": false,
+            "cprTrained": false,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": false,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": false,
+            "specialNeedsCare": false,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "25",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "28",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": false,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": true,
+            "mealPreparation": false,
+            "swimmingSupervision": true,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 2,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "35229433",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": true,
+            "dateNight": false,
+            "lightCleaning": true,
+            "mealPrepLaundry": true,
+            "mover": true,
+            "personalAssistant": false,
+            "petHelp": false,
+            "shopping": false,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": null,
+        "seniorCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "PART_TIME",
+          "bio": {
+            "experienceSummary": "My empathy towards patients makes a significant difference in their well-being. I always keep an open line of communication to understand their needs better. I'm also experienced in assisting patient in taking medication and am trained in CPR,",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "35524931",
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "50",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "alzheimersOrDementiaExperience": false,
+            "certifiedNursingAssistant": false,
+            "comfortableWithPets": false,
+            "cprTrained": false,
+            "doesNotSmoke": true,
+            "firstAidTraining": false,
+            "homeHealthAideExperience": false,
+            "hospiceExperience": true,
+            "licensedNurse": false,
+            "medicalEquipmentExperience": false,
+            "ownTransportation": false,
+            "registeredNurse": false,
+            "woundCare": false,
+            "__typename": "SeniorCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "25",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "50",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "supportedServices": {
+            "visitingPhysician": false,
+            "visitingNurse": false,
+            "transportation": false,
+            "specializedCare": false,
+            "specialNeeds": false,
+            "respiteCare": false,
+            "personalCare": false,
+            "mobilityAssistance": false,
+            "medicalTransportation": false,
+            "medicalManagement": true,
+            "mealPreparation": false,
+            "lightHousekeeping": true,
+            "liveInHomeCare": true,
+            "hospiceServices": true,
+            "homeModification": false,
+            "homeHealth": false,
+            "helpStayingPhysicallyActive": false,
+            "heavyLifting": false,
+            "feeding": false,
+            "errands": false,
+            "dementia": false,
+            "companionship": false,
+            "bathing": true,
+            "__typename": "SeniorCareCaregiverServices"
+          },
+          "yearsOfExperience": 0,
+          "__typename": "SeniorCareCaregiverProfile"
+        },
+        "tutoringCaregiverProfile": null,
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": {
+        "dayList": {
+          "monday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "tuesday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "wednesday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "thursday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "friday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "saturday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "sunday": {
+            "blocks": [
+              {
+                "end": "00:00:00",
+                "start": "18:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "06:00:00",
+                "start": "00:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "12:00:00",
+                "start": "06:00:00",
+                "__typename": "LocalTimeBlock"
+              },
+              {
+                "end": "18:00:00",
+                "start": "12:00:00",
+                "__typename": "LocalTimeBlock"
+              }
+            ],
+            "__typename": "DailySchedule"
+          },
+          "__typename": "WeeklySchedule"
+        },
+        "__typename": "RecurringAvailability"
+      },
+      "responseRate": 100,
+      "responseTime": 322,
+      "signUpDate": "2024-09-01T20:05:00.000Z",
+      "yearsOfExperience": 2,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/1080X1080/32/46886832_ASrjW50dqlIjsTB4f8fEzCpaOaWRoW00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/33/46886833_ASrjW50dqlIjsTB4f8fEzCpaOaWRoW00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

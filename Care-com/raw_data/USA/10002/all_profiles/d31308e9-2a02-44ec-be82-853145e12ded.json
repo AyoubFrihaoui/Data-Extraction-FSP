@@ -1,0 +1,530 @@
+{
+  "data": {
+    "getCaregiver": {
+      "continuousBackgroundCheck": {
+        "seeker": {
+          "hasLimitReached": false,
+          "subscriptionStatus": null,
+          "__typename": "SeekerContinuousBgcSubscriptionDto"
+        },
+        "hasActiveHit": false,
+        "__typename": "ContinuousBackgroundCheck"
+      },
+      "backgroundChecks": [
+        {
+          "backgroundCheckName": "CARE_CHECK",
+          "whenCompleted": "2025-01-08T01:30:00.000Z",
+          "__typename": "BackgroundCheck"
+        }
+      ],
+      "badges": [
+        "BACKGROUND_CHECK"
+      ],
+      "distanceFromSeekerInMiles": null,
+      "educationDegrees": [
+        {
+          "currentlyAttending": false,
+          "degreeYear": null,
+          "educationLevel": "COLLEGE_DEGREE",
+          "schoolName": "CUNY John Jay College Criminal Justice",
+          "educationDetailsText": [
+            "Cuny John Jay College Criminal Justice",
+            "Bachelor degree"
+          ],
+          "__typename": "EducationDegree"
+        }
+      ],
+      "hasCareCheck": true,
+      "hasGrantedCriminalBGCAccess": false,
+      "hasGrantedMvrBGCAccess": false,
+      "hasGrantedPremierBGCAccess": false,
+      "hiredByCounts": {
+        "locality": null,
+        "__typename": "CaregiverHiredByCounts"
+      },
+      "hiredTimes": 3,
+      "isFavorite": false,
+      "isMVREligible": true,
+      "isVaccinated": false,
+      "member": {
+        "id": "d31308e9-2a02-44ec-be82-853145e12ded",
+        "lastName": "O",
+        "firstName": "Eliza",
+        "gender": "FEMALE",
+        "hiResImageURL": "https://www.care.com/s/d/aws/photo/1080X1080/95/39657495_IDLeJiwEfvla3MPRNuEsV37kjA1XR00",
+        "displayName": "Eliza O.",
+        "email": "frihaouiayoube@gmail.com",
+        "primaryService": "CHILD_CARE",
+        "imageURL": "https://www.care.com/s/d/aws/photo/135X135/95/39657495_IDLeJiwEfvla3MPRNuEsV37kjA1XR00",
+        "address": {
+          "city": "Brooklyn",
+          "state": "NY",
+          "zip": "11231",
+          "__typename": "Address"
+        },
+        "languages": [
+          "ENGLISH"
+        ],
+        "legacyId": "5045429",
+        "isPremium": false,
+        "__typename": "Member"
+      },
+      "placeInfo": null,
+      "profiles": {
+        "serviceIds": [
+          "CHILD_CARE",
+          "PET_CARE",
+          "TUTORING"
+        ],
+        "childCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "ageGroups": [
+            "NEWBORN",
+            "TODDLER",
+            "EARLY_SCHOOL",
+            "ELEMENTARY_SCHOOL",
+            "TEEN"
+          ],
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "I have a background in early childhood development and education, with 10+ years of childcare experience. My Bachelor's degree is in Developmental Forensic Psychology. I am passionate about children and believe in age-appropriate positive reinforcement and interactive play. I am kind and easygoing, with a calm upbeat attitude. I love trips to the park, dance parties, arts and crafts, and sports. \n\nAfter graduating from college, I spent a couple of years in behavioral intervention and respite care work with children with ASD & ADHD; including a year as a homeschool/remote-learning aide. I also spent a semester working as a TA at PS29 in the Library and STEM department with grades K-5. \n\nI am trained in First Aid & CPR and have also been background checked/fingerprinted with the DOE and DSS. I have a driver's license with a clean record and access to a car. \n\nCOVID-negative; testing regularly. Open to working with a bubble/multiple families. \n\nExcellent references upon request.",
+            "title": null,
+            "aiAssistedBio": false,
+            "__typename": "Bio"
+          },
+          "childStaffRatio": null,
+          "id": "3658375",
+          "maxAgeMonths": null,
+          "minAgeMonths": null,
+          "numberOfChildren": 4,
+          "offerings": null,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "afterSchoolCare": false,
+            "babysitter": true,
+            "certifiedNursingAssistant": false,
+            "certifiedRegisterNurse": false,
+            "certifiedTeacher": false,
+            "childDevelopmentAssociate": false,
+            "comfortableWithPets": true,
+            "cprTrained": true,
+            "crn": false,
+            "doesNotSmoke": true,
+            "doula": false,
+            "earlyChildDevelopmentCoursework": false,
+            "earlyChildhoodEducation": false,
+            "firstAidTraining": true,
+            "mothersHelper": false,
+            "nafccCertified": false,
+            "nanny": true,
+            "newbornCareSpecialist": false,
+            "nightNanny": false,
+            "ownTransportation": true,
+            "specialNeedsCare": true,
+            "trustlineCertifiedCalifornia": false,
+            "__typename": "ChildCareCaregiverQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "amount": "20",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "35",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "rates": [
+            {
+              "hourlyRate": {
+                "amount": "20",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 1,
+              "isDefaulted": false,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "23",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 2,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "26",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 3,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            },
+            {
+              "hourlyRate": {
+                "amount": "29",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "numberOfChildren": 4,
+              "isDefaulted": true,
+              "__typename": "OneTimeChildCareRates"
+            }
+          ],
+          "supportedServices": {
+            "carpooling": false,
+            "craftAssistance": true,
+            "errands": false,
+            "groceryShopping": false,
+            "laundryAssistance": false,
+            "lightHousekeeping": false,
+            "mealPreparation": false,
+            "swimmingSupervision": true,
+            "travel": true,
+            "__typename": "ChildCareCaregiverServices"
+          },
+          "yearsOfExperience": 10,
+          "__typename": "ChildCareCaregiverProfile"
+        },
+        "commonCaregiverProfile": {
+          "id": "3658375",
+          "repeatClientsCount": 0,
+          "merchandizedJobInterests": {
+            "companionCare": false,
+            "dateNight": true,
+            "lightCleaning": true,
+            "mealPrepLaundry": true,
+            "mover": false,
+            "personalAssistant": true,
+            "petHelp": true,
+            "shopping": false,
+            "transportation": false,
+            "__typename": "MerchandizedJobInterests"
+          },
+          "__typename": "CommonCaregiverProfile"
+        },
+        "petCareCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "rates": [
+            {
+              "activity": "Sitting",
+              "activityRate": {
+                "amount": "43",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Boarding",
+              "activityRate": {
+                "amount": "38",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "night",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "Doggy day care",
+              "activityRate": {
+                "amount": "38",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "day",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "30-minute dog walk",
+              "activityRate": {
+                "amount": "17",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            },
+            {
+              "activity": "60-minute dog walk",
+              "activityRate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "activityRateUnit": "walk",
+              "__typename": "OneTimePetCareRates"
+            }
+          ],
+          "bio": {
+            "experienceSummary": "I've grown up my whole life with dogs. I currently have 2 small dogs, a Maltese and a Maltese-Pomeranian mix. I have also lived with cats for a while. I've also taken care of neighbors' and friends' pets when they are away, including staying over at their residence and house/pet sitting",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "3658411",
+          "numberOfPetsComfortableWith": 0,
+          "otherQualities": [],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "17",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "17",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "petSpecies": {
+            "caresForAmphibians": false,
+            "caresForBirds": false,
+            "caresForCats": true,
+            "caresForDogs": true,
+            "caresForExoticPets": false,
+            "caresForFarmAnimals": true,
+            "caresForFish": true,
+            "caresForHorses": true,
+            "caresForMammals": true,
+            "caresForOtherPets": false,
+            "__typename": "PetCareSpeciesCaredFor"
+          },
+          "qualities": {
+            "isBondedAndInsured": false,
+            "isNappsCertified": false,
+            "isPSAMemberAndIsInsured": false,
+            "isRedCrossPetFirstAidCertified": false,
+            "doesNotSmoke": true,
+            "ownsTransportation": true,
+            "isCertifiedAndInsured": false,
+            "isExperiencedWithChallengingPets": false,
+            "isExperiencedWithSeniorPets": false,
+            "isExperiencedWithSpecialNeedsPets": false,
+            "isExperiencedWithYoungPets": false,
+            "__typename": "PetCareQualities"
+          },
+          "recurringRate": {
+            "hourlyRateFrom": {
+              "currencyCode": "USD",
+              "amount": "17",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "currencyCode": "USD",
+              "amount": "17",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "serviceRates": [
+            {
+              "rate": {
+                "amount": "43",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "SITTING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "38",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "OVER_NIGHT",
+              "subtype": "BOARDING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "38",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_DAY",
+              "subtype": "DAYCARE",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "17",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_30_MIN",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            },
+            {
+              "rate": {
+                "amount": "27",
+                "currencyCode": "USD",
+                "__typename": "Money"
+              },
+              "duration": "PER_HOUR",
+              "subtype": "WALKING",
+              "__typename": "PetCareSubtypeRate"
+            }
+          ],
+          "supportedServices": {
+            "administersMedicine": true,
+            "boardsOvernight": true,
+            "doesDailyFeeding": true,
+            "doesHouseSitting": true,
+            "doesPetDaycare": false,
+            "doesPetSitting": true,
+            "doesPetWalking": true,
+            "groomsAnimals": false,
+            "retrievesMail": true,
+            "trainsDogs": false,
+            "transportsPets": false,
+            "watersPlants": true,
+            "__typename": "PetCareServices"
+          },
+          "yearsOfExperience": 5,
+          "__typename": "PetCareCaregiverProfile"
+        },
+        "seniorCareCaregiverProfile": null,
+        "tutoringCaregiverProfile": {
+          "approvalStatus": "APPROVED",
+          "availabilityFrequency": "FULL_TIME",
+          "bio": {
+            "experienceSummary": "I graduated Cum Laude  and was a straight-A student throughout high school. I am able to tutor any subject except foreign languages, although I am currently working to learn Spanish myself and would be happy to work on that with kids. I specifically excel in paper-writing, algebra, and test-prep. In the past I struggled with time management, organization, and testing anxiety myself, and have utilized and learned a variety of methods to help, I'm happy to share my knowledge and help your kid succeed and overcome any learning challenges. Everybody learns differently and has different strengths, it's about uncovering what each individual needs to feel confident and smart.",
+            "title": null,
+            "__typename": "Bio"
+          },
+          "id": "3658403",
+          "otherGeneralSubjects": [
+            "Computers",
+            "English",
+            "Math",
+            "Science",
+            "Test Prep",
+            "Art",
+            "Dance",
+            "Music And Drama"
+          ],
+          "otherQualities": [
+            "I was on honor roll/high honors in high school. I received the award for excellence and achievement in mathematics when I graduated. I was awarded honors scholarships at multiple colleges including Pace University and Hunter College."
+          ],
+          "payRange": {
+            "hourlyRateFrom": {
+              "amount": "17",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "hourlyRateTo": {
+              "amount": "25",
+              "currencyCode": "USD",
+              "__typename": "Money"
+            },
+            "__typename": "PayRange"
+          },
+          "qualities": {
+            "additionalDetails": {
+              "doesNotSmoke": true,
+              "isComfortableWithPets": true,
+              "ownsTransportation": true,
+              "__typename": "TutoringAdditionalDetailsQualities"
+            },
+            "professionalSkills": {
+              "americanTutoringAssociationCertified": false,
+              "certifiedTeacher": false,
+              "__typename": "TutoringProfessionalSkillsQualities"
+            },
+            "__typename": "TutoringQualities"
+          },
+          "supportedServices": {
+            "tutorsInCenter": false,
+            "tutorsInStudentsHome": true,
+            "tutorsInTeachersHome": false,
+            "tutorsOnline": false,
+            "__typename": "TutoringServices"
+          },
+          "specificSubjects": [
+            "MATH_SUBJECT_ALGEBRA",
+            "MATH_SUBJECT_CALCULUS",
+            "MATH_SUBJECT_ELEMENTARY_SCHOOL_MATH",
+            "MATH_SUBJECT_GEOMETRY",
+            "MATH_SUBJECT_MIDDLE_SCHOOL_MATH",
+            "MATH_SUBJECT_PRE_CALCULUS",
+            "ENGLISH_SUBJECT_GRAMMAR",
+            "ENGLISH_SUBJECT_LITERATURE",
+            "ENGLISH_SUBJECT_READING",
+            "ENGLISH_SUBJECT_WRITING",
+            "SCIENCE_SUBJECT_BIOLOGY",
+            "SCIENCE_SUBJECT_CHEMISTRY",
+            "SCIENCE_SUBJECT_EARTH_SCIENCE",
+            "SCIENCE_SUBJECT_ELEMENTARY_SCIENCE",
+            "SCIENCE_SUBJECT_LIFE_SCIENCE",
+            "SCIENCE_SUBJECT_MIDDLE_SCHOOL",
+            "SCIENCE_SUBJECT_PHYSICS",
+            "SCIENCE_SUBJECT_PSYCHOLOGY",
+            "COMPUTERS_SUBJECT_MICROSOFT_EXCEL",
+            "COMPUTERS_SUBJECT_MACINTOSH",
+            "COMPUTERS_SUBJECT_MICROSOFT_WORD",
+            "COMPUTERS_SUBJECT_MICROSOFT_OFFICE",
+            "COMPUTERS_SUBJECT_MICROSOFT_POWERPOINT",
+            "COMPUTERS_SUBJECT_PHOTOSHOP",
+            "ART_SUBJECT_DRAWING",
+            "ART_SUBJECT_PAINTING",
+            "ART_SUBJECT_PHOTOGRAPHY",
+            "MUSIC_DRAMA_SUBJECT_DRAMA_THEATER",
+            "MUSIC_DRAMA_SUBJECT_GENERAL_MUSIC",
+            "MUSIC_DRAMA_SUBJECT_SINGING",
+            "DANCE_SUBJECT_BALLET",
+            "TEST_PREP_SUBJECT_3RD_GRADE_SOL",
+            "TEST_PREP_SUBJECT_5TH_GRADE_SOL",
+            "TEST_PREP_SUBJECT_ACT",
+            "TEST_PREP_SUBJECT_ELEMENTARY_STANDARD_TESTING",
+            "TEST_PREP_SUBJECT_GED",
+            "TEST_PREP_SUBJECT_MIDDLE_SCHOOL_SOL",
+            "TEST_PREP_SUBJECT_PRIVATE_SCHOOL_ENTRANCE",
+            "TEST_PREP_SUBJECT_PSAT_TEST",
+            "TEST_PREP_SUBJECT_SAT_MATH",
+            "TEST_PREP_SUBJECT_SAT_VERBAL"
+          ],
+          "otherSpecificSubject": "",
+          "yearsOfExperience": 3,
+          "__typename": "TutoringCaregiverProfile"
+        },
+        "houseKeepingCaregiverProfile": null,
+        "__typename": "CaregiverProfiles"
+      },
+      "providerStatus": "ACTIVE",
+      "recurringAvailability": null,
+      "responseRate": 0,
+      "responseTime": 0,
+      "signUpDate": "2011-12-20T02:21:00.000Z",
+      "yearsOfExperience": 10,
+      "nonPrimaryImages": [
+        "https://www.care.com/s/d/aws/photo/450X450/29/32036229_IDLeJiwEfvla3MPRNuEsV37kjA1XR00",
+        "https://www.care.com/s/d/aws/photo/1080X1080/64/39657464_IDLeJiwEfvla3MPRNuEsV37kjA1XR00"
+      ],
+      "__typename": "Caregiver"
+    }
+  }
+}

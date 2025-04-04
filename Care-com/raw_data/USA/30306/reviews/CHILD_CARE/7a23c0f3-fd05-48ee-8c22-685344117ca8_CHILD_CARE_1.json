@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2025-03-17T01:51:25.751Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Victoria was wonderful with my daughter.",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "826001ad-a111-53bf-8138-913cb4228bc4",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "7a23c0f3-fd05-48ee-8c22-685344117ca8",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/43/45709143_Rncj8cyYMcrHzyEuMtey1ajfx35DC00",
+            "publicMemberInfo": {
+              "firstName": "Sarah",
+              "lastInitial": "R",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2025-03-17T01:51:26.628Z",
+          "verifiedByCare": true,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "SENIOR_CARE",
+          "createTime": "2023-04-25T01:32:06.667Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Shekeira is a great companion and caregiver. She is punctuated, caring, compassionate and exceeded my expectations! I would highly recommend her for caregiving for your loved ones!",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "341c44b9-32c5-430c-85f9-9b2b90718e57",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "QUALITY_OF_CARE",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "PUNCTUALITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "COMMUNICATION",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "SKILL_SET",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "45baa196-09eb-4ee1-b461-4e14294da303",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/94/44576494_gPSUuhmshImvvQURVv7QwK7RLpPoA600",
+            "publicMemberInfo": {
+              "firstName": "Mary",
+              "lastInitial": "L",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2023-04-25T01:32:07.448Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

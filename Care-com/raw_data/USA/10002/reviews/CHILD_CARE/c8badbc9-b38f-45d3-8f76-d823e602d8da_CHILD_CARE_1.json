@@ -1,0 +1,130 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2025-02-09T19:55:46.000Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "0b158287-cb97-4786-8f82-6c7bf43bfaca",
+          "languageCode": "en-us",
+          "originalSource": "CZEN",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "DEPENDABILITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            },
+            {
+              "type": "PUNCTUALITY",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "c8badbc9-b38f-45d3-8f76-d823e602d8da",
+            "providerType": "INDIVIDUAL",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": null,
+            "publicMemberInfo": {
+              "firstName": "Kathryn",
+              "lastInitial": "F",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "SEEKER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": "CZEN",
+          "updateTime": "2025-02-10T12:58:02.000Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        },
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-12-12T17:34:17.568Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Blanca was knowledgeable, friendly, and very respectful of our space and time. We've already agreed to hire her again!",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "d8beec56-5609-50c2-9dc8-040bd55c3889",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "c8badbc9-b38f-45d3-8f76-d823e602d8da",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/45/46606545_nFiP644CUtlN2yqr9ZKoHvdJ9Aqw00",
+            "publicMemberInfo": {
+              "firstName": "Flourish",
+              "lastInitial": "K",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-12-12T17:34:18.484Z",
+          "verifiedByCare": true,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}

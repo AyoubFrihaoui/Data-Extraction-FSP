@@ -1,0 +1,70 @@
+{
+  "data": {
+    "reviewsByReviewee": {
+      "__typename": "ReviewsByRevieweePayload",
+      "nextPageToken": "",
+      "reviews": [
+        {
+          "attributes": [
+            {
+              "truthy": true,
+              "type": "HIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": true,
+              "type": "REHIRED",
+              "__typename": "ReviewInfoAttribute"
+            },
+            {
+              "truthy": false,
+              "type": "SAFETY_CONCERN",
+              "__typename": "ReviewInfoAttribute"
+            }
+          ],
+          "careType": "CHILD_CARE",
+          "createTime": "2024-06-02T12:21:37.132Z",
+          "deleteTime": null,
+          "description": {
+            "displayText": "",
+            "originalText": "Mulki was great! She was in time and helped my kids get through their morning with an irregular routine. One of them is potty training and has no accidents under her care (yay!) and the other loved the way she engaged their desires for play. When the booking ended they both asked about having her again. ",
+            "__typename": "ReviewInfoText"
+          },
+          "id": "06f268d6-c6c7-59a9-914d-09a0a167d1bf",
+          "languageCode": "en-us",
+          "originalSource": "MFE",
+          "ratings": [
+            {
+              "type": "OVERALL",
+              "value": 5,
+              "__typename": "ReviewInfoRating"
+            }
+          ],
+          "retort": null,
+          "reviewee": {
+            "id": "0295c109-7038-4f45-b2e0-fdfdfd3483e0",
+            "providerType": "COMPANY",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewee"
+          },
+          "reviewer": {
+            "imageURL": "https://www.care.com/s/d/aws/photo/135X135/82/37654882_JPp3JlEblQxThhTUcfhFduGmtYT7FK00",
+            "publicMemberInfo": {
+              "firstName": "Joseph",
+              "lastInitial": "P",
+              "__typename": "PublicMemberInfo"
+            },
+            "source": "CZEN",
+            "type": "PROVIDER",
+            "__typename": "ReviewInfoReviewer"
+          },
+          "status": "APPROVED",
+          "updateSource": null,
+          "updateTime": "2024-06-02T12:21:37.881Z",
+          "verifiedByCare": false,
+          "__typename": "ReviewInfo"
+        }
+      ]
+    }
+  }
+}
