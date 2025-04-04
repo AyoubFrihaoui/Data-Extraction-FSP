@@ -1,0 +1,110 @@
+{
+  "data": {
+    "searchProvidersChildCare": {
+      "sourceType": "PN",
+      "searchProvidersConnection": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null,
+          "__typename": "PageInfo"
+        },
+        "totalHits": 161,
+        "edges": [
+          {
+            "node": {
+              "member": {
+                "id": "37eb8645-a63a-4b08-a1a0-349faafb2abb",
+                "legacyId": "11516126",
+                "imageURL": "https://www.care.com/s/d/aws/photo/135X135/54/46242454_aLynyf72o0rieBQD3zxL5x3q2kQA30310",
+                "displayName": "Tahira S.",
+                "firstName": "Tahira",
+                "lastName": "S",
+                "address": {
+                  "city": "Decatur",
+                  "state": "GA",
+                  "zip": "30034",
+                  "__typename": "Address"
+                },
+                "primaryService": "CHILD_CARE",
+                "__typename": "Member"
+              },
+              "hasCareCheck": true,
+              "badges": [
+                "BACKGROUND_CHECK",
+                "VACCINATED"
+              ],
+              "yearsOfExperience": 10,
+              "profileDataSource": "bravo",
+              "hiredByCounts": {
+                "locality": null,
+                "__typename": "CaregiverHiredByCounts"
+              },
+              "hiredTimes": 0,
+              "revieweeMetrics": {
+                "metrics": {
+                  "totalReviews": 0,
+                  "averageRatings": [],
+                  "__typename": "RevieweeMetrics"
+                },
+                "__typename": "RevieweeMetricsPayload"
+              },
+              "profiles": {
+                "commonCaregiverProfile": {
+                  "id": "13914519",
+                  "bio": {
+                    "experienceSummary": "Hello! My name is Tahira and I am a current grad student looking to start nannying in NYC. Since 2014, I've worked as a babysitter, and summer camp counselor, at tourist attractions that were popular with children in Georgia, and in schools here in New York, both during the day and in after-school programs. I'm working to gain all of this experience so I can better serve children as a school psychologist in the future. I love the performing and visual arts and am passionate about encouraging children to be their most authentic selves while keeping them safe. I would love to care for your little ones on a one-time or recurring basis. Let's chat if you need some assistance!",
+                    "__typename": "Bio"
+                  },
+                  "__typename": "CommonCaregiverProfile"
+                },
+                "childCareCaregiverProfile": {
+                  "rates": [
+                    {
+                      "hourlyRate": {
+                        "amount": "20",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 1,
+                      "__typename": "OneTimeChildCareRates"
+                    },
+                    {
+                      "hourlyRate": {
+                        "amount": "24",
+                        "__typename": "Money"
+                      },
+                      "numberOfChildren": 2,
+                      "__typename": "OneTimeChildCareRates"
+                    }
+                  ],
+                  "recurringRate": {
+                    "hourlyRateFrom": {
+                      "amount": "20",
+                      "__typename": "Money"
+                    },
+                    "hourlyRateTo": {
+                      "amount": "28",
+                      "__typename": "Money"
+                    },
+                    "__typename": "PayRange"
+                  },
+                  "__typename": "ChildCareCaregiverProfile"
+                },
+                "petCareCaregiverProfile": null,
+                "houseKeepingCaregiverProfile": null,
+                "tutoringCaregiverProfile": null,
+                "seniorCareCaregiverProfile": null,
+                "__typename": "CaregiverProfiles"
+              },
+              "featuredReview": null,
+              "isFavorite": false,
+              "__typename": "Caregiver"
+            },
+            "__typename": "SearchProvidersEdge"
+          }
+        ],
+        "__typename": "SearchProvidersConnection"
+      },
+      "__typename": "SearchProvidersSuccess"
+    }
+  }
+}
