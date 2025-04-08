@@ -498,8 +498,8 @@ class YoopiesScraper:
 
         # Map care_type and sub_type to GraphQL variables/filters
         # This could be more sophisticated if needed
-        service_map = {"childcare": "CHILDCARE", "tutoring": "TUTORING"} # Add others as needed
-        type_filter_map = {"babysitting": "SITTER", "nanny": "NANNY"} # Add others as needed
+        service_map = {"childcare": "CHILDCARE", "seniorcare": "ELDERLYCARE", "housekeeping": "HOUSEKEEPING"} # Add others as needed
+        type_filter_map = {"babysitting": "SITTER", "carer": "CARER", "housekeeper": "HOUSEKEEPER"} # Add others as needed
 
         gql_service = service_map.get(self.care_type, "CHILDCARE") # Default if not mapped
         gql_type_filter = type_filter_map.get(self.sub_type, "SITTER") # Default if not mapped
@@ -862,7 +862,7 @@ if __name__ == "__main__":
 # Scrape function wrapper
 # ------------------------------------------------------------------------------
 
-def scrape():
+def scrape(care_type: str, sub_type: str):
     print("Running YoopiesScraper example...")
     # --- IMPORTANT: Replace with actual coordinates for the postal code ---
     # You might use a geocoding service/library (like geopy) or a predefined mapping
@@ -890,10 +890,10 @@ def scrape():
             city=TARGET_CITY,
             latitude=TARGET_LATITUDE,
             longitude=TARGET_LONGITUDE,
-            care_type="childcare",    # Corresponds to 'garde d'enfants'
-            sub_type="babysitting",   # Corresponds to 'baby-sitting'
+            care_type=care_type,    # Corresponds to 'garde d'enfants'
+            sub_type=sub_type,   # Corresponds to 'baby-sitting'
             search_page_size=100,     # Request 100 per page
-            search_radius_km= 9000,   # Set a larger search radius
+            search_radius_km= 50000,   # Set a larger search radius
             cookie=YOOPIES_COOKIE     # Pass the cookie
         )
         scraper.run()
