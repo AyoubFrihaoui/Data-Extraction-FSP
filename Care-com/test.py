@@ -1,766 +1,1546 @@
-# data_quality_check_hybrid_flattening.py
+# etl_load_postgres_normalized.py
 
+from decimal import Decimal, InvalidOperation
 import os
+import sys
 import json
 import logging
 from pathlib import Path
 import pandas as pd
-import pandera as pa
-from pandera import Column, DataFrameSchema
-import traceback # For detailed error logging
+from typing import List, Optional, Any, Dict
+import traceback
 
-# --- Configuration (ADJUST THESE PATHS AND VALUES) ---
-BASE_RAW_DIR = Path("raw_data")
-BASE_PREPROCESSED_DIR = Path("preprocessed_data")
-EXAMPLE_ZIP = "10002" # Or "07008" etc.
+from sqlalchemy import (
+    Numeric,
+    create_engine,
+    Column,
+    Integer,
+    String,
+    Float,
+    Boolean,
+    ForeignKey,
+    Text,
+    TIMESTAMP,
+    Time,
+    UniqueConstraint,
+    Index,
+    CheckConstraint,
+)
+from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker, Session
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+
+from config import CARE_COM_PASSWORD
+
+# ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
+# Database Connection String (replace with your actual credentials)
+# Format: postgresql://user:password@host:port/database
+
+DATABASE_URI = f"postgresql://postgres:{CARE_COM_PASSWORD}@localhost:5432/care-com_db2"  # Example for PostgreSQL
 COUNTRY = "USA"
-
-# --- Dynamic Path Construction ---
-COUNTRY_RAW_DIR = BASE_RAW_DIR / COUNTRY
-ZIP_RAW_DIR = COUNTRY_RAW_DIR / EXAMPLE_ZIP
-PROFILES_INPUT_DIR = ZIP_RAW_DIR / "all_profiles"
-REVIEWS_INPUT_DIR = ZIP_RAW_DIR / "reviews"
-
+BASE_PREPROCESSED_DIR = Path("preprocessed_data")
 COUNTRY_PREPROCESSED_DIR = BASE_PREPROCESSED_DIR / COUNTRY
-ZIP_PREPROCESSED_DIR = COUNTRY_PREPROCESSED_DIR / EXAMPLE_ZIP
-PROFILES_OUTPUT_DIR = ZIP_PREPROCESSED_DIR
-REVIEWS_OUTPUT_DIR = ZIP_PREPROCESSED_DIR # Saving reviews in the same zip folder
 
 # --- Logging Setup ---
-LOG_FILE = BASE_PREPROCESSED_DIR / f"data_quality_{COUNTRY}_{EXAMPLE_ZIP}.log"
-# Ensure log directory exists *before* setting up logging handlers
+LOG_FILE = BASE_PREPROCESSED_DIR / f"etl_load_postgres_{COUNTRY}_normalized.log"
 if not LOG_FILE.parent.exists():
     try:
         LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
         print(f"Created log directory: {LOG_FILE.parent}")
     except Exception as e:
         print(f"FATAL: Could not create log directory {LOG_FILE.parent}: {e}")
-        exit(1) # Exit if logging can't be set up
+        exit(1)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s",
-    handlers=[
-        logging.FileHandler(LOG_FILE, encoding='utf-8'),
-        logging.StreamHandler()
-    ]
+    handlers=[logging.FileHandler(LOG_FILE, encoding="utf-8"), logging.StreamHandler()],
 )
 logger = logging.getLogger(__name__)
 
-# --- Helper Functions ---
+# --- SQLAlchemy Setup ---
+Base = declarative_base()
+engine = None
+SessionLocal = None
+try:
+    engine = create_engine(DATABASE_URI, echo=False)
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    logger.info("Database engine created successfully.")
+except Exception as e:
+    logger.error(f"Failed to create database engine: {e}")
+    exit(1)
 
-def ensure_dir_exists(path: Path):
-    """Creates a directory if it doesn't exist."""
-    if not path.exists():
-        try:
-            path.mkdir(parents=True, exist_ok=True)
-            logger.info(f"Created directory: {path}")
-        except Exception as e:
-            logger.error(f"Failed to create directory {path}: {e}")
-            raise
 
-def load_json_files(directory: Path) -> list:
-    """Recursively loads JSON files (excluding 'metadata_') from a directory."""
-    json_objects = []
-    if not directory.is_dir():
-        logger.warning(f"Input directory not found or is not a directory: {directory}")
-        return json_objects
-    logger.info(f"Scanning for JSON files in: {directory}")
-    file_count = 0
-    for file_path in directory.rglob("*.json"):
-        file_count += 1
-        if file_path.name.startswith("metadata_"): continue
-        try:
-            with open(file_path, "r", encoding="utf-8") as f: data = json.load(f)
-            json_objects.append({"filename": str(file_path.relative_to(BASE_RAW_DIR)), "data": data})
-        except json.JSONDecodeError as e: logger.error(f"JSON Decode Error in file {file_path}: {e}")
-        except Exception as e: logger.error(f"Error reading file {file_path}: {e}")
-    logger.info(f"Scanned {file_count} files. Found {len(json_objects)} valid JSON files in {directory}.")
-    return json_objects
-
-def safe_json_dump(data, default="null"):
-    """Safely dumps data to JSON string, handling potential type errors."""
+# --- Helper Functions (Mostly unchanged) ---
+def parse_json_field(json_string: Optional[str], default_val: Any = None, dumps: bool = False) -> Any:
+    """Safely parse a JSON string from CSV, return default on error or if None/empty."""
+    if (
+        pd.isna(json_string)
+        or not isinstance(json_string, str)
+        or not json_string.strip()
+    ):
+        return default_val
     try:
-        return json.dumps(data)
-    except TypeError as e:
-        logger.warning(f"Could not serialize data to JSON: {e}. Data type: {type(data)}. Returning '{default}'.")
-        return default # Return valid JSON null or empty object/list string
+        if dumps:
+            json_string = json_string.replace("'", '"')
+            json_string =  json.dumps(json_string)  # Check if it's a valid JSON string
+        return json.loads(json_string)
+    except json.JSONDecodeError:
+        return default_val
 
-def flatten_main_profile(profile_data: dict, filename: str) -> dict:
-    """
-    Flattens the main caregiver profile fields explicitly.
-    Stores complex nested objects (profiles, backgroundChecks, etc.) as JSON strings.
-    """
-    flat_profile = {"source_filename": filename, "_flattening_error": False}
+
+def safe_int(value) -> Optional[int]:
+    if pd.isna(value):
+        return None
     try:
-        # Basic structure check
-        if not isinstance(profile_data.get("data", {}).get("getCaregiver"), dict):
-             logger.error(f"Unexpected JSON structure in {filename}. Missing 'data.getCaregiver'.")
-             flat_profile["_flattening_error"] = True
-             return flat_profile
+        return int(value)
+    except (ValueError, TypeError):
+        return None
 
-        caregiver = profile_data["data"]["getCaregiver"]
-        member = caregiver.get("member", {})
-        address = member.get("address", {}) if isinstance(member, dict) else {}
 
-        # --- Explicitly flatten member fields ---
-        flat_profile.update({
-            "profile_id": member.get("id"),
-            "member_firstName": member.get("firstName"),
-            "member_lastName": member.get("lastName"),
-            "member_gender": member.get("gender"),
-            "member_displayName": member.get("displayName"),
-            "member_email": member.get("email"),
-            "member_primaryService": member.get("primaryService"),
-            "member_hiResImageURL": member.get("hiResImageURL"),
-            "member_imageURL": member.get("imageURL"),
-            "member_address_city": address.get("city"),
-            "member_address_state": address.get("state"),
-            "member_address_zip": address.get("zip"),
-            "member_languages_json": safe_json_dump(member.get("languages", [])),
-            "member_legacyId": member.get("legacyId"),
-            "member_isPremium": member.get("isPremium", None) # Keep None for now
-        })
+def safe_float(value) -> Optional[float]:
+    if pd.isna(value):
+        return None
+    try:
+        return float(value)
+    except (ValueError, TypeError):
+        return None
 
-        # --- Explicitly flatten top-level caregiver fields ---
-        flat_profile.update({
-            "distanceFromSeekerInMiles": caregiver.get("distanceFromSeekerInMiles"),
-            "hasCareCheck": caregiver.get("hasCareCheck"),
-            "hasGrantedCriminalBGCAccess": caregiver.get("hasGrantedCriminalBGCAccess"),
-            "hasGrantedMvrBGCAccess": caregiver.get("hasGrantedMvrBGCAccess"),
-            "hasGrantedPremierBGCAccess": caregiver.get("hasGrantedPremierBGCAccess"),
-            "hiredTimes": caregiver.get("hiredTimes"),
-            "isFavorite": caregiver.get("isFavorite"),
-            "isMVREligible": caregiver.get("isMVREligible"),
-            "isVaccinated": caregiver.get("isVaccinated"),
-            "providerStatus": caregiver.get("providerStatus"),
-            "responseRate": caregiver.get("responseRate"),
-            "responseTime": caregiver.get("responseTime"),
-            "signUpDate": caregiver.get("signUpDate"),
-            "yearsOfExperience": caregiver.get("yearsOfExperience"),
-            # --- Store complex fields as JSON ---
-            "badges_json": safe_json_dump(caregiver.get("badges", [])),
-            "backgroundChecks_json": safe_json_dump(caregiver.get("backgroundChecks", [])),
-            "educationDegrees_json": safe_json_dump(caregiver.get("educationDegrees", [])),
-            "hiredByCounts_json": safe_json_dump(caregiver.get("hiredByCounts", {})),
-            "placeInfo_json": safe_json_dump(caregiver.get("placeInfo", {})),
-            "profiles_json": safe_json_dump(caregiver.get("profiles", {})), # Key for nested processing
-            "recurringAvailability_json": safe_json_dump(caregiver.get("recurringAvailability", {})),
-            "nonPrimaryImages_json": safe_json_dump(caregiver.get("nonPrimaryImages", [])),
-            "continuousBackgroundCheck_json": safe_json_dump(caregiver.get("continuousBackgroundCheck", {}))
-        })
 
-        # --- Type Conversion (using pd.NA for missing/failed) ---
-        bool_fields = [k for k in flat_profile if k.startswith('is') or k.startswith('has')]
-        for field in bool_fields:
-            val = flat_profile.get(field)
-            if val is None: flat_profile[field] = pd.NA
-            else: 
-                try: flat_profile[field] = bool(val)
-                except: flat_profile[field] = pd.NA
+def safe_decimal(value, default=None) -> Optional[Decimal]:
+    """Convert value to Decimal, returning default (None) on failure or if NaN/None."""
+    if pd.isna(value):
+        return default
+    try:
+        # Convert to string first for robustness against floats/ints in source
+        return Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError):  # Catch potential errors
+        logger.warning(
+            f"Could not convert '{value}' (type: {type(value)}) to Decimal. Returning default."
+        )
+        return default
 
-        numeric_fields = ["hiredTimes", "responseRate", "responseTime", "yearsOfExperience", "distanceFromSeekerInMiles"]
-        for field in numeric_fields:
-             val = flat_profile.get(field)
-             if val is None: flat_profile[field] = pd.NA
-             else:
-                try: flat_profile[field] = pd.to_numeric(val) if str(val).strip() != "" else pd.NA
-                except (ValueError, TypeError): flat_profile[field] = pd.NA
 
-        if flat_profile["signUpDate"]:
-             try: flat_profile["signUpDate"] = pd.to_datetime(flat_profile["signUpDate"], errors='coerce')
-             except Exception: flat_profile["signUpDate"] = pd.NaT
-        else: flat_profile["signUpDate"] = pd.NaT
+def safe_bool(value) -> Optional[bool]:
+    if pd.isna(value):
+        return None
+    if isinstance(value, str):
+        if value.lower() in ["true", "t", "1", "yes", "y"]:
+            return True
+        if value.lower() in ["false", "f", "0", "no", "n"]:
+            return False
+    try:
+        return bool(value)
+    except (ValueError, TypeError):
+        return None
 
-        # Check profile_id after potential member issues
-        if pd.isna(flat_profile["profile_id"]):
-             logger.warning(f"Missing profile_id for record from {filename}.")
 
-        return flat_profile
+def safe_timestamp(value) -> Optional[pd.Timestamp]:
+    if pd.isna(value):
+        return None
+        ts = pd.to_datetime(value, errors="coerce")
+        return ts if pd.notna(ts) else None
+
+
+def safe_time(
+    value,
+) -> Optional[pd.Timestamp]:  # Using pd.Timestamp for parsing flexibility
+    """Convert HH:MM:SS string to datetime.time object, return None on failure."""
+    if pd.isna(value) or not isinstance(value, str):
+        return None
+    try:
+        # Use pandas to parse, handling potential errors
+        # Use a dummy date part as pd.to_datetime needs it, then extract time
+        dt_obj = pd.to_datetime(
+            f"1900-01-01 {value}", format="%Y-%m-%d %H:%M:%S", errors="coerce"
+        )
+        # Return the time component if parsing succeeded
+        return dt_obj.time() if pd.notna(dt_obj) else None
+    except ValueError:
+        logger.warning(f"Could not parse time string: {value}")
+        return None
     except Exception as e:
-        logger.error(f"Critical error flattening main profile in file {filename}: {e}\n{traceback.format_exc()}")
-        flat_profile["_flattening_error"] = True
-        return flat_profile
-
-def extract_and_flatten_nested_profiles(main_profile_row: pd.Series) -> list:
-    """
-    Extracts sub-profiles. Flattens known simple fields explicitly.
-    Dynamically flattens known nested dicts (qualities, services, etc.).
-    Stores known lists as JSON.
-    """
-    nested_rows = []
-    profile_id = main_profile_row.get("profile_id")
-    filename = main_profile_row.get("source_filename", "unknown")
-    profiles_str = main_profile_row.get("profiles_json", "{}") # Key from flatten_main_profile
-
-    if pd.isna(profile_id) or profile_id is None:
-        # logger.warning(f"Skipping nested: missing profile_id in row from {filename}") # Too verbose
-        return nested_rows
-
-    try:
-        profiles_obj = json.loads(profiles_str) if isinstance(profiles_str, str) and profiles_str else {}
-        if not isinstance(profiles_obj, dict):
-             logger.warning(f"Parsed 'profiles_json' is not a dict for profile_id {profile_id} from {filename}. Skipping.")
-             return nested_rows
-    except Exception as e:
-        logger.error(f"Error parsing nested profiles JSON for profile_id {profile_id} from {filename}: {e}. JSON: '{str(profiles_str)[:100]}...'")
-        return nested_rows
-
-    service_ids = profiles_obj.get("serviceIds", []) # List
-    # Known sub-profile keys
-    sub_profile_keys = [
-        "childCareCaregiverProfile", "commonCaregiverProfile", "petCareCaregiverProfile",
-        "seniorCareCaregiverProfile", "tutoringCaregiverProfile", "houseKeepingCaregiverProfile"
-    ]
-    # Known nested dictionaries within sub-profiles that need dynamic inner flattening
-    dynamic_inner_dicts = ['bio', 'payRange', 'recurringRate', 'qualities', 'supportedServices', 'merchandizedJobInterests']
-    # Known lists within sub-profiles to store as JSON
-    json_lists = ['ageGroups', 'otherQualities', 'rates', 'schedule', 'educationDetailsText']
+        logger.error(f"Unexpected error parsing time '{value}': {e}")
+        return None
 
 
-    for sub_profile_type in sub_profile_keys:
-        sub_profile = profiles_obj.get(sub_profile_type)
-        if isinstance(sub_profile, dict): # Process only if it's a dictionary
-            try:
-                # Base info
-                flat_sub = {
-                    "profile_id": profile_id,
-                    "sub_profile_type": sub_profile_type,
-                    "service_ids_json": safe_json_dump(service_ids)
-                }
-                prefix = sub_profile_type + "_" # Prefix for column names
+# --- SQLAlchemy Models (Fully Normalized) ---
 
-                # Iterate through fields in the sub-profile
-                for field, value in sub_profile.items():
-                    col_name_base = prefix + field
-                    if field == "__typename": continue # Skip metadata
 
-                    # 1. Handle known dictionaries needing dynamic inner flattening
-                    if field in dynamic_inner_dicts and isinstance(value, dict):
-                        for inner_key, inner_val in value.items():
-                            if inner_key == "__typename": continue
-                            # Create column like: houseKeepingCaregiverProfile_qualities_doesNotSmoke
-                            flat_sub[f"{col_name_base}_{inner_key}"] = inner_val
-                    # 2. Handle known lists to store as JSON
-                    elif field in json_lists and isinstance(value, list):
-                        flat_sub[f"{col_name_base}_json"] = safe_json_dump(value)
-                    # 3. Handle other nested lists/dicts (store as JSON as fallback)
-                    elif isinstance(value, list):
-                         logger.debug(f"Storing unhandled list field '{field}' as JSON for {sub_profile_type}, profile {profile_id}")
-                         flat_sub[f"{col_name_base}_json"] = safe_json_dump(value)
-                    elif isinstance(value, dict):
-                         logger.debug(f"Storing unhandled dict field '{field}' as JSON for {sub_profile_type}, profile {profile_id}")
-                         flat_sub[f"{col_name_base}_json"] = safe_json_dump(value)
-                    # 4. Handle simple, explicitly known fields
+# --- Main Profile & Related ---
+class Profile(Base):
+    __tablename__ = "profiles"
+    profile_id = Column(String, primary_key=True)
+    zip_code = Column(String, nullable=True, index=True)
+    source_filename = Column(Text, nullable=True)
+    first_name = Column(String, nullable=True)
+    last_name = Column(String, nullable=True)
+    gender = Column(String, nullable=True)
+    display_name = Column(String, nullable=True)
+    email = Column(String, nullable=True)
+    primary_service = Column(String, nullable=True, index=True)
+    hi_res_image_url = Column(Text, nullable=True)
+    image_url = Column(Text, nullable=True)
+    address_city = Column(String, nullable=True)
+    address_state = Column(String(10), nullable=True)
+    address_zip = Column(String(20), nullable=True)
+    legacy_id = Column(String, nullable=True)
+    is_premium = Column(Boolean, nullable=True)
+    distance_from_seeker = Column(Float, nullable=True)
+    has_care_check = Column(Boolean, nullable=True)
+    has_granted_criminal_bgc_access = Column(Boolean, nullable=True)
+    has_granted_mvr_bgc_access = Column(Boolean, nullable=True)
+    has_granted_premier_bgc_access = Column(Boolean, nullable=True)
+    hired_times = Column(Integer, nullable=True)
+    is_favorite = Column(Boolean, nullable=True)
+    is_mvr_eligible = Column(Boolean, nullable=True)
+    is_vaccinated = Column(Boolean, nullable=True)
+    provider_status = Column(String, nullable=True)
+    response_rate = Column(Integer, nullable=True)
+    response_time = Column(Integer, nullable=True)
+    sign_up_date = Column(TIMESTAMP(timezone=False), nullable=True)
+    years_of_experience = Column(Integer, nullable=True)
+    # Store complex objects as JSONB if not fully normalized below
+    hired_by_counts_json = Column(JSONB, nullable=True)
+    place_info_json = Column(JSONB, nullable=True)
+    recurring_availability_json = Column(JSONB, nullable=True)
+    continuous_background_check_json = Column(JSONB, nullable=True)
+    # Relationships
+    offered_services = relationship(
+        "ProfileOfferedService",
+        back_populates="profile",
+        cascade="all, delete-orphan",  # Delete offered services if profile is deleted
+        lazy="selectin",
+    )
+    languages = relationship(
+        "ProfileLanguage",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    availability_blocks = relationship(
+        "ProfileAvailability",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    badges = relationship(
+        "ProfileBadge",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    background_checks = relationship(
+        "ProfileBackgroundCheck",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    education_degrees = relationship(
+        "ProfileEducationDegree",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    non_primary_images = relationship(
+        "ProfileNonPrimaryImage",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    nested_childcare = relationship(
+        "NestedChildcareProfile",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )  # One-to-one
+    nested_common = relationship(
+        "NestedCommonProfile",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    nested_petcare = relationship(
+        "NestedPetcareProfile",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    nested_seniorcare = relationship(
+        "NestedSeniorcareProfile",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    nested_tutoring = relationship(
+        "NestedTutoringProfile",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    nested_housekeeping = relationship(
+        "NestedHousekeepingProfile",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    reviews = relationship(
+        "Review",
+        back_populates="profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class ProfileAvailability(Base):
+    __tablename__ = "profile_availability"
+    id = Column(
+        Integer, primary_key=True
+    )  # Synthetic primary key for the availability record itself
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id"), nullable=False, index=True
+    )
+    day_of_week = Column(String, nullable=False)  # e.g., 'monday', 'tuesday'
+    start_time = Column(Time, nullable=True)  # Store as TIME type
+    end_time = Column(Time, nullable=True)  # Store as TIME type
+
+    profile = relationship("Profile", back_populates="availability_blocks")
+
+    # Optional: Index for faster lookup by profile and day
+    __table_args__ = (Index("ix_profile_avail_day", "profile_id", "day_of_week"),)
+
+
+class ProfileOfferedService(Base):
+    __tablename__ = "profile_offered_services"
+    # Composite primary key ensures a profile doesn't list the same service twice
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id", ondelete="CASCADE"), primary_key=True
+    )
+    service_name = Column(String, primary_key=True)  # e.g., CHILD_CARE, SENIOR_CARE
+
+    profile = relationship(
+        "Profile", back_populates="offered_services"
+    )  # Correct back_populates
+
+    # Optional index for lookups based on service name
+    __table_args__ = (Index("ix_profile_offered_service_name", "service_name"),)
+
+
+class ProfileLanguage(Base):
+    __tablename__ = "profile_languages"
+    profile_id = Column(String, ForeignKey("profiles.profile_id"), primary_key=True)
+    language = Column(String, primary_key=True)
+    profile = relationship("Profile", back_populates="languages")
+
+
+class ProfileBadge(Base):
+    __tablename__ = "profile_badges"
+    profile_id = Column(String, ForeignKey("profiles.profile_id"), primary_key=True)
+    badge = Column(String, primary_key=True)
+    profile = relationship("Profile", back_populates="badges")
+
+
+class ProfileBackgroundCheck(Base):
+    __tablename__ = "profile_background_checks"
+    id = Column(Integer, primary_key=True)
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id"), nullable=False, index=True
+    )
+    check_name = Column(String, nullable=True)
+    completed_at = Column(TIMESTAMP(timezone=False), nullable=True)
+    profile = relationship("Profile", back_populates="background_checks")
+    __table_args__ = (UniqueConstraint("profile_id", "check_name", "completed_at"),)
+
+
+class ProfileEducationDegree(Base):
+    __tablename__ = "profile_education_degrees"
+    id = Column(Integer, primary_key=True)
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id"), nullable=False, index=True
+    )
+    currently_attending = Column(Boolean, nullable=True)
+    degree_year = Column(Integer, nullable=True)
+    education_level = Column(String, nullable=True)
+    school_name = Column(Text, nullable=True)
+    details_text_json = Column(JSONB, nullable=True)
+    profile = relationship("Profile", back_populates="education_degrees")
+
+
+class ProfileNonPrimaryImage(Base):
+    __tablename__ = "profile_non_primary_images"
+    id = Column(Integer, primary_key=True)
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id"), nullable=False, index=True
+    )
+    image_url = Column(Text, nullable=False)
+    profile = relationship("Profile", back_populates="non_primary_images")
+    __table_args__ = (UniqueConstraint("profile_id", "image_url"),)
+
+
+# --- Nested Profile Base (Common Fields) ---
+class NestedProfileBase:  # Not a table, just for common fields mixin (optional)
+    id = Column(Integer, primary_key=True)  # Synthetic PK for each nested table
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id"), nullable=False, unique=True
+    )  # One-to-one link
+    zip_code = Column(String, nullable=True)
+    sub_id = Column(String, nullable=True)  # ID from sub-profile source JSON
+    approval_status = Column(String, nullable=True)
+    availability_frequency = Column(String, nullable=True)
+    years_of_experience = Column(Integer, nullable=True)
+    # Common complex fields stored as JSONB (can be normalized further if needed)
+    bio = Column(String, nullable=True)
+    payrange_from_amount =  Column(String, nullable=True)  #Column(Numeric(10, 2), nullable=True)
+    payrange_from_currency = Column(String, nullable=True)
+    payrange_to_amount = Column(String, nullable=True)
+    payrange_to_currency = Column(String, nullable=True)
+    # pay_range_json = Column(JSONB, nullable=True)
+    recurring_rate_json = Column(JSONB, nullable=True)
+    service_ids_json = Column(JSONB, nullable=True)  # List of parent service IDs
+
+
+# --- Specific Nested Profile Tables & Related ---
+
+
+# Nested Common Profile
+class NestedCommonProfile(NestedProfileBase, Base):
+    __tablename__ = "nested_common_profiles"
+    repeat_clients_count = Column(Integer, nullable=True)
+    profile = relationship("Profile", back_populates="nested_common")
+    merchandized_job_interests = relationship(
+        "NestedCommonInterest",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class NestedCommonInterest(Base):
+    __tablename__ = "nested_common_interests"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_common_profiles.id"), primary_key=True
+    )
+    interest_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedCommonProfile", back_populates="merchandized_job_interests"
+    )
+
+
+# Nested Childcare Profile
+class NestedChildcareProfile(NestedProfileBase, Base):
+    __tablename__ = "nested_childcare_profiles"
+    child_staff_ratio = Column(Float, nullable=True)
+    max_age_months = Column(Integer, nullable=True)
+    min_age_months = Column(Integer, nullable=True)
+    number_of_children = Column(Integer, nullable=True)
+    rates_json = Column(JSONB, nullable=True)
+    age_groups_json = Column(JSONB, nullable=True)
+    other_qualities_json = Column(
+        JSONB, nullable=True
+    )  # Store less structured lists as JSONB
+    profile = relationship("Profile", back_populates="nested_childcare")
+    qualities = relationship(
+        "NestedChildcareQuality",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    supported_services = relationship(
+        "NestedChildcareService",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    # ADDED Relationship:
+    age_groups = relationship(
+        "NestedChildcareAgeGroup",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",  # Delete age groups if profile is deleted
+        lazy="selectin",
+    )
+
+
+class NestedChildcareAgeGroup(Base):
+    __tablename__ = "nested_childcare_age_groups"
+    # Composite primary key: ensures a profile doesn't have the same age group twice
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_childcare_profiles.id"), primary_key=True
+    )
+    age_group = Column(String, primary_key=True)  # e.g., NEWBORN, TODDLER
+
+    nested_profile = relationship("NestedChildcareProfile", back_populates="age_groups")
+
+
+class NestedChildcareQuality(Base):
+    __tablename__ = "nested_childcare_qualities"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_childcare_profiles.id"), primary_key=True
+    )
+    quality_name = Column(String, primary_key=True)
+    nested_profile = relationship("NestedChildcareProfile", back_populates="qualities")
+
+
+class NestedChildcareService(Base):
+    __tablename__ = "nested_childcare_services"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_childcare_profiles.id"), primary_key=True
+    )
+    service_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedChildcareProfile", back_populates="supported_services"
+    )
+
+
+# Nested Housekeeping Profile
+class NestedHousekeepingProfile(NestedProfileBase, Base):
+    __tablename__ = "nested_housekeeping_profiles"
+    distance_willing_to_travel = Column(Integer, nullable=True)
+    schedule_json = Column(JSONB, nullable=True)
+    other_qualities_json = Column(JSONB, nullable=True)
+    profile = relationship("Profile", back_populates="nested_housekeeping")
+    qualities = relationship(
+        "NestedHousekeepingQuality",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    supported_services = relationship(
+        "NestedHousekeepingService",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class NestedHousekeepingQuality(Base):
+    __tablename__ = "nested_housekeeping_qualities"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_housekeeping_profiles.id"), primary_key=True
+    )
+    quality_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedHousekeepingProfile", back_populates="qualities"
+    )
+
+
+class NestedHousekeepingService(Base):
+    __tablename__ = "nested_housekeeping_services"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_housekeeping_profiles.id"), primary_key=True
+    )
+    service_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedHousekeepingProfile", back_populates="supported_services"
+    )
+
+
+# Nested Petcare Profile
+class NestedPetcareProfile(NestedProfileBase, Base):
+    __tablename__ = "nested_petcare_profiles"
+    number_of_pets_comfortable_with = Column(Integer, nullable=True)
+    rates_json = Column(JSONB, nullable=True)
+    other_qualities_json = Column(JSONB, nullable=True)
+    # pet_species_json = Column(JSONB, nullable=True) # Delete species
+    profile = relationship("Profile", back_populates="nested_petcare")
+    service_rates_normalized = relationship(
+        "NestedPetcareServiceRate",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+        order_by="NestedPetcareServiceRate.subtype",  # Optional ordering
+    )
+    species_cared_for = relationship(
+        "NestedPetcareSpecies",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",  # Delete species if petcare profile is deleted
+        lazy="selectin",
+    )
+    activity_rates = relationship(
+        "NestedPetcareActivityRate",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    qualities = relationship(
+        "NestedPetcareQuality",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    supported_services = relationship(
+        "NestedPetcareService",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class NestedPetcareSpecies(Base):
+    __tablename__ = "nested_petcare_species"
+    # Composite primary key: one petcare profile can care for a species only once
+    nested_profile_id = Column(
+        Integer,
+        ForeignKey("nested_petcare_profiles.id", ondelete="CASCADE"),
+        primary_key=True,
+    )
+    species_name = Column(String, primary_key=True)  # e.g., caresForDogs, caresForCats
+
+    nested_profile = relationship(
+        "NestedPetcareProfile", back_populates="species_cared_for"
+    )
+
+    # Optional: Add an index if you frequently query species across profiles
+    # __table_args__ = (Index('ix_petcare_species_name', 'species_name'), )
+
+
+class NestedPetcareActivityRate(Base):
+    __tablename__ = "nested_petcare_activity_rates"
+    id = Column(Integer, primary_key=True)
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_petcare_profiles.id"), nullable=False, index=True
+    )
+    activity = Column(
+        String, nullable=True
+    )  # e.g., Sitting, Boarding, 30-minute dog walk
+    amount = Column(Numeric(10, 2), nullable=True)
+    currency = Column(String(3), nullable=True)
+    unit = Column(String, nullable=True)  # e.g., night, day, walk
+    nested_profile = relationship(
+        "NestedPetcareProfile", back_populates="activity_rates"
+    )
+    __table_args__ = (
+        UniqueConstraint(
+            "nested_profile_id", "activity", "unit", name="uq_petcare_activity_rate"
+        ),
+    )
+
+
+class NestedPetcareServiceRate(Base):
+    __tablename__ = "nested_petcare_service_rates"
+    id = Column(Integer, primary_key=True)  # Synthetic PK for the rate record
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_petcare_profiles.id"), nullable=False, index=True
+    )
+    subtype = Column(String, nullable=True)  # e.g., SITTING, BOARDING, WALKING, DAYCARE
+    duration = Column(
+        String, nullable=True
+    )  # e.g., OVER_NIGHT, PER_DAY, PER_30_MIN, PER_HOUR
+    amount = Column(Numeric(10, 2), nullable=True)
+    currency = Column(String(3), nullable=True)
+
+    nested_profile = relationship(
+        "NestedPetcareProfile", back_populates="service_rates_normalized"
+    )  # Use a distinct name
+
+    # Optional: Constraint to ensure combination is unique per profile if needed
+    # __table_args__ = (UniqueConstraint('nested_profile_id', 'subtype', 'duration', name='uq_petcare_service_rate'), )
+
+
+class NestedPetcareQuality(Base):
+    __tablename__ = "nested_petcare_qualities"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_petcare_profiles.id"), primary_key=True
+    )
+    quality_name = Column(String, primary_key=True)
+    nested_profile = relationship("NestedPetcareProfile", back_populates="qualities")
+
+
+class NestedPetcareService(Base):
+    __tablename__ = "nested_petcare_services"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_petcare_profiles.id"), primary_key=True
+    )
+    service_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedPetcareProfile", back_populates="supported_services"
+    )
+
+
+# Nested Seniorcare Profile
+class NestedSeniorcareProfile(NestedProfileBase, Base):
+    __tablename__ = "nested_seniorcare_profiles"
+    other_qualities_json = Column(JSONB, nullable=True)
+    profile = relationship("Profile", back_populates="nested_seniorcare")
+    qualities = relationship(
+        "NestedSeniorcareQuality",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    supported_services = relationship(
+        "NestedSeniorcareService",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class NestedSeniorcareQuality(Base):
+    __tablename__ = "nested_seniorcare_qualities"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_seniorcare_profiles.id"), primary_key=True
+    )
+    quality_name = Column(String, primary_key=True)
+    nested_profile = relationship("NestedSeniorcareProfile", back_populates="qualities")
+
+
+class NestedSeniorcareService(Base):
+    __tablename__ = "nested_seniorcare_services"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_seniorcare_profiles.id"), primary_key=True
+    )
+    service_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedSeniorcareProfile", back_populates="supported_services"
+    )
+
+
+# Nested Tutoring Profile
+class NestedTutoringProfile(NestedProfileBase, Base):
+    __tablename__ = "nested_tutoring_profiles"
+    other_specific_subject = Column(Text, nullable=True)
+    other_general_subjects_json = Column(JSONB, nullable=True)
+    other_qualities_json = Column(JSONB, nullable=True)
+    specific_subjects_json = Column(JSONB, nullable=True)
+    profile = relationship("Profile", back_populates="nested_tutoring")
+    qualities = relationship(
+        "NestedTutoringQuality",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )  # Assuming qualities is dict of bools
+    supported_services = relationship(
+        "NestedTutoringService",
+        back_populates="nested_profile",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class NestedTutoringQuality(Base):
+    __tablename__ = "nested_tutoring_qualities"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_tutoring_profiles.id"), primary_key=True
+    )
+    quality_name = Column(String, primary_key=True)
+    nested_profile = relationship("NestedTutoringProfile", back_populates="qualities")
+
+
+class NestedTutoringService(Base):
+    __tablename__ = "nested_tutoring_services"
+    nested_profile_id = Column(
+        Integer, ForeignKey("nested_tutoring_profiles.id"), primary_key=True
+    )
+    service_name = Column(String, primary_key=True)
+    nested_profile = relationship(
+        "NestedTutoringProfile", back_populates="supported_services"
+    )
+
+
+# --- Review & Related ---
+class Review(Base):
+    __tablename__ = "reviews"
+    review_id = Column(String, primary_key=True)
+    profile_id = Column(
+        String, ForeignKey("profiles.profile_id"), nullable=True, index=True
+    )
+    zip_code = Column(String, nullable=True, index=True)
+    source_filename = Column(Text, nullable=True)
+    care_type = Column(String, nullable=True)
+    create_time = Column(TIMESTAMP(timezone=False), nullable=True)
+    delete_time = Column(TIMESTAMP(timezone=False), nullable=True)
+    description_display_text = Column(Text, nullable=True)
+    description_original_text = Column(Text, nullable=True)
+    language_code = Column(String, nullable=True)
+    original_source = Column(String, nullable=True)
+    status = Column(String, nullable=True)
+    update_source = Column(String, nullable=True)
+    update_time = Column(TIMESTAMP(timezone=False), nullable=True)
+    verified_by_care = Column(Boolean, nullable=True)
+    reviewee_provider_type = Column(String, nullable=True)
+    reviewee_type = Column(String, nullable=True)
+    reviewer_image_url = Column(Text, nullable=True)
+    reviewer_first_name = Column(String, nullable=True)
+    reviewer_last_initial = Column(String, nullable=True)
+    reviewer_source = Column(String, nullable=True)
+    reviewer_type = Column(String, nullable=True)
+    retort_json = Column(JSONB, nullable=True)
+    profile = relationship("Profile", back_populates="reviews")
+    ratings = relationship(
+        "ReviewRating",
+        back_populates="review",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    attributes = relationship(
+        "ReviewAttribute",
+        back_populates="review",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
+class ReviewRating(Base):
+    __tablename__ = "review_ratings"
+    review_id = Column(String, ForeignKey("reviews.review_id"), primary_key=True)
+    rating_type = Column(String, primary_key=True)
+    rating_value = Column(Integer, nullable=True)
+    review = relationship("Review", back_populates="ratings")
+
+
+class ReviewAttribute(Base):
+    __tablename__ = "review_attributes"
+    review_id = Column(String, ForeignKey("reviews.review_id"), primary_key=True)
+    attribute_type = Column(String, primary_key=True)
+    attribute_value = Column(Boolean, nullable=True)
+    review = relationship("Review", back_populates="attributes")
+
+
+# --- Mapping from sub_profile_type string to Model Class & Link Tables ---
+# This is crucial for dynamically loading into the correct table
+NESTED_MODEL_MAP = {
+    "childCareCaregiverProfile": {
+        "model": NestedChildcareProfile,
+        "qualities_link": NestedChildcareQuality,
+        "services_link": NestedChildcareService,
+    },
+    "commonCaregiverProfile": {
+        "model": NestedCommonProfile,
+        "interests_link": NestedCommonInterest,  # Special name for merchandizedJobInterests
+    },
+    "houseKeepingCaregiverProfile": {
+        "model": NestedHousekeepingProfile,
+        "qualities_link": NestedHousekeepingQuality,
+        "services_link": NestedHousekeepingService,
+    },
+    "petCareCaregiverProfile": {
+        "model": NestedPetcareProfile,
+        "qualities_link": NestedPetcareQuality,
+        "services_link": NestedPetcareService,
+    },
+    "seniorCareCaregiverProfile": {
+        "model": NestedSeniorcareProfile,
+        "qualities_link": NestedSeniorcareQuality,
+        "services_link": NestedSeniorcareService,
+    },
+    "tutoringCaregiverProfile": {
+        "model": NestedTutoringProfile,
+        "qualities_link": NestedTutoringQuality,  # Assumes qualities dict is flags
+        "services_link": NestedTutoringService,
+    },
+}
+
+
+# --- ETL Data Loading Functions ---
+
+
+def load_profiles(session: Session, df: pd.DataFrame):
+    """Loads main profile data and related normalized tables."""
+    logger.info(f"Starting to load {len(df)} main profile records...")
+    loaded_count = 0
+    skipped_count = 0
+    for idx, row in df.iterrows():
+        profile_id = row.get("profile_id")
+        zip_code = row.get("zip_code")
+        if pd.isna(profile_id):
+            logger.warning(f"Skip profile {idx} missing ID.")
+            skipped_count += 1
+            continue
+        try:
+            profile = (
+                session.query(Profile).filter_by(profile_id=profile_id).one_or_none()
+            )
+            if not profile:
+                profile = Profile(profile_id=profile_id)
+                session.add(profile)
+            # Populate simple fields
+            profile.zip_code = zip_code
+            profile.source_filename = row.get("source_filename")
+            profile.first_name = row.get("member_firstName")
+            profile.last_name = row.get("member_lastName")
+            profile.gender = row.get("member_gender")
+            profile.display_name = row.get("member_displayName")
+            profile.email = row.get("member_email")
+            profile.primary_service = row.get("member_primaryService")
+            profile.hi_res_image_url = row.get("member_hiResImageURL")
+            profile.image_url = row.get("member_imageURL")
+            profile.address_city = row.get("member_address_city")
+            profile.address_state = row.get("member_address_state")
+            profile.address_zip = row.get("member_address_zip")
+            profile.legacy_id = row.get("member_legacyId")
+            profile.is_premium = safe_bool(row.get("member_isPremium"))
+            profile.distance_from_seeker = safe_float(
+                row.get("distanceFromSeekerInMiles")
+            )
+            profile.has_care_check = safe_bool(row.get("hasCareCheck"))
+            profile.has_granted_criminal_bgc_access = safe_bool(
+                row.get("hasGrantedCriminalBGCAccess")
+            )
+            profile.has_granted_mvr_bgc_access = safe_bool(
+                row.get("hasGrantedMvrBGCAccess")
+            )
+            profile.has_granted_premier_bgc_access = safe_bool(
+                row.get("hasGrantedPremierBGCAccess")
+            )
+            profile.hired_times = safe_int(row.get("hiredTimes"))
+            profile.is_favorite = safe_bool(row.get("isFavorite"))
+            profile.is_mvr_eligible = safe_bool(row.get("isMVREligible"))
+            profile.is_vaccinated = safe_bool(row.get("isVaccinated"))
+            profile.provider_status = row.get("providerStatus")
+            profile.response_rate = safe_int(row.get("responseRate"))
+            profile.response_time = safe_int(row.get("responseTime"))
+            profile.sign_up_date = safe_timestamp(row.get("signUpDate"))
+            profile.years_of_experience = safe_int(row.get("yearsOfExperience"))
+            # JSONB fields
+            profile.hired_by_counts_json = parse_json_field(
+                row.get("hiredByCounts_json"), {}
+            )
+            profile.place_info_json = parse_json_field(row.get("placeInfo_json"), None)
+            profile.continuous_background_check_json = parse_json_field(
+                row.get("continuousBackgroundCheck_json"), {}
+            )
+
+            # Handle Relationships
+            languages = parse_json_field(row.get("member_languages_json"), [])
+            profile.languages = [
+                ProfileLanguage(language=str(lang)) for lang in languages if lang
+            ]
+            badges = parse_json_field(row.get("badges_json"), [])
+            profile.badges = [
+                ProfileBadge(badge=str(badge)) for badge in badges if badge
+            ]
+            checks = parse_json_field(row.get("backgroundChecks_json"), [])
+            profile.background_checks = [
+                ProfileBackgroundCheck(
+                    check_name=c.get("backgroundCheckName"),
+                    completed_at=safe_timestamp(c.get("whenCompleted")),
+                )
+                for c in checks
+                if isinstance(c, dict)
+            ]
+            degrees = parse_json_field(row.get("educationDegrees_json"), [])
+            profile.education_degrees = [
+                ProfileEducationDegree(
+                    currently_attending=safe_bool(d.get("currentlyAttending")),
+                    degree_year=safe_int(d.get("degreeYear")),
+                    education_level=d.get("educationLevel"),
+                    school_name=d.get("schoolName"),
+                    details_text_json=d.get("educationDetailsText"),
+                )
+                for d in degrees
+                if isinstance(d, dict)
+            ]
+            images = parse_json_field(row.get("nonPrimaryImages_json"), [])
+            profile.non_primary_images = [
+                ProfileNonPrimaryImage(image_url=str(img_url))
+                for img_url in images
+                if img_url and isinstance(img_url, str)
+            ]
+            # Availability blocks
+            new_availability = []
+            avail = parse_json_field(
+                row.get("recurringAvailability_json"), {}
+            )  # Parse the JSON
+            day_list = avail.get("dayList", {}) if isinstance(avail, dict) else {}
+            if isinstance(day_list, dict):
+                for day, schedule in day_list.items():  # 'monday', 'tuesday', etc.
+                    # Ensure day name is valid if needed, or store as string
+                    valid_days = {
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday",
+                        "saturday",
+                        "sunday",
+                    }
+                    if day == "__typename":  # Skip typename field
+                        continue
+                    elif day not in valid_days:
+                        logger.warning(
+                            f"Invalid day '{day}' in availability for profile {profile_id}. Skipping."
+                        )
+                        continue
+
+                    if isinstance(schedule, dict):
+                        blocks = schedule.get("blocks", [])
+                        if isinstance(blocks, list):
+                            for block in blocks:
+                                if isinstance(block, dict):
+                                    start_t = safe_time(block.get("start"))
+                                    end_t = safe_time(block.get("end"))
+                                    # Only add if both start and end times are valid
+                                    if start_t is not None and end_t is not None:
+                                        new_availability.append(
+                                            ProfileAvailability(
+                                                day_of_week=day,
+                                                start_time=start_t,
+                                                end_time=end_t,
+                                            )
+                                        )
+                                    else:
+                                        logger.warning(
+                                            f"Invalid time block found for {day}, profile {profile_id}: start='{block.get('start')}', end='{block.get('end')}'. Skipping block."
+                                        )
+                        else:
+                            logger.warning(
+                                f"Availability 'blocks' is not a list for {day}, profile {profile_id}. Skipping day."
+                            )
                     else:
-                         flat_sub[col_name_base] = value
+                        logger.warning(
+                            f"Availability schedule for '{day}' is not a dict for profile {profile_id}. Skipping day."
+                        )
 
-                # --- Optional: Type Conversion after flattening ---
-                # Convert numeric/bool fields based on their *flattened* names
-                for key, val in flat_sub.items():
-                     # Skip already processed or non-primitive types
-                    if pd.isna(val) or isinstance(val, (bool, int, float, list, dict)): continue
+            # Assign the new list to the relationship
+            profile.availability_blocks = new_availability
 
-                    # Attempt numeric
-                    if any(suffix in key for suffix in ['Rate', 'Count', 'Experience', 'amount', 'year', 'age', 'ratio', 'distance', 'hourlyRateFrom', 'hourlyRateTo']):
-                         try: flat_sub[key] = pd.to_numeric(val) if str(val).strip() != "" else pd.NA
-                         except (ValueError, TypeError): pass # Keep original if failed
+            # --- >>> NEW: Normalize Offered Services <<< ---
+            new_offered_services = []
+            profiles_data = parse_json_field(
+                row.get("profiles_json"), {}
+            )  # Parse the profiles object
+            service_ids_list = (
+                profiles_data.get("serviceIds", [])
+                if isinstance(profiles_data, dict)
+                else []
+            )
+            if isinstance(service_ids_list, list):
+                for service_name in service_ids_list:
+                    if (
+                        isinstance(service_name, str) and service_name
+                    ):  # Ensure it's a non-empty string
+                        new_offered_services.append(
+                            ProfileOfferedService(service_name=service_name)
+                        )
 
-                    # Attempt boolean (for flags within qualities, services etc.)
-                    # Check if it looks like a flag from known nested dicts
-                    elif any(f"_{flag_dict}_" in key for flag_dict in dynamic_inner_dicts):
-                        if isinstance(val, str) and val.lower() in ['true', 'false']:
-                            flat_sub[key] = val.lower() == 'true'
-                        elif str(val) in ['1', '0']:
-                            flat_sub[key] = str(val) == '1'
-                        # If it's already bool, it's fine. Otherwise leave as is.
+            # Assign the new list to the relationship
+            profile.offered_services = new_offered_services
+            # --- <<< END: Normalize Offered Services >>> ---
 
-                nested_rows.append(flat_sub)
-            except Exception as e:
-                 logger.error(f"Error hybrid flattening sub-profile '{sub_profile_type}' for profile_id {profile_id} from {filename}: {e}\n{traceback.format_exc()}")
-        elif sub_profile is not None:
-             logger.debug(f"Skipping non-dict sub-profile '{sub_profile_type}' (type: {type(sub_profile)}) for profile_id {profile_id}.")
-
-    return nested_rows
+            session.flush()
+            loaded_count += 1
+        except SQLAlchemyError as e:
+            logger.error(f"DB Error profile {profile_id}: {e}")
+            session.rollback()
+        except Exception as e:
+            logger.error(f"Error profile {profile_id}: {e}\n{traceback.format_exc()}")
+            session.rollback()
+            skipped_count += 1
+    logger.info(f"Profiles load done. Loaded: {loaded_count}, Skipped: {skipped_count}")
 
 
-def flatten_review(review_data: dict, filename: str, reviewee_id_override: str = None) -> dict:
-    """Flattens a single review object explicitly, storing complex parts as JSON."""
-    flat_review = {"source_filename": filename, "_flattening_error": False}
+def load_nested_profiles(
+    session: Session, df: pd.DataFrame, sub_profile_type_name: str
+):
+    """Loads data for a specific nested profile type into its dedicated table."""
+    if sub_profile_type_name not in NESTED_MODEL_MAP:
+        logger.error(
+            f"No model mapping found for nested type: {sub_profile_type_name}. Skipping."
+        )
+        return
+    map_info = NESTED_MODEL_MAP[sub_profile_type_name]
+    NestedModel = map_info["model"]
+    logger.info(
+        f"Starting load {len(df)} nested '{sub_profile_type_name}' records into {NestedModel.__tablename__}..."
+    )
+    loaded_count = 0
+    skipped_count = 0
+    parent_not_found = 0
+    pk_count = 0
+
+    for idx, row in df.iterrows():
+        profile_id = row.get("profile_id")
+        sub_type = row.get("sub_profile_type")
+        zip_code = row.get("zip_code")
+        if (
+            pd.isna(profile_id)
+            or pd.isna(sub_type)
+            or sub_type != sub_profile_type_name
+        ):
+            skipped_count += 1
+            continue
+        if (
+            session.query(Profile.profile_id).filter_by(profile_id=profile_id).scalar()
+            is None
+        ):
+            parent_not_found += 1
+            continue
+
+        try:
+            # Find existing or create new nested record
+            nested = (
+                session.query(NestedModel)
+                .filter_by(profile_id=profile_id)
+                .one_or_none()
+            )  # Unique constraint helps here
+            if not nested:
+                nested = NestedModel(profile_id=profile_id)
+                session.add(nested)
+
+            # --- Populate Explicit/Simple Fields ---
+            nested.zip_code = zip_code
+            nested.sub_id = row.get(f"{sub_profile_type_name}_id")
+            nested.approval_status = row.get(f"{sub_profile_type_name}_approvalStatus")
+            nested.availability_frequency = row.get(
+                f"{sub_profile_type_name}_availabilityFrequency"
+            )
+            nested.years_of_experience = safe_int(
+                row.get(f"{sub_profile_type_name}_yearsOfExperience")
+            )
+            # nested.service_ids_json = parse_json_field(row.get("service_ids_json"), [])
+
+            # --- Populate JSONB Fields ---
+            nested.bio = row.get(f"{sub_profile_type_name}_bio_experienceSummary")
+            
+            # --- PayRange Handling ---
+            if sub_profile_type_name != "commonCaregiverProfile":
+                # pr = parse_json_field(row.get(f"{sub_type}_payRange_json"), {}); # Parse payRange JSON string
+                pr_from = json.loads(parse_json_field(row.get(f"{sub_profile_type_name}_payRange_hourlyRateFrom"), {}, dumps=True))
+                pr_to = json.loads(parse_json_field(row.get(f"{sub_profile_type_name}_payRange_hourlyRateTo"), {}, dumps=True))
+
+                # Assign to specific DB columns, converting amount with safe_decimal
+                # if loaded_count  > 100 and loaded_count < 150:
+                #     logger.info(f"PayRange from: {pr_from.get('amount')}, to: {pr_to}")
+                #     logger.info(f"{sub_profile_type_name}")
+                #     logger.info(f"{row.get('childCareCaregiverProfile_payRange_hourlyRateFrom')}")
+                #     logger.info(parse_json_field(row.get(f"{sub_profile_type_name}_payRange_hourlyRateFrom")) )
+                nested.payrange_from_amount = pr_from["amount"]
+                nested.payrange_from_currency = pr_from["currencyCode"]
+                nested.payrange_to_amount = pr_from["amount"]
+                nested.payrange_to_currency = pr_to["currencyCode"]
+            nested.recurring_rate_json = parse_json_field(
+                row.get(f"{sub_profile_type_name}_recurringRate_json"), {}
+            )
+            # Type-specific JSON fields
+            if hasattr(nested, "rates_json"):
+                nested.rates_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_rates_json"), []
+                )
+            # Ages
+            ages = parse_json_field(
+                row.get(f"{sub_type}_ageGroups_json"), []
+            )  # Parse the source JSON list
+            if isinstance(ages, list) and hasattr(nested, "age_groups"):
+                nested.age_groups = [
+                    NestedChildcareAgeGroup(age_group=str(ag)) for ag in ages if ag
+                ]  # Assign new objects
+            if hasattr(nested, "other_qualities_json"):
+                nested.other_qualities_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_otherQualities_json"), []
+                )
+            if hasattr(nested, "schedule_json"):
+                nested.schedule_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_schedule_json"), []
+                )
+            if hasattr(nested, "service_rates_json"):
+                nested.service_rates_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_serviceRates_json"), []
+                )
+            if hasattr(nested, "pet_species_json"):
+                nested.pet_species_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_petSpecies_json"), {}
+                )
+            if hasattr(nested, "other_general_subjects_json"):
+                nested.other_general_subjects_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_otherGeneralSubjects_json"), []
+                )
+            if hasattr(nested, "specific_subjects_json"):
+                nested.specific_subjects_json = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_specificSubjects_json"), []
+                )
+
+            # --- Populate simple fields specific to certain types ---
+            if sub_profile_type_name == "commonCaregiverProfile":
+                nested.repeat_clients_count = safe_int(
+                    row.get("commonCaregiverProfile_repeatClientsCount")
+                )
+            if sub_profile_type_name == "houseKeepingCaregiverProfile":
+                nested.distance_willing_to_travel = safe_int(
+                    row.get("houseKeepingCaregiverProfile_distanceWillingToTravel")
+                )
+            if sub_profile_type_name == "childCareCaregiverProfile":
+                nested.child_staff_ratio = safe_float(
+                    row.get("childCareCaregiverProfile_childStaffRatio")
+                )
+                nested.max_age_months = safe_int(
+                    row.get("childCareCaregiverProfile_maxAgeMonths")
+                )
+                nested.min_age_months = safe_int(
+                    row.get("childCareCaregiverProfile_minAgeMonths")
+                )
+                nested.number_of_children = safe_int(
+                    row.get("childCareCaregiverProfile_numberOfChildren")
+                )
+            if sub_profile_type_name == "petCareCaregiverProfile":
+                # add normalized tables
+                # >>> Normalize Petcare Activity Rates (from rates_json) <<<
+                if hasattr(nested, "activity_rates"):  # Check relationship exists
+
+                    act_rates_data = parse_json_field(
+                        row.get(f"{sub_type}_rates_json"), []
+                    )
+                    new_activity_rates = []
+                    if isinstance(act_rates_data, list):
+                        for r in act_rates_data:
+                            if isinstance(r, dict):
+                                rate_info = r.get("activityRate", {})
+                                new_activity_rates.append(
+                                    NestedPetcareActivityRate(
+                                        activity=r.get("activity"),
+                                        amount=safe_decimal(rate_info.get("amount")),
+                                        currency=rate_info.get("currencyCode"),
+                                        unit=r.get("activityRateUnit"),
+                                    )
+                                )
+                    nested.activity_rates = new_activity_rates
+
+                # >>> Normalize Petcare Service Rates (from serviceRates_json) <<<
+                if hasattr(
+                    nested, "service_rates_normalized"
+                ):  # Check relationship exists
+
+                    srv_rates_data = parse_json_field(
+                        row.get(f"{sub_type}_serviceRates_json"), []
+                    )
+                    new_service_rates = []
+                    if isinstance(srv_rates_data, list):
+                        for r in srv_rates_data:
+                            if isinstance(r, dict):
+                                rate_info = r.get("rate", {})
+                                new_service_rates.append(
+                                    NestedPetcareServiceRate(
+                                        subtype=r.get("subtype"),
+                                        duration=r.get("duration"),
+                                        amount=safe_decimal(rate_info.get("amount")),
+                                        currency=rate_info.get("currencyCode"),
+                                    )
+                                )
+                    nested.service_rates_normalized = new_service_rates
+
+                # >>> Normalize Petcare Species (from petSpecies_json) <<<
+                if hasattr(nested, 'species_cared_for'):
+                    species = parse_json_field(row.get(f"{sub_type}_petSpecies_json"),{})
+                    species_list = []
+                    if isinstance(species, dict):
+                         species_list = [NestedPetcareSpecies(species_name=k) for k,v in species.items() if v is True and k != "__typename"]
+                    nested.species_cared_for = species_list
+                # end add
+
+                # nested.petcare_number_of_pets_comfortable_with = safe_int(
+                #     row.get("petCareCaregiverProfile_numberOfPetsComfortableWith")
+                # )
+            if sub_profile_type_name == "tutoringCaregiverProfile":
+                nested.tutoring_other_specific_subject = row.get(
+                    "tutoringCaregiverProfile_otherSpecificSubject"
+                )
+
+            # Flush to get nested.id if it's newly created
+            session.flush()
+            pk_count += 1
+
+            # --- Normalize *_list columns (flags) ---
+            # Qualities
+            if (
+                "qualities_link" in map_info
+                and f"{sub_profile_type_name}_qualities_flags_json" in row
+            ):
+                qualities = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_qualities_flags_json"), []
+                )
+                if isinstance(qualities, list):
+                    nested.qualities = [
+                        map_info["qualities_link"](quality_name=str(q))
+                        for q in qualities
+                        if q
+                    ]
+            # Services
+            if (
+                "services_link" in map_info
+                and f"{sub_profile_type_name}_supportedServices_flags_json" in row
+            ):
+                services = parse_json_field(
+                    row.get(f"{sub_profile_type_name}_supportedServices_flags_json"), []
+                )
+                if isinstance(services, list):
+                    nested.supported_services = [
+                        map_info["services_link"](service_name=str(s))
+                        for s in services
+                        if s
+                    ]
+            # Interests (Common profile specific)
+            if (
+                "interests_link" in map_info
+                and f"{sub_profile_type_name}_merchandizedJobInterests_flags_json"
+                in row
+            ):
+                interests = parse_json_field(
+                    row.get(
+                        f"{sub_profile_type_name}_merchandizedJobInterests_flags_json"
+                    ),
+                    [],
+                )
+                if isinstance(interests, list):
+                    nested.merchandized_job_interests = [
+                        map_info["interests_link"](interest_name=str(i))
+                        for i in interests
+                        if i
+                    ]
+
+            session.flush()
+            loaded_count += 1
+        except SQLAlchemyError as e:
+            logger.error(f"DB Error nested {sub_type} profile {profile_id}: {e}")
+            session.rollback()
+        except Exception as e:
+            logger.error(
+                f"Error nested {sub_type} profile {profile_id}: {e}\n{traceback.format_exc()}"
+            )
+            session.rollback()
+            skipped_count += 1
+    logger.info(
+        f"Nested '{sub_profile_type_name}' load done. Loaded: {loaded_count}, Skipped: {skipped_count}, ParentNotFound: {parent_not_found}, PKs assigned: {pk_count}"
+    )
+
+
+def load_reviews(session: Session, df: pd.DataFrame):
+    """Loads review data and related normalized tables."""
+    logger.info(f"Starting load {len(df)} review records...")
+    loaded_count = 0
+    skipped_count = 0
+    parent_not_found = 0
+    for idx, row in df.iterrows():
+        review_id = row.get("review_id")
+        profile_id = row.get("profile_id")
+        zip_code = row.get("zip_code")
+        if pd.isna(review_id):
+            logger.warning(f"Skip review {idx} missing ID.")
+            skipped_count += 1
+            continue
+        if (
+            pd.notna(profile_id)
+            and session.query(Profile.profile_id)
+            .filter_by(profile_id=profile_id)
+            .scalar()
+            is None
+        ):
+            logger.warning(
+                f"Parent {profile_id} not found review {review_id}. FK set NULL."
+            )
+            profile_id = None
+            parent_not_found += 1
+        try:
+            review = session.query(Review).filter_by(review_id=review_id).one_or_none()
+            if not review:
+                review = Review(review_id=review_id)
+                session.add(review)
+            # Populate simple fields
+            review.profile_id = profile_id
+            review.zip_code = zip_code
+            review.source_filename = row.get("source_filename")
+            review.care_type = row.get("careType")
+            review.create_time = safe_timestamp(row.get("createTime"))
+            review.delete_time = safe_timestamp(row.get("deleteTime"))
+            review.description_display_text = row.get("description_displayText")
+            review.description_original_text = row.get("description_originalText")
+            review.language_code = row.get("languageCode")
+            review.original_source = row.get("originalSource")
+            review.status = row.get("status")
+            review.update_source = row.get("updateSource")
+            review.update_time = safe_timestamp(row.get("updateTime"))
+            review.verified_by_care = safe_bool(row.get("verifiedByCare"))
+            review.reviewee_provider_type = row.get("reviewee_providerType")
+            review.reviewee_type = row.get("reviewee_type")
+            review.reviewer_image_url = row.get("reviewer_imageURL")
+            review.reviewer_first_name = row.get("reviewer_firstName")
+            review.reviewer_last_initial = row.get("reviewer_lastInitial")
+            review.reviewer_source = row.get("reviewer_source")
+            review.reviewer_type = row.get("reviewer_type")
+            review.retort_json = parse_json_field(row.get("retort_json"), {})
+            # Handle Relationships
+            ratings = parse_json_field(row.get("ratings_json"), [])
+            review.ratings = [
+                ReviewRating(
+                    rating_type=r.get("type"), rating_value=safe_int(r.get("value"))
+                )
+                for r in ratings
+                if isinstance(r, dict) and r.get("type")
+            ]
+            attributes = parse_json_field(row.get("attributes_json"), [])
+            review.attributes = [
+                ReviewAttribute(
+                    attribute_type=a.get("type"),
+                    attribute_value=safe_bool(a.get("truthy")),
+                )
+                for a in attributes
+                if isinstance(a, dict) and a.get("type")
+            ]
+
+            session.flush()
+            loaded_count += 1
+        except SQLAlchemyError as e:
+            logger.error(f"DB Error review {review_id}: {e}")
+            session.rollback()
+        except Exception as e:
+            logger.error(f"Error review {review_id}: {e}\n{traceback.format_exc()}")
+            session.rollback()
+            skipped_count += 1
+    logger.info(
+        f"Reviews load done. Loaded: {loaded_count}, Skipped: {skipped_count}, ParentNotFound: {parent_not_found}"
+    )
+
+
+# --- Main ETL Function ---
+def run_etl():
+    if not SessionLocal:
+        logger.error("DB session not configured.")
+        return
+    session = SessionLocal()
+    logger.info("DB session created.")
     try:
-        if not isinstance(review_data, dict):
-             logger.warning(f"Review data is not a dict in {filename}. Skipping.")
-             flat_review["_flattening_error"] = True; return flat_review
-
-        review_id = review_data.get("id")
-        flat_review["review_id"] = review_id
-
-        description = review_data.get("description", {})
-        reviewee = review_data.get("reviewee", {})
-        reviewer = review_data.get("reviewer", {})
-        public_member_info = reviewer.get("publicMemberInfo", {}) if isinstance(reviewer, dict) else {}
-
-        profile_id = reviewee.get("id") if isinstance(reviewee, dict) else None
-        if not profile_id and reviewee_id_override: profile_id = reviewee_id_override
-        flat_review["profile_id"] = profile_id
-
-        flat_review.update({
-            "careType": review_data.get("careType"),
-            "createTime": review_data.get("createTime"),
-            "deleteTime": review_data.get("deleteTime"),
-            "description_displayText": description.get("displayText") if isinstance(description, dict) else None,
-            "description_originalText": description.get("originalText") if isinstance(description, dict) else None,
-            "languageCode": review_data.get("languageCode"),
-            "originalSource": review_data.get("originalSource"),
-            "status": review_data.get("status"),
-            "updateSource": review_data.get("updateSource"),
-            "updateTime": review_data.get("updateTime"),
-            "verifiedByCare": review_data.get("verifiedByCare", None),
-            # Reviewee info
-            "reviewee_providerType": reviewee.get("providerType") if isinstance(reviewee, dict) else None,
-            "reviewee_type": reviewee.get("type") if isinstance(reviewee, dict) else None,
-            # Reviewer info
-            "reviewer_imageURL": reviewer.get("imageURL") if isinstance(reviewer, dict) else None,
-            "reviewer_firstName": public_member_info.get("firstName") if isinstance(public_member_info, dict) else None,
-            "reviewer_lastInitial": public_member_info.get("lastInitial") if isinstance(public_member_info, dict) else None,
-            "reviewer_source": reviewer.get("source") if isinstance(reviewer, dict) else None,
-            "reviewer_type": reviewer.get("type") if isinstance(reviewer, dict) else None,
-            # JSON fields
-            "ratings_json": safe_json_dump(review_data.get("ratings", [])),
-            "retort_json": safe_json_dump(review_data.get("retort", {})),
-            "attributes_json": safe_json_dump(review_data.get("attributes", []))
-        })
-
-        # Type Conversion
-        for ts_field in ["createTime", "deleteTime", "updateTime"]:
-            val = flat_review.get(ts_field)
-            if val:
-                try: flat_review[ts_field] = pd.to_datetime(val, errors='coerce')
-                except Exception: flat_review[ts_field] = pd.NaT
-            else: flat_review[ts_field] = pd.NaT
-
-        val_bool = flat_review.get("verifiedByCare")
-        if val_bool is None: flat_review["verifiedByCare"] = pd.NA
+        logger.info("Creating DB tables if needed...")
+        Base.metadata.create_all(bind=engine)
+        logger.info("Table check complete.")
+        # Load Main Profiles first
+        profiles_csv = COUNTRY_PREPROCESSED_DIR / "main_profiles_processed.csv"
+        if profiles_csv.is_file():
+            logger.info(f"Reading main profiles: {profiles_csv}")
+            profiles_df = pd.read_csv(profiles_csv, low_memory=False)
+            load_profiles(session, profiles_df)
+            session.commit()
+            logger.info("Committed main profiles.")
         else:
-            try: flat_review["verifiedByCare"] = bool(val_bool)
-            except: flat_review["verifiedByCare"] = pd.NA
+            logger.error(f"Main profiles CSV not found: {profiles_csv}. Aborting.")
+            return
 
-        return flat_review
+        # Load Nested Profiles
+        nested_files = list(COUNTRY_PREPROCESSED_DIR.glob("nested_*_processed.csv"))
+        if nested_files:
+            logger.info(f"Found {len(nested_files)} nested profile CSV files.")
+            for nested_csv in nested_files:
+                parts = nested_csv.stem.split("_")
+                sub_profile_type_name = (
+                    parts[1] if len(parts) > 1 and parts[0] == "nested" else None
+                )
+                if sub_profile_type_name:
+                    logger.info(
+                        f"Reading nested profiles: {nested_csv} (Type: {sub_profile_type_name})"
+                    )
+                    nested_df = pd.read_csv(nested_csv, low_memory=False)
+                    load_nested_profiles(session, nested_df, sub_profile_type_name)
+                    session.commit()
+                    logger.info(f"Committed nested profiles: {sub_profile_type_name}")
+                else:
+                    logger.warning(
+                        f"Cannot determine type from filename: {nested_csv}. Skipping."
+                    )
+        else:
+            logger.warning("No nested profile CSV files found.")
+
+        # Load Reviews
+        reviews_csv = COUNTRY_PREPROCESSED_DIR / "reviews_processed.csv"
+        if reviews_csv.is_file():
+            logger.info(f"Reading reviews: {reviews_csv}")
+            reviews_df = pd.read_csv(reviews_csv, low_memory=False)
+            load_reviews(session, reviews_df)
+            session.commit()
+            logger.info("Committed reviews.")
+        else:
+            logger.warning(f"Reviews CSV not found: {reviews_csv}.")
+        logger.info("ETL process completed successfully!")
+    except SQLAlchemyError as e:
+        logger.error(f"DB error during ETL: {e}\n{traceback.format_exc()}")
+        session.rollback()
+    except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
+        session.rollback()
     except Exception as e:
-        logger.error(f"Critical error flattening review in file {filename} (ID: {review_id}): {e}\n{traceback.format_exc()}")
-        flat_review["_flattening_error"] = True
-        return flat_review
+        logger.error(f"Unexpected ETL error: {e}\n{traceback.format_exc()}")
+        session.rollback()
+    finally:
+        logger.info("Closing DB session.")
+        session.close()
 
-def create_dataframe(json_objs: list, flatten_func: callable, desc: str) -> pd.DataFrame:
-    """Creates DataFrame by applying flattening function, skipping errors."""
-    flattened_data = []
-    error_count = 0
-    for item in json_objs:
-        if isinstance(item.get('data'), dict):
-            flat_item = flatten_func(item['data'], item['filename'])
-            if isinstance(flat_item, dict) and not flat_item.get("_flattening_error"):
-                flattened_data.append(flat_item)
-            else: error_count += 1 # Count records that failed to flatten
-        else: logger.warning(f"Skipping record from {item['filename']}: invalid 'data' structure.")
-    if error_count > 0: logger.error(f"{error_count} records failed to flatten during {desc} creation.")
-    if not flattened_data: logger.warning(f"No valid data to create DataFrame for {desc}."); return pd.DataFrame()
-    df = pd.DataFrame(flattened_data)
-    df = df.convert_dtypes()
-    logger.info(f"Created DataFrame for {desc} with {len(df)} records and {len(df.columns)} columns.")
-    return df
-
-def create_reviews_dataframe(json_objs: list) -> pd.DataFrame:
-    """Creates DataFrame for reviews, handling nested list structure."""
-    all_reviews = []
-    error_count = 0
-    for item in json_objs:
-        filename = item['filename']
-        try:
-            data_level = item.get('data', {})
-            payload_level = data_level.get('data', {})
-            review_payload = payload_level.get('reviewsByReviewee', {})
-            reviews_list = review_payload.get('reviews', [])
-            if not isinstance(reviews_list, list): logger.warning(f"Reviews not a list in {filename}."); continue
-            reviewee_id_from_payload = None # Placeholder
-            for review_obj in reviews_list:
-                if isinstance(review_obj, dict):
-                    flat_review = flatten_review(review_obj, filename, reviewee_id_from_payload)
-                    if isinstance(flat_review, dict) and not flat_review.get("_flattening_error"): all_reviews.append(flat_review)
-                    else: error_count += 1
-                else: logger.warning(f"Review item not a dict in {filename}.")
-        except Exception as e: logger.error(f"Error processing review payload {filename}: {e}\n{traceback.format_exc()}"); error_count += 1
-    if error_count > 0: logger.error(f"{error_count} reviews failed to flatten.")
-    if not all_reviews: logger.warning("No valid review data found."); return pd.DataFrame()
-    df = pd.DataFrame(all_reviews)
-    df = df.convert_dtypes()
-    logger.info(f"Created DataFrame for reviews with {len(df)} records and {len(df.columns)} columns.")
-    return df
-
-# --- Pandera Schemas (Explicit Core Fields, Non-Strict for Dynamic Nested) ---
-main_profile_schema = DataFrameSchema({
-    "profile_id": Column(str, nullable=False, unique=True), # Expect this to be non-null after fixing potential issues
-    "source_filename": Column(str, nullable=False),
-    "member_firstName": Column(str, nullable=True, coerce=True),
-    "member_gender": Column(str, nullable=True, coerce=True),
-    "member_isPremium": Column(bool, nullable=True, coerce=True),
-    "yearsOfExperience": Column(float, nullable=True, coerce=True), # Using float due to pd.NA
-    "signUpDate": Column("datetime64[ns]", nullable=True, coerce=True),
-    "profiles_json": Column(str, nullable=True), # Needed for nested extraction
-}, strict=False, coerce=True) # strict=False allows dynamic member_ fields and caregiver_ fields
-
-nested_profile_schema = DataFrameSchema({
-    "profile_id": Column(str, nullable=False),
-    "sub_profile_type": Column(str, nullable=False),
-    # Known simple fields (examples)
-    "commonCaregiverProfile_id": Column(str, nullable=True, coerce=True, required=False), # Make optional as it depends on type
-    "commonCaregiverProfile_repeatClientsCount": Column(float, nullable=True, coerce=True, required=False), # Float for NA
-    "seniorCareCaregiverProfile_yearsOfExperience": Column(float, nullable=True, coerce=True, required=False),
-    "houseKeepingCaregiverProfile_yearsOfExperience": Column(float, nullable=True, coerce=True, required=False),
-    # Add more explicit simple fields if needed, but keep strict=False
-}, strict=False, coerce=True) # strict=False essential for dynamic *_qualities_*, *_services_* etc.
-
-review_schema = DataFrameSchema({
-    "review_id": Column(str, nullable=False, unique=True),
-    "profile_id": Column(str, nullable=True), # Allow null if link failed initially
-    "createTime": Column("datetime64[ns]", nullable=True, coerce=True),
-    "verifiedByCare": Column(bool, nullable=True, coerce=True),
-    "ratings_json": Column(str, nullable=True),
-    "attributes_json": Column(str, nullable=True),
-}, strict=False, coerce=True)
-
-
-# --- Data Quality & Reporting ---
-# run_quality_checks_and_report and safe_json_load functions remain the same as the previous good version
-# (Re-include them here for completeness)
-def safe_json_load(json_string):
-    """Safely load JSON string, return empty list/dict on failure."""
-    if pd.isna(json_string) or not isinstance(json_string, str): return []
-    try:
-        loaded = json.loads(json_string)
-        return loaded if isinstance(loaded, (list, dict)) else []
-    except Exception: return []
-
-def run_quality_checks_and_report(df: pd.DataFrame, schema: DataFrameSchema, df_name: str, output_dir: Path) -> pd.DataFrame:
-    """Performs validation, calculates quality metrics, saves report/validated data."""
-    logger.info(f"--- Running Quality Checks for {df_name} ({len(df)} rows) ---")
-    if df.empty: logger.warning(f"DataFrame '{df_name}' is empty."); return df
-
-    logger.info(f"Data types PRE-validation for {df_name}:\n{df.dtypes.value_counts()}")
-
-    validated_df, validation_errors = df, None
-    try:
-        validated_df = schema.validate(df.copy(), lazy=True)
-        logger.info(f"Schema validation PASSED for {df_name}.")
-    except pa.errors.SchemaErrors as err:
-        logger.error(f"Schema validation FAILED for {df_name}.")
-        try:
-            error_details = err.failure_cases.to_dict(orient='records')
-            logger.error(f"Validation Failure Cases (sample):\n{json.dumps(error_details[:5], indent=2, default=str)}")
-            validation_errors = err.failure_cases
-        except Exception as json_err:
-            logger.error(f"Could not serialize validation errors: {json_err}")
-            logger.error(f"Pandera failure cases head:\n{err.failure_cases.head()}")
-            validation_errors = err.failure_cases
-        logger.warning(f"Proceeding with checks on *original* {df_name} DataFrame.")
-        validated_df = df # Use original for reporting
-    except Exception as verr:
-        logger.error(f"Unexpected error during Pandera validation for {df_name}: {verr}\n{traceback.format_exc()}")
-        validated_df = df
-
-    report = {'dataframe_name': df_name, 'total_rows': len(validated_df), 'total_columns': len(validated_df.columns),
-              'schema_validation_passed': validation_errors is None,
-              'validation_error_count': len(validation_errors) if validation_errors is not None else 0}
-    missing_counts = validated_df.isnull().sum()
-    report['missing_values_summary'] = json.dumps(missing_counts[missing_counts > 0].apply(int).to_dict())
-
-    numeric_cols = validated_df.select_dtypes(include=['number']).columns
-    stats_summary = {}
-    for col in numeric_cols:
-        try:
-            desc = validated_df[col].dropna().describe().to_dict()
-            stats_summary[col] = {k: round(v, 2) if isinstance(v, (int, float)) else v for k, v in desc.items()}
-        except Exception as e: stats_summary[col] = f"Error: {e}"
-    report['numeric_column_stats'] = json.dumps(stats_summary, default=str)
-
-    json_string_cols = [c for c in validated_df.columns if c.endswith('_json')]
-    json_len_summary = {}
-    for col in json_string_cols:
-        try:
-             if col in validated_df and not validated_df[col].dropna().empty:
-                 lengths = validated_df[col].apply(safe_json_load).apply(len)
-                 json_len_summary[col] = {'mean_items': round(lengths.mean(), 2), 'max_items': int(lengths.max()), 'total_items': int(lengths.sum())}
-             else: json_len_summary[col] = {'mean_items': 0, 'max_items': 0, 'total_items': 0}
-        except Exception as e: json_len_summary[col] = f"Error: {e}"
-    report['json_string_column_stats'] = json.dumps(json_len_summary, default=str)
-
-    # Use profile_id from main_profiles, review_id from reviews
-    pk_col = "profile_id" if df_name == "main_profiles" else "review_id" if df_name == "reviews" else None
-    if pk_col and pk_col in validated_df.columns:
-         # Check for nulls before checking duplicates
-         null_pks = validated_df[pk_col].isnull().sum()
-         if null_pks > 0: logger.warning(f"Found {null_pks} null primary keys ('{pk_col}') in {df_name}.")
-         num_duplicates = int(validated_df[pk_col].dropna().duplicated().sum())
-         report['duplicate_pk_rows'] = num_duplicates
-         if num_duplicates > 0: logger.warning(f"Found {num_duplicates} duplicate non-null PKs ('{pk_col}') in {df_name}.")
-    elif df_name == "nested_profiles" and "profile_id" in validated_df.columns and "sub_profile_type" in validated_df.columns:
-         # Check composite key for nested profiles
-         num_duplicates = int(validated_df.duplicated(subset=["profile_id", "sub_profile_type"], keep=False).sum())
-         report['duplicate_pk_rows'] = num_duplicates
-         if num_duplicates > 0: logger.warning(f"Found {num_duplicates} duplicate composite PKs (profile_id, sub_profile_type) in {df_name}.")
-    else: report['duplicate_pk_rows'] = 'N/A'
-
-    try:
-        ensure_dir_exists(output_dir)
-        report_df = pd.DataFrame([report])
-        report_file = output_dir / f"quality_report_{df_name}.csv"
-        report_df.to_csv(report_file, index=False, encoding='utf-8')
-        logger.info(f"Quality report saved to: {report_file}")
-        output_data_file = output_dir / f"{df_name}_processed.csv"
-        # Use validated_df if validation passed, otherwise original df might be more complete
-        df_to_save = validated_df if validation_errors is None else df
-        df_to_save.to_csv(output_data_file, index=False, encoding='utf-8')
-        logger.info(f"Processed data saved to: {output_data_file}")
-        if validation_errors is not None:
-            error_file = output_dir / f"validation_errors_{df_name}.csv"
-            validation_errors.to_csv(error_file, index=False, encoding='utf-8')
-            logger.info(f"Validation errors saved to: {error_file}")
-    except Exception as save_err:
-        logger.error(f"Failed to save report or data for {df_name}: {save_err}\n{traceback.format_exc()}")
-
-    logger.info(f"--- Finished Quality Checks for {df_name} ---")
-    return validated_df # Return the validated df
 
 def print_proposed_data_model():
-    """Prints the proposed relational data model (hybrid flattening)."""
+    """Prints the proposed relational data model (Fully Normalized)."""
+    # This is a textual representation, the actual models are defined above
     model = """
-    Proposed Relational Data Model (Hybrid Flattening):
-    ----------------------------------------------------
-    NOTE: NestedServiceProfiles columns contain dynamically flattened fields
-          from qualities, services, etc. prefixed by sub-profile type.
-          JSON columns require further parsing/normalization in ETL/DB.
+    Proposed Relational Data Model (Normalized):
+    ---------------------------------------------
+    NOTE: This describes the target schema with normalization applied.
 
-    1. Profiles (Main Caregiver Information)
-       - profile_id (PK, VARCHAR) - From member.id
-       - source_filename (VARCHAR)
-       - member_firstName (VARCHAR, Nullable)
-       - member_lastName (VARCHAR, Nullable)
-       - member_gender (VARCHAR, Nullable)
-       - member_displayName (VARCHAR, Nullable)
-       - member_email (VARCHAR, Nullable)
-       - member_primaryService (VARCHAR, Nullable)
-       - member_hiResImageURL (VARCHAR, Nullable)
-       - member_imageURL (VARCHAR, Nullable)
-       - member_address_city (VARCHAR, Nullable)
-       - member_address_state (VARCHAR, Nullable)
-       - member_address_zip (VARCHAR, Nullable)
-       - member_languages_json (JSONB/TEXT)
-       - member_legacyId (VARCHAR, Nullable)
-       - member_isPremium (BOOLEAN, Nullable)
-       - distanceFromSeekerInMiles (FLOAT, Nullable)
-       - hasCareCheck (BOOLEAN, Nullable)
-       - hasGrantedCriminalBGCAccess (BOOLEAN, Nullable)
-       - hasGrantedMvrBGCAccess (BOOLEAN, Nullable)
-       - hasGrantedPremierBGCAccess (BOOLEAN, Nullable)
-       - hiredTimes (INTEGER, Nullable)
-       - isFavorite (BOOLEAN, Nullable)
-       - isMVREligible (BOOLEAN, Nullable)
-       - isVaccinated (BOOLEAN, Nullable)
-       - providerStatus (VARCHAR, Nullable)
-       - responseRate (INTEGER, Nullable)
-       - responseTime (INTEGER, Nullable)
-       - signUpDate (TIMESTAMP, Nullable)
-       - yearsOfExperience (INTEGER, Nullable)
-       - badges_json (JSONB/TEXT)
-       - backgroundChecks_json (JSONB/TEXT)
-       - educationDegrees_json (JSONB/TEXT)
-       - hiredByCounts_json (JSONB/TEXT)
-       - placeInfo_json (JSONB/TEXT)
-       - recurringAvailability_json (JSONB/TEXT)
-       - nonPrimaryImages_json (JSONB/TEXT)
-       - continuousBackgroundCheck_json (JSONB/TEXT)
-       # Note: profiles_json is used for processing but typically not stored directly
+    1. profiles (Main Caregiver Info)
+       - profile_id (PK), zip_code, source_filename, first_name, last_name, gender, ..., years_of_experience, ...
+       - JSONB Columns: hired_by_counts_json, place_info_json, recurring_availability_json, continuous_background_check_json
 
-    2. NestedServiceProfiles (Explicit top-level, dynamic inner fields)
-       - nested_profile_pk (PK, SERIAL or UUID - Added during ETL)
-       - profile_id (FK -> Profiles.profile_id)
-       - sub_profile_type (VARCHAR) - e.g., 'commonCaregiverProfile', 'houseKeepingCaregiverProfile'
-       - service_ids_json (JSONB/TEXT)
-       # --- Explicit Simple Sub-Profile Fields (Examples) ---
-       - commonCaregiverProfile_id (VARCHAR, Nullable)
-       - commonCaregiverProfile_repeatClientsCount (INTEGER, Nullable)
-       - seniorCareCaregiverProfile_id (VARCHAR, Nullable)
-       - seniorCareCaregiverProfile_approvalStatus (VARCHAR, Nullable)
-       - seniorCareCaregiverProfile_availabilityFrequency (VARCHAR, Nullable)
-       - seniorCareCaregiverProfile_yearsOfExperience (INTEGER, Nullable)
-       - houseKeepingCaregiverProfile_id (VARCHAR, Nullable)
-       - houseKeepingCaregiverProfile_approvalStatus (VARCHAR, Nullable)
-       - houseKeepingCaregiverProfile_yearsOfExperience (INTEGER, Nullable)
-       - houseKeepingCaregiverProfile_distanceWillingToTravel (INTEGER, Nullable)
-       - childCareCaregiverProfile_id (VARCHAR, Nullable)
-       - childCareCaregiverProfile_numberOfChildren (INTEGER, Nullable)
-       # --- Dynamically Flattened Inner Fields (Examples) ---
-       - commonCaregiverProfile_merchandizedJobInterests_companionCare (BOOLEAN, Nullable)
-       - commonCaregiverProfile_merchandizedJobInterests_lightCleaning (BOOLEAN, Nullable)
-       - seniorCareCaregiverProfile_bio_experienceSummary (TEXT, Nullable)
-       - seniorCareCaregiverProfile_payRange_hourlyRateFrom_amount (VARCHAR -> NUMERIC, Nullable)
-       - seniorCareCaregiverProfile_qualities_cprTrained (BOOLEAN, Nullable)
-       - seniorCareCaregiverProfile_supportedServices_transportation (BOOLEAN, Nullable)
-       - houseKeepingCaregiverProfile_qualities_doesNotSmoke (BOOLEAN, Nullable)
-       - houseKeepingCaregiverProfile_supportedServices_laundry (BOOLEAN, Nullable)
-       # --- JSON Lists within Sub-Profiles (Examples) ---
-       - seniorCareCaregiverProfile_otherQualities_json (JSONB/TEXT)
-       - childCareCaregiverProfile_ageGroups_json (JSONB/TEXT)
-       - childCareCaregiverProfile_rates_json (JSONB/TEXT)
-       - houseKeepingCaregiverProfile_schedule_json (JSONB/TEXT)
+    2. profile_languages (Normalized)
+       - profile_id (PK, FK), language (PK)
 
-    3. Reviews (Explicit Fields)
-       - review_id (PK, VARCHAR)
-       - profile_id (FK -> Profiles.profile_id, Nullable)
-       - source_filename (VARCHAR)
-       - careType (VARCHAR, Nullable)
-       - createTime (TIMESTAMP, Nullable)
-       - deleteTime (TIMESTAMP, Nullable)
-       - description_displayText (TEXT, Nullable)
-       - description_originalText (TEXT, Nullable)
-       - languageCode (VARCHAR, Nullable)
-       - originalSource (VARCHAR, Nullable)
-       - status (VARCHAR, Nullable)
-       - updateSource (VARCHAR, Nullable)
-       - updateTime (TIMESTAMP, Nullable)
-       - verifiedByCare (BOOLEAN, Nullable)
-       - reviewee_providerType (VARCHAR, Nullable)
-       - reviewee_type (VARCHAR, Nullable)
-       - reviewer_imageURL (VARCHAR, Nullable)
-       - reviewer_firstName (VARCHAR, Nullable)
-       - reviewer_lastInitial (VARCHAR, Nullable)
-       - reviewer_source (VARCHAR, Nullable)
-       - reviewer_type (VARCHAR, Nullable)
-       - ratings_json (JSONB/TEXT) -> Normalize to ReviewRatings
-       - retort_json (JSONB/TEXT)
-       - attributes_json (JSONB/TEXT) -> Normalize to ReviewAttributes
+    3. profile_badges (Normalized)
+       - profile_id (PK, FK), badge (PK)
 
-    Normalization Strategy Remains Similar:
-    - Normalize JSON fields (languages, badges, checks, degrees, ratings, attributes, lists within nested profiles)
-      into separate tables during the database loading (ETL) phase.
+    4. profile_background_checks (Normalized)
+       - id (PK), profile_id (FK), check_name, completed_at
+
+    5. profile_education_degrees (Normalized)
+       - id (PK), profile_id (FK), currently_attending, degree_year, education_level, school_name, details_text_json
+
+    6. profile_non_primary_images (Normalized)
+       - id (PK), profile_id (FK), image_url
+
+    --- Separate Nested Profile Tables (Examples) ---
+
+    7. nested_common_profiles
+       - id (PK), profile_id (FK, Unique), zip_code, sub_id, repeat_clients_count, service_ids_json
+    8. nested_common_interests (Normalized from common_..._list)
+       - nested_profile_id (PK, FK -> nested_common_profiles.id), interest_name (PK)
+
+    9. nested_childcare_profiles
+       - id (PK), profile_id (FK, Unique), zip_code, sub_id, approval_status, availability_frequency, years_of_experience,
+         child_staff_ratio, max_age_months, min_age_months, number_of_children,
+         bio, pay_range_json, recurring_rate_json, rates_json, age_groups_json, other_qualities_json, service_ids_json
+    10. nested_childcare_qualities (Normalized from childCare..._qualities_list)
+        - nested_profile_id (PK, FK -> nested_childcare_profiles.id), quality_name (PK)
+    11. nested_childcare_services (Normalized from childCare..._supportedServices_list)
+        - nested_profile_id (PK, FK -> nested_childcare_profiles.id), service_name (PK)
+
+    12. nested_housekeeping_profiles
+        - id (PK), profile_id (FK, Unique), zip_code, sub_id, approval_status, availability_frequency, years_of_experience,
+          distance_willing_to_travel, bio, pay_range_json, recurring_rate_json, schedule_json, other_qualities_json, service_ids_json
+    13. nested_housekeeping_qualities (...)
+    14. nested_housekeeping_services (...)
+
+    15. nested_petcare_profiles (...)
+    16. nested_petcare_qualities (...)
+    17. nested_petcare_services (...)
+
+    18. nested_seniorcare_profiles (...)
+    19. nested_seniorcare_qualities (...)
+    20. nested_seniorcare_services (...)
+
+    21. nested_tutoring_profiles (...)
+    22. nested_tutoring_qualities (...)
+    23. nested_tutoring_services (...)
+
+    --- Review Tables ---
+
+    24. reviews
+        - review_id (PK), profile_id (FK), zip_code, source_filename, care_type, create_time, ..., retort_json
+    25. review_ratings (Normalized from ratings_json)
+        - review_id (PK, FK), rating_type (PK), rating_value
+    26. review_attributes (Normalized from attributes_json)
+        - review_id (PK, FK), attribute_type (PK), attribute_value
     """
     print(model)
 
+
 # --- Main Execution ---
 if __name__ == "__main__":
-    logger.info(f"Starting Data Quality Check Script for {COUNTRY}/{EXAMPLE_ZIP}")
-    # Ensure output dirs exist
-    ensure_dir_exists(BASE_PREPROCESSED_DIR)
-    ensure_dir_exists(COUNTRY_PREPROCESSED_DIR)
-    ensure_dir_exists(ZIP_PREPROCESSED_DIR)
-
-    main_profiles_df = pd.DataFrame()
-    nested_profiles_df = pd.DataFrame()
-    reviews_df = pd.DataFrame()
-
-    # --- Process Profiles ---
-    logger.info(f"--- Processing Profiles ---")
-    logger.info(f"Input Dir: {PROFILES_INPUT_DIR}")
-    logger.info(f"Output Dir: {PROFILES_OUTPUT_DIR}")
-    profile_json_files = load_json_files(PROFILES_INPUT_DIR)
-
-    if profile_json_files:
-        main_profiles_df = create_dataframe(profile_json_files, flatten_main_profile, "main_profiles")
-        if not main_profiles_df.empty:
-            main_profiles_df = run_quality_checks_and_report(main_profiles_df, main_profile_schema, "main_profiles", PROFILES_OUTPUT_DIR)
-            nested_profile_rows = []
-            for idx, row in main_profiles_df.iterrows():
-                 # Defend against potential errors in a single row's processing
-                 try:
-                    nested_profile_rows.extend(extract_and_flatten_nested_profiles(row))
-                 except Exception as nested_err:
-                    logger.error(f"Error during nested profile extraction for profile_id {row.get('profile_id','N/A')} from {row.get('source_filename','N/A')}: {nested_err}\n{traceback.format_exc()}")
-
-            if nested_profile_rows:
-                nested_profiles_df = pd.DataFrame(nested_profile_rows)
-                nested_profiles_df = nested_profiles_df.convert_dtypes()
-                nested_profiles_df = run_quality_checks_and_report(nested_profiles_df, nested_profile_schema, "nested_profiles", PROFILES_OUTPUT_DIR)
-            else: logger.warning("No nested profile data was extracted or survived processing.")
-        else: logger.warning("Main profiles DataFrame is empty after flattening.")
-    else: logger.warning(f"No profile JSON files found. Skipping profile processing.")
-
-    # --- Process Reviews ---
-    logger.info(f"--- Processing Reviews ---")
-    logger.info(f"Input Dir: {REVIEWS_INPUT_DIR}")
-    logger.info(f"Output Dir: {REVIEWS_OUTPUT_DIR}")
-    review_json_files = []
-    if REVIEWS_INPUT_DIR.is_dir():
-        for type_dir in REVIEWS_INPUT_DIR.iterdir():
-            if type_dir.is_dir():
-                logger.info(f"Loading reviews from type directory: {type_dir.name}")
-                review_json_files.extend(load_json_files(type_dir))
-    else: logger.warning(f"Reviews input directory does not exist: {REVIEWS_INPUT_DIR}")
-
-    if review_json_files:
-        reviews_df = create_reviews_dataframe(review_json_files)
-        if not reviews_df.empty:
-            reviews_df = run_quality_checks_and_report(reviews_df, review_schema, "reviews", REVIEWS_OUTPUT_DIR)
-        else: logger.warning("Reviews DataFrame is empty after processing.")
-    else: logger.warning(f"No review JSON files found. Skipping review processing.")
-
-    logger.info("--- Proposed Data Model ---")
-    print_proposed_data_model()
-    logger.info("--- Data Quality Check Script Finished ---")
-    
-def run_quality():
-    logger.info(f"Starting Data Quality Check Script for {COUNTRY}/{EXAMPLE_ZIP}")
-    # Ensure output dirs exist
-    ensure_dir_exists(BASE_PREPROCESSED_DIR)
-    ensure_dir_exists(COUNTRY_PREPROCESSED_DIR)
-    ensure_dir_exists(ZIP_PREPROCESSED_DIR)
-
-    main_profiles_df = pd.DataFrame()
-    nested_profiles_df = pd.DataFrame()
-    reviews_df = pd.DataFrame()
-
-    # --- Process Profiles ---
-    logger.info(f"--- Processing Profiles ---")
-    logger.info(f"Input Dir: {PROFILES_INPUT_DIR}")
-    logger.info(f"Output Dir: {PROFILES_OUTPUT_DIR}")
-    profile_json_files = load_json_files(PROFILES_INPUT_DIR)
-
-    if profile_json_files:
-        main_profiles_df = create_dataframe(profile_json_files, flatten_main_profile, "main_profiles")
-        if not main_profiles_df.empty:
-            main_profiles_df = run_quality_checks_and_report(main_profiles_df, main_profile_schema, "main_profiles", PROFILES_OUTPUT_DIR)
-            nested_profile_rows = []
-            for idx, row in main_profiles_df.iterrows():
-                 # Defend against potential errors in a single row's processing
-                 try:
-                    nested_profile_rows.extend(extract_and_flatten_nested_profiles(row))
-                 except Exception as nested_err:
-                    logger.error(f"Error during nested profile extraction for profile_id {row.get('profile_id','N/A')} from {row.get('source_filename','N/A')}: {nested_err}\n{traceback.format_exc()}")
-
-            if nested_profile_rows:
-                nested_profiles_df = pd.DataFrame(nested_profile_rows)
-                nested_profiles_df = nested_profiles_df.convert_dtypes()
-                nested_profiles_df = run_quality_checks_and_report(nested_profiles_df, nested_profile_schema, "nested_profiles", PROFILES_OUTPUT_DIR)
-            else: logger.warning("No nested profile data was extracted or survived processing.")
-        else: logger.warning("Main profiles DataFrame is empty after flattening.")
-    else: logger.warning(f"No profile JSON files found. Skipping profile processing.")
-
-    # --- Process Reviews ---
-    logger.info(f"--- Processing Reviews ---")
-    logger.info(f"Input Dir: {REVIEWS_INPUT_DIR}")
-    logger.info(f"Output Dir: {REVIEWS_OUTPUT_DIR}")
-    review_json_files = []
-    if REVIEWS_INPUT_DIR.is_dir():
-        for type_dir in REVIEWS_INPUT_DIR.iterdir():
-            if type_dir.is_dir():
-                logger.info(f"Loading reviews from type directory: {type_dir.name}")
-                review_json_files.extend(load_json_files(type_dir))
-    else: logger.warning(f"Reviews input directory does not exist: {REVIEWS_INPUT_DIR}")
-
-    if review_json_files:
-        reviews_df = create_reviews_dataframe(review_json_files)
-        if not reviews_df.empty:
-            reviews_df = run_quality_checks_and_report(reviews_df, review_schema, "reviews", REVIEWS_OUTPUT_DIR)
-        else: logger.warning("Reviews DataFrame is empty after processing.")
-    else: logger.warning(f"No review JSON files found. Skipping review processing.")
-
-    logger.info("--- Proposed Data Model ---")
-    print_proposed_data_model()
-    logger.info("--- Data Quality Check Script Finished ---")
+    logger.info(
+        f"Starting ETL Script: Load Processed CSVs to PostgreSQL DB for {COUNTRY}"
+    )
+    run_etl()
+    # Optionally print the model description at the end
+    # print_proposed_data_model()
+    logger.info("ETL Script Finished.")
