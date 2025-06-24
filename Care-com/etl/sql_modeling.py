@@ -186,7 +186,7 @@ class Profile(Base):
     provider_status = Column(String, nullable=True)
     response_rate = Column(Integer, nullable=True)
     response_time = Column(Integer, nullable=True)
-    sign_up_date = Column(TIMESTAMP(timezone=False), nullable=True)
+    sign_up_date = Column(String, nullable=True)
     years_of_experience = Column(Integer, nullable=True)
     cbc_seeker_limit_reached = Column(Boolean, nullable=True)
     cbc_seeker_status = Column(String, nullable=True)
@@ -946,7 +946,7 @@ def load_profiles(session: Session, df: pd.DataFrame):
             profile.provider_status = row.get("providerStatus")
             profile.response_rate = safe_int(row.get("responseRate"))
             profile.response_time = safe_int(row.get("responseTime"))
-            profile.sign_up_date = safe_timestamp(row.get("signUpDate"))
+            profile.sign_up_date = row.get("signUpDate")
             profile.years_of_experience = safe_int(row.get("yearsOfExperience"))
             cbc = parse_json_field(row.get("continuousBackgroundCheck_json"), {})
             cbc_seeker = cbc.get("seeker", {}) if isinstance(cbc, dict) else {}

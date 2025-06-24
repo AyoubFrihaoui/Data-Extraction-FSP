@@ -38,7 +38,7 @@ from config import CARE_COM_PASSWORD
 # Database Connection String (replace with your actual credentials)
 # Format: postgresql://user:password@host:port/database
 
-DATABASE_URI = f"postgresql://postgres:{CARE_COM_PASSWORD}@localhost:5432/care-com_db2"  # Example for PostgreSQL
+DATABASE_URI = f"postgresql://postgres:{CARE_COM_PASSWORD}@localhost:5432/care-com_db3"  # Example for PostgreSQL
 COUNTRY = "USA"
 BASE_PREPROCESSED_DIR = Path("preprocessed_data")
 COUNTRY_PREPROCESSED_DIR = BASE_PREPROCESSED_DIR / COUNTRY
@@ -199,7 +199,7 @@ class Profile(Base):
     provider_status = Column(String, nullable=True)
     response_rate = Column(Integer, nullable=True)
     response_time = Column(Integer, nullable=True)
-    sign_up_date = Column(TIMESTAMP(timezone=False), nullable=True)
+    sign_up_date = Column(String, nullable=True)
     years_of_experience = Column(Integer, nullable=True)
     # Store complex objects as JSONB if not fully normalized below
     hired_by_counts_json = Column(JSONB, nullable=True)
@@ -748,15 +748,15 @@ class Review(Base):
     zip_code = Column(String, nullable=True, index=True)
     source_filename = Column(Text, nullable=True)
     care_type = Column(String, nullable=True)
-    create_time = Column(TIMESTAMP(timezone=False), nullable=True)
-    delete_time = Column(TIMESTAMP(timezone=False), nullable=True)
+    create_time = Column(String, nullable=True)
+    delete_time = Column(String, nullable=True)
     description_display_text = Column(Text, nullable=True)
     description_original_text = Column(Text, nullable=True)
     language_code = Column(String, nullable=True)
     original_source = Column(String, nullable=True)
     status = Column(String, nullable=True)
     update_source = Column(String, nullable=True)
-    update_time = Column(TIMESTAMP(timezone=False), nullable=True)
+    update_time = Column(String, nullable=True)
     verified_by_care = Column(Boolean, nullable=True)
     reviewee_provider_type = Column(String, nullable=True)
     reviewee_type = Column(String, nullable=True)
@@ -890,7 +890,7 @@ def load_profiles(session: Session, df: pd.DataFrame):
             profile.provider_status = row.get("providerStatus")
             profile.response_rate = safe_int(row.get("responseRate"))
             profile.response_time = safe_int(row.get("responseTime"))
-            profile.sign_up_date = safe_timestamp(row.get("signUpDate"))
+            profile.sign_up_date = row.get("signUpDate")
             profile.years_of_experience = safe_int(row.get("yearsOfExperience"))
             # JSONB fields
             profile.hired_by_counts_json = parse_json_field(
@@ -1339,15 +1339,15 @@ def load_reviews(session: Session, df: pd.DataFrame):
             review.zip_code = zip_code
             review.source_filename = row.get("source_filename")
             review.care_type = row.get("careType")
-            review.create_time = safe_timestamp(row.get("createTime"))
-            review.delete_time = safe_timestamp(row.get("deleteTime"))
+            review.create_time = row.get("createTime")
+            review.delete_time = row.get("deleteTime")
             review.description_display_text = row.get("description_displayText")
             review.description_original_text = row.get("description_originalText")
             review.language_code = row.get("languageCode")
             review.original_source = row.get("originalSource")
             review.status = row.get("status")
             review.update_source = row.get("updateSource")
-            review.update_time = safe_timestamp(row.get("updateTime"))
+            review.update_time = row.get("updateTime")
             review.verified_by_care = safe_bool(row.get("verifiedByCare"))
             review.reviewee_provider_type = row.get("reviewee_providerType")
             review.reviewee_type = row.get("reviewee_type")
