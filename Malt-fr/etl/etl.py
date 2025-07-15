@@ -44,6 +44,7 @@ import os
 import re
 import json
 import logging
+import time
 import pandas as pd
 from lxml import html
 from tqdm import tqdm
@@ -303,7 +304,7 @@ class MaltDataProcessor:
                 "experience_years_text": extract_with_xpath(tree, '//*[@id="__nuxt"]/div/main/div/div[1]/div[2]/div/div[1]/div/div/div[3]/ul/li[2]/span[2]'),
                 "response_rate_text": extract_with_xpath(tree, '//*[@id="__nuxt"]/div/main/div/div[1]/div[2]/div/div[1]/div/div/div[3]/ul/li[3]/span[2]'),
                 "response_time_text": extract_with_xpath(tree, '//*[@id="__nuxt"]/div/main/div/div[1]/div[2]/div/div[1]/div/div/div[3]/ul/li[4]/span[2]'),
-                "profile_description": extract_with_xpath(tree, '//*[@id="__nuxt"]/div/main/div/div[1]/div[2]/div/div[3]/div[2]/div/section[3]/div/div/div'),
+                "profile_description": extract_with_xpath(tree, '/html/body/div[1]/div/main/div/div[1]/div[2]/div/div[3]/div[2]/div/section[3]/div/div/div[2]'),
                 "has_signed_charter": bool(extract_with_xpath(tree, '//*[@id="__nuxt"]/div/main/div/div[1]/div[2]/div/div[3]/div[1]/div/section[2]/div/div/div[1]/div/div[2]/p')),
                 "has_verified_email": bool(extract_with_xpath(tree, '//*[@id="__nuxt"]/div/main/div/div[1]/div[2]/div/div[3]/div[1]/div/section[2]/div/div/div[4]/div/div[2]')),
             })
